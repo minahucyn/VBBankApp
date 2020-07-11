@@ -15,6 +15,21 @@
         'Open AuthView
         ShowAuthenticationView()
 
+        'chcking somehting temporarily
+        OpenCreditManagement()
+
+    End Sub
+
+    Private Sub OpenCreditManagement()
+        'Initialize authView
+        Dim crmView As New CreditManagementView(New CreditManagementViewModel())
+        'set authView as a child of MainView.
+        crmView.MdiParent = Me
+        'check if user is authorized for this view
+        If IsViewAuthorized(crmView) Then
+            'open authView
+            crmView.Show()
+        End If
     End Sub
 
     ''' <summary>

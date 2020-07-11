@@ -12,6 +12,16 @@ Public Class CreditManagementViewModel
     Public Sub New()
         'Initialize lists
         TitleList = New List(Of String)
+        InitializeDemoData()
+    End Sub
+
+    Private Sub InitializeDemoData()
+        'add titles
+        TitleList.Add("MR")
+        TitleList.Add("MRS")
+        TitleList.Add("MS")
+        TitleList.Add("DR")
+        TitleList.Add("OTHER")
     End Sub
 #End Region
 
