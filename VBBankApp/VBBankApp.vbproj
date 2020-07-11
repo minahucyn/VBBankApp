@@ -73,6 +73,21 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ClaimsModel.vb" />
+    <Compile Include="ViewModels\CreditManagementViewModel.vb" />
+    <Compile Include="ViewModels\ViewModelBase.vb" />
+    <Compile Include="Views\AuthenticationView.Designer.vb">
+      <DependentUpon>AuthenticationView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuthenticationView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreditManagementView.Designer.vb">
+      <DependentUpon>CreditManagementView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreditManagementView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\MainView.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +118,12 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\AuthenticationView.resx">
+      <DependentUpon>AuthenticationView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreditManagementView.resx">
+      <DependentUpon>CreditManagementView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.vb</DependentUpon>
     </EmbeddedResource>
@@ -119,9 +140,6 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
