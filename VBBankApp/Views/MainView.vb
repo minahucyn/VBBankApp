@@ -1,12 +1,38 @@
 ﻿Public Class MainView
     Private _claims As New ClaimsModel
+
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
         ' Initialize Authorization.
         InitializeAuthorization()
+        InitializeMenu()
 
+    End Sub
+
+    Private Sub TadaClicked(sender As Object, e As EventArgs)
+        Throw New NotImplementedException()
+    End Sub
+
+    Private Sub InitializeMenu()
+        'clear the menu
+        'add the tada stuff to the menu
+
+        MainMenuStrip.Items.Clear()
+        MainMenuStrip.Items.Add("Boom")
+        MainMenuStrip.Items.Add("B000oom")
+
+        For Each item In MainMenuStrip.Items
+            Dim boomItem As ToolStripItem = item
+            AddHandler boomItem.Click, AddressOf TadaCicked
+        Next
+
+    End Sub
+
+    Private Sub TadaCicked(sender As Object, e As EventArgs)
+        Dim og_boom As ToolStripItem = sender
+        MsgBox(og_boom.Text)
     End Sub
 
     Private Sub InitializeAuthorization()
@@ -14,10 +40,6 @@
 
         'Open AuthView
         ShowAuthenticationView()
-
-        'chcking somehting temporarily
-        OpenCreditManagement()
-
     End Sub
 
     Private Sub OpenCreditManagement()
@@ -58,11 +80,17 @@
         Dim claim = _claims.Claims.Find(Function(x) x = view.Tag)
         'if no claim is found....
         If String.IsNullOrEmpty(claim) Then
-            MsgBox("You are not authorized for this view!", MsgBoxStyle.Exclamation, "Not Authorized")
+            MsgBox($"You are not authorized for {view.Tag}!", MsgBoxStyle.Exclamation, "Not Authorized")
             Return False 'return false
         End If
         'If claim is found... return true
         Return True
     End Function
+
+
+End Class
+
+Public Class TadaMenuItem
+    Inherits ToolStripItem
 
 End Class
