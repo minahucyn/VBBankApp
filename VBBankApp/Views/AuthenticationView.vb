@@ -1,28 +1,42 @@
 Imports System.ComponentModel
 
 Public Class AuthenticationView
-    Public Sub New()
+    Private ReadOnly _viewModel As AuthenticationViewModel
 
-        ' This call is required by the designer.
+    Public Sub New(viewModel As AuthenticationViewModel)
+
         InitializeComponent()
         Me.CenterToParent()
+        'assign the view model to the field
+        Me._viewModel = viewModel
 
-        ' Add any initialization after the InitializeComponent() call.
+        'Bind The controls to ViewModel.
+        InitializeBinding()
 
-    End Sub
-    ' TODO: Insert code to perform custom authentication using the provided username and password 
-    ' (See https://go.microsoft.com/fwlink/?LinkId=35339).  
-    ' The custom principal can then be attached to the current thread's principal as follows: 
-    '     My.User.CurrentPrincipal = CustomPrincipal
-    ' where CustomPrincipal is the IPrincipal implementation used to perform authentication. 
-    ' Subsequently, My.User will return identity information encapsulated in the CustomPrincipal object
-    ' such as the username, display name, etc.
-
-    Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
-
+        'Subscribe to Events
+        AddHandler OK.Click, AddressOf OnOKClicked
     End Sub
 
-    Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
+    Private Sub OnOKClicked(sender As Object, e As EventArgs)
+        'Try to login user
+        _viewModel.VerifyPassword()
+    End Sub
+
+    Private Sub InitializeBinding()
+        'Bind username
+        UsernameTextBox.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.Username),
+                                                     False, DataSourceUpdateMode.OnPropertyChanged))
+        'Bind password
+        PasswordTextBox.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.Password),
+                                                     False, DataSourceUpdateMode.OnPropertyChanged))
+        'Bind islockedalert
+        LabelLockedAlert.DataBindings.Add(New Binding("Visible", _viewModel, NameOf(_viewModel.IsLockedAlertVisible)))
+        'Bind OKButton
+        OK.DataBindings.Add(New Binding("Enabled", _viewModel, NameOf(_viewModel.IsOKButtonEnabled)))
+
+    End Sub
+
+    Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.Close()
     End Sub
 

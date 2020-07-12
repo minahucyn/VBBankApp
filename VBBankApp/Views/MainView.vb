@@ -59,7 +59,7 @@
     ''' </summary>
     Private Sub ShowAuthenticationView()
         'Initialize authView
-        Dim authView As New AuthenticationView()
+        Dim authView As New AuthenticationView(New AuthenticationViewModel())
         'set authView as a child of MainView.
         authView.MdiParent = Me
         'check if user is authorized for this view

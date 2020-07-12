@@ -38,6 +38,7 @@ Partial Class AuthenticationView
         Me.PasswordTextBox = New System.Windows.Forms.TextBox()
         Me.OK = New System.Windows.Forms.Button()
         Me.Cancel = New System.Windows.Forms.Button()
+        Me.LabelLockedAlert = New System.Windows.Forms.Label()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -100,6 +101,18 @@ Partial Class AuthenticationView
         Me.Cancel.TabIndex = 5
         Me.Cancel.Text = "&Cancel"
         '
+        'LabelLockedAlert
+        '
+        Me.LabelLockedAlert.BackColor = System.Drawing.SystemColors.Control
+        Me.LabelLockedAlert.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelLockedAlert.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.LabelLockedAlert.Location = New System.Drawing.Point(175, 126)
+        Me.LabelLockedAlert.Name = "LabelLockedAlert"
+        Me.LabelLockedAlert.Size = New System.Drawing.Size(219, 34)
+        Me.LabelLockedAlert.TabIndex = 6
+        Me.LabelLockedAlert.Text = "THE USER IS LOCKED! " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PLEASE CONTACT YOUR ADMIN."
+        Me.LabelLockedAlert.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
         'AuthenticationView
         '
         Me.AcceptButton = Me.OK
@@ -107,6 +120,7 @@ Partial Class AuthenticationView
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
         Me.ClientSize = New System.Drawing.Size(401, 192)
+        Me.Controls.Add(Me.LabelLockedAlert)
         Me.Controls.Add(Me.Cancel)
         Me.Controls.Add(Me.OK)
         Me.Controls.Add(Me.PasswordTextBox)
@@ -128,4 +142,5 @@ Partial Class AuthenticationView
 
     End Sub
 
+    Friend WithEvents LabelLockedAlert As Label
 End Class

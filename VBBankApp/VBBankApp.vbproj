@@ -73,7 +73,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto\Hashing.vb" />
     <Compile Include="Models\ClaimsModel.vb" />
+    <Compile Include="Models\GoodHashModel.vb" />
+    <Compile Include="ViewModels\AuthenticationViewModel.vb" />
     <Compile Include="ViewModels\CreditManagementViewModel.vb" />
     <Compile Include="ViewModels\ViewModelBase.vb" />
     <Compile Include="Views\AuthenticationView.Designer.vb">
