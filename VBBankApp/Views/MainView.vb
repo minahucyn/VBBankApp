@@ -1,6 +1,8 @@
-﻿Public Class MainView
-    Private _claims As New ClaimsModel
+﻿Imports VBBankApp
 
+Public Class MainView
+    Private _claims As New ClaimsModel
+    Dim WithEvents _authView As AuthenticationView
     Public Sub New()
 
         ' This call is required by the designer.
@@ -59,15 +61,21 @@
     ''' </summary>
     Private Sub ShowAuthenticationView()
         'Initialize authView
-        Dim authView As New AuthenticationView(New AuthenticationViewModel())
+        _authView = New AuthenticationView(New AuthenticationViewModel())
         'set authView as a child of MainView.
-        authView.MdiParent = Me
+        _authView.MdiParent = Me
+        'Listen for successful authentication
+        AddHandler _authView.AuthenticationSuccessful, AddressOf OnAuthenticationSuccessful
         'check if user is authorized for this view
-        If IsViewAuthorized(authView) Then
+        If IsViewAuthorized(_authView) Then
             'open authView
-            authView.Show()
+            _authView.Show()
         End If
 
+    End Sub
+
+    Private Sub OnAuthenticationSuccessful(authDetails As AuthDetailsModel)
+        ToolStripLabelUserNameAndRole.Text = $"{authDetails.Username} [ {authDetails.Fullname} ]"
     End Sub
 
     ''' <summary>

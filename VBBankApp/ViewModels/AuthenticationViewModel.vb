@@ -10,12 +10,22 @@ Public Class AuthenticationViewModel
     Private _isLockedAlertVisible As Boolean
     Private _isOKButtonEnabled As Boolean
 #End Region
+
+#Region "Events"
+    Public Event PasswordVerified(authDetails As AuthDetailsModel)
+#End Region
+
+#Region "Default Constructor"
+
     Public Sub New()
         IsLockedAlertVisible = False
         IsOKButtonEnabled = False
         'Listen for property changed events
         AddHandler Me.PropertyChanged, AddressOf ActingOnPropertyChanges
+        AddHandler Me.PasswordVerified, AddressOf OnPasswordVerified
     End Sub
+
+#End Region
 
 #Region "Public Properties"
     Public Property Username() As String
@@ -77,20 +87,22 @@ Public Class AuthenticationViewModel
 #Region "Public Methods"
     Public Sub VerifyPassword()
         'fetch the password hash from database for the username
-        Dim goodHashModel = GetGoodHash()
+        Dim authDetails = GetAuthDetails()
         'Check whether the user is locked....
-        If goodHashModel.IsLocked Then
+        If authDetails.IsLocked Then
             'Show the notification....
             IsLockedAlertVisible = True
             'abort authentication
             Return
         End If
         'compare with hash of user provided password
-        Dim IsVerified As Boolean = Hashing.VerifyPassword(_password, goodHashModel.GoodHash)
+        Dim IsVerified As Boolean = Hashing.VerifyPassword(_password, authDetails.GoodHash)
+
         'Checking if the password matched
         If IsVerified Then
-            'Check wheater the user is locked.
-            'Get user details, Role and Claims.
+            ' Completed password verification..., 
+            RaiseEvent PasswordVerified(authDetails)
+            Debug.WriteLine("User authenticated")
         Else
             'Notify user that the credetials did not match.
             MsgBox("Authentication failed! Username and Password did not match!")
@@ -102,13 +114,22 @@ Public Class AuthenticationViewModel
 #End Region
 
 #Region "Private Methods"
+
+    Private Sub OnPasswordVerified(authDetails As AuthDetailsModel)
+        MsgBox("Password verified!" & vbCrLf & $"Username: {authDetails.Username}, Role: {authDetails.UserRole}, name: {authDetails.Fullname}")
+    End Sub
+
     ''' <summary>
     ''' Gets the good Hash from the database for the specified username.
     ''' </summary>
     ''' <returns> returns good hash model with hash and islocked property </returns>
-    Private Function GetGoodHash() As GoodHashModel
+    Private Function GetAuthDetails() As AuthDetailsModel
         'Simulate calling database
-        Return New GoodHashModel() With {
+        Return New AuthDetailsModel() With {
+            .Fullname = "Mina Hucyn",
+            .UserClaims = New ClaimsModel(),
+            .Username = "minahucyn",
+            .UserRole = "Normal",
             .GoodHash = "SHA512:88:rvb0bbHRIxdO9DoZvhrv2NWC/tssaikt0Q==:4cq/04d1pjFir7COwEBrfe02z3u6xrYkyhI/a80X/5QEBZRo9ooEUONk0FhAIWTvSDjVrIZOxF3Oz9tgkn2p8w==",
             .IsLocked = False}
     End Function

@@ -1,12 +1,17 @@
 Imports System.ComponentModel
+Imports VBBankApp
 
 Public Class AuthenticationView
     Private ReadOnly _viewModel As AuthenticationViewModel
+    Public Event AuthenticationSuccessful(authDetails As AuthDetailsModel)
+
+    Private _isAuthSuccessful As Boolean
 
     Public Sub New(viewModel As AuthenticationViewModel)
 
         InitializeComponent()
         Me.CenterToParent()
+        _isAuthSuccessful = False
         'assign the view model to the field
         Me._viewModel = viewModel
 
@@ -15,6 +20,14 @@ Public Class AuthenticationView
 
         'Subscribe to Events
         AddHandler OK.Click, AddressOf OnOKClicked
+        AddHandler _viewModel.PasswordVerified, AddressOf OnUserLoggedIn
+        AddHandler Me.FormClosing, AddressOf AuthenticationView_Closing
+    End Sub
+
+    Private Sub OnUserLoggedIn(authDetails As AuthDetailsModel)
+        RaiseEvent AuthenticationSuccessful(authDetails)
+        _isAuthSuccessful = True
+        Me.Close()
     End Sub
 
     Private Sub OnOKClicked(sender As Object, e As EventArgs)
@@ -40,7 +53,11 @@ Public Class AuthenticationView
         Me.Close()
     End Sub
 
-    Private Sub AuthenticationView_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub AuthenticationView_Closing(sender As Object, e As CancelEventArgs)
+        'if form is closing on successful authentiation Don not show msg to confirm app exit.
+        If _isAuthSuccessful Then
+            Return
+        End If
         'ask the user wheather the user wants to close the app.
         Dim userInput = MsgBox("Are you sure you want to exit the application?", MsgBoxStyle.YesNo, "Application Exit!")
         'check user input...
