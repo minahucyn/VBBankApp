@@ -1,6 +1,8 @@
-﻿Imports VBBankApp
+﻿Imports Newtonsoft.Json
+Imports VBBankApp
 
 Public Class MainView
+    Private ReadOnly _viewModel As MainViewModel
     Private _claims As New ClaimsModel
     Dim WithEvents _authView As AuthenticationView
     Public Sub New()
@@ -10,7 +12,15 @@ Public Class MainView
         ' Initialize Authorization.
         InitializeAuthorization()
         InitializeMenu()
+        _viewModel = New MainViewModel()
+        InitializeBinding()
+    End Sub
 
+    Private Sub InitializeBinding()
+        'logged in fullname [ username ]
+        ToolStripLabelUserNameAndRole.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.DisplayUsernameFullname)))
+        'logged in user role
+        ToolStripLabelUserRoleDisplay.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.UserRole)))
     End Sub
 
     Private Sub TadaClicked(sender As Object, e As EventArgs)
@@ -40,6 +50,12 @@ Public Class MainView
     Private Sub InitializeAuthorization()
         'TO DO: Check if any user is Authenticated
 
+        Dim menu As List(Of MenuModel) = New List(Of MenuModel)
+        menu.Add(New MenuModel() With {.Id = 1, .Name = "Username", .ParentId = Nothing})
+        menu.Add(New MenuModel() With {.Id = 2, .Name = "Log Out", .ParentId = 1})
+        menu.Add(New MenuModel() With {.Id = 3, .Name = "Exit", .ParentId = 1})
+
+        MsgBox(JsonConvert.SerializeObject(menu))
         'Open AuthView
         ShowAuthenticationView()
     End Sub
@@ -75,7 +91,9 @@ Public Class MainView
     End Sub
 
     Private Sub OnAuthenticationSuccessful(authDetails As AuthDetailsModel)
-        ToolStripLabelUserNameAndRole.Text = $"{authDetails.Username} [ {authDetails.Fullname} ]"
+        _viewModel.Fullname = authDetails.Fullname
+        _viewModel.UserRole = authDetails.UserRole
+        _viewModel.Username = authDetails.Username
     End Sub
 
     ''' <summary>
@@ -94,7 +112,6 @@ Public Class MainView
         'If claim is found... return true
         Return True
     End Function
-
 
 End Class
 

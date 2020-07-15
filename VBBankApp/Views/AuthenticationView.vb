@@ -24,11 +24,23 @@ Public Class AuthenticationView
         AddHandler Me.FormClosing, AddressOf AuthenticationView_Closing
     End Sub
 
-    Private Sub OnUserLoggedIn(authDetails As AuthDetailsModel)
-        RaiseEvent AuthenticationSuccessful(authDetails)
+    Private Async Sub OnUserLoggedIn(authDetails As AuthDetailsModel)
         _isAuthSuccessful = True
+        Await InitializeAniamtionAsync()
+        RaiseEvent AuthenticationSuccessful(authDetails)
         Me.Close()
     End Sub
+
+    ''' <summary>
+    ''' Runs the login successful animation asynchronously
+    ''' </summary>
+    Private Async Function InitializeAniamtionAsync() As Task
+        'move the animation panel to view area
+        PanelAnimation.Location = PanelAuth.Location
+        PictureBoxAnimation.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBoxAnimation.Image = My.Resources.loginSuccessful
+        Await Task.Delay(2900)
+    End Function
 
     Private Sub OnOKClicked(sender As Object, e As EventArgs)
         'Try to login user
@@ -69,4 +81,5 @@ Public Class AuthenticationView
             e.Cancel = True
         End If
     End Sub
+
 End Class

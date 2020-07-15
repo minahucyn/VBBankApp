@@ -24,7 +24,9 @@ Partial Class MainView
     Private Sub InitializeComponent()
         Me.MenuStripMain = New System.Windows.Forms.MenuStrip()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabelUserNameAndRole = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabelUserNameAndRole = New BindableToolStripStatusLabel()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabelUserRoleDisplay = New BindableToolStripStatusLabel()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -38,7 +40,7 @@ Partial Class MainView
         'ToolStrip1
         '
         Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabelUserNameAndRole})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabelUserNameAndRole, Me.ToolStripSeparator1, Me.ToolStripLabelUserRoleDisplay})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 465)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(954, 25)
@@ -48,8 +50,19 @@ Partial Class MainView
         'ToolStripLabelUserNameAndRole
         '
         Me.ToolStripLabelUserNameAndRole.Name = "ToolStripLabelUserNameAndRole"
-        Me.ToolStripLabelUserNameAndRole.Size = New System.Drawing.Size(115, 22)
-        Me.ToolStripLabelUserNameAndRole.Text = "username (user role)"
+        Me.ToolStripLabelUserNameAndRole.Size = New System.Drawing.Size(120, 22)
+        Me.ToolStripLabelUserNameAndRole.Text = "Fullname [Username]"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripLabelUserRoleDisplay
+        '
+        Me.ToolStripLabelUserRoleDisplay.Name = "ToolStripLabelUserRoleDisplay"
+        Me.ToolStripLabelUserRoleDisplay.Size = New System.Drawing.Size(56, 22)
+        Me.ToolStripLabelUserRoleDisplay.Text = "User Role"
         '
         'MainView
         '
@@ -72,5 +85,7 @@ Partial Class MainView
 
     Friend WithEvents MenuStripMain As MenuStrip
     Friend WithEvents ToolStrip1 As ToolStrip
-    Friend WithEvents ToolStripLabelUserNameAndRole As ToolStripLabel
+    Friend WithEvents ToolStripLabelUserNameAndRole As BindableToolStripStatusLabel
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripLabelUserRoleDisplay As BindableToolStripStatusLabel
 End Class

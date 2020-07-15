@@ -48,6 +48,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -74,8 +77,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Crypto\Hashing.vb" />
+    <Compile Include="Extensions\BindableToolStripStatusLabel.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Models\AuthDetailsModel.vb" />
     <Compile Include="Models\ClaimsModel.vb" />
+    <Compile Include="Models\MainViewModel.vb" />
+    <Compile Include="Models\MenuModel.vb" />
     <Compile Include="ViewModels\AuthenticationViewModel.vb" />
     <Compile Include="ViewModels\CreditManagementViewModel.vb" />
     <Compile Include="ViewModels\ViewModelBase.vb" />
@@ -143,6 +151,9 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\loginSuccessful.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
