@@ -5,4 +5,5 @@
     Public Property UserClaims As ClaimsModel
     Public Property GoodHash As String
     Public Property IsLocked As Boolean
+    Public Property MenuJson As String
 End Class

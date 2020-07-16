@@ -131,7 +131,8 @@ Public Class AuthenticationViewModel
             .Username = "minahucyn",
             .UserRole = "Normal",
             .GoodHash = "SHA512:88:rvb0bbHRIxdO9DoZvhrv2NWC/tssaikt0Q==:4cq/04d1pjFir7COwEBrfe02z3u6xrYkyhI/a80X/5QEBZRo9ooEUONk0FhAIWTvSDjVrIZOxF3Oz9tgkn2p8w==",
-            .IsLocked = False}
+            .IsLocked = False,
+            .MenuJson = "[{'Id':1,'Name':'Username','ParentId':0},{'Id':2,'Name':'Log Out','ParentId':1},{'Id':3,'Name':'Exit','ParentId':1}]"}
     End Function
 
     Private Sub IncrementRetryCount()
