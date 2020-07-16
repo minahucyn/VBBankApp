@@ -16,7 +16,6 @@ Public Class MainView
         InitializeComponent()
         ' Initialize Authorization.
         InitializeAuthorization()
-        InitializeMenu()
         _viewModel = New MainViewModel()
         InitializeBinding()
 
@@ -89,26 +88,6 @@ Public Class MainView
 
     Private Sub TadaClicked(sender As Object, e As EventArgs)
         Throw New NotImplementedException()
-    End Sub
-
-    Private Sub InitializeMenu()
-        'clear the menu
-        'add the tada stuff to the menu
-
-        'MainMenuStrip.Items.Clear()
-        'MainMenuStrip.Items.Add("Boom", Nothing, AddressOf TadaCicked)
-        'MainMenuStrip.Items.Add("B000oom", Nothing, AddressOf TadaCicked)
-
-        'Dim SubMenu As ToolStripMenuItem = New ToolStripMenuItem("Sub Boom", Nothing, AddressOf TadaClicked)
-
-        'For Each item In MainMenuStrip.Items
-        '    Dim boomItem As ToolStripMenuItem = item
-        '    Debug.WriteLine("Menu item name:" + boomItem.Text)
-        '    boomItem.DropDownItems.Add(SubMenu)
-
-        'Next
-
-
     End Sub
 
     Private Sub TadaCicked(sender As Object, e As EventArgs)
