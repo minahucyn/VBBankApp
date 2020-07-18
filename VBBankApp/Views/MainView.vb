@@ -30,24 +30,27 @@ Public Class MainView
     Private Sub OnInitialzeApplicationMenu(appMenu As List(Of MenuModel))
         'clear the menu
         MainMenuStrip.Items.Clear()
+        If appMenu Is Nothing Then
+            Return
+        End If
 
         'determine number of menu levels
         Dim menuLevels As Integer = 0
         While True
-
+            'searching the menu model list for level existance
             Dim levelExists As Boolean = appMenu.Exists(Function(x)
                                                             Return x.ParentId = menuLevels
                                                         End Function)
+            'if the menu/submenu item level exists....
             If levelExists Then
+                'increament the menu level to search for... in the next iteration
                 menuLevels += 1
-            Else
+            Else 'if the current menu level does not exist...
+                'forcefully exit while.
                 Exit While
             End If
 
-
         End While
-
-
 
 
         For index = 0 To menuLevels
@@ -73,10 +76,6 @@ Public Class MainView
             Next
         Next
 
-
-
-
-
     End Sub
 
     Private Sub InitializeBinding()
@@ -92,7 +91,25 @@ Public Class MainView
 
     Private Sub TadaCicked(sender As Object, e As EventArgs)
         Dim og_boom As ToolStripMenuItem = sender
-        Debug.WriteLine(og_boom.Text & " - " & og_boom.DropDownItems.Count)
+
+        Select Case og_boom.Text.ToLower()
+            Case ("Exit").ToLower()
+                Environment.Exit(0)
+            Case ("Log out").ToLower()
+                'close all open the mdi child views
+                For Each frm As Form In Me.MdiChildren
+                    frm.Close()
+                Next
+                'start the AuthView
+                ShowAuthenticationView()
+                Dim authView As New AuthDetailsModel()
+                authView.MenuJson = ""
+                OnAuthenticationSuccessful(authView)
+
+            Case Else
+
+        End Select
+
     End Sub
 
     Private Sub InitializeAuthorization()
