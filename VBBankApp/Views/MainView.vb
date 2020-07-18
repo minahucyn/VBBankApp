@@ -39,7 +39,7 @@ Public Class MainView
         While True
             'searching the menu model list for level existance
             Dim levelExists As Boolean = appMenu.Exists(Function(x)
-                                                            Return x.ParentId = menuLevels
+                                                            Return x.ParentId = menuLevels Or x.Id = menuLevels
                                                         End Function)
             'if the menu/submenu item level exists....
             If levelExists Then
@@ -52,7 +52,7 @@ Public Class MainView
 
         End While
 
-
+        Dim iterationVariable As Integer = 0
         For index = 0 To menuLevels
             Dim currentLevelMenu = appMenu.Where(Function(x)
                                                      Return x.ParentId = index
@@ -62,6 +62,10 @@ Public Class MainView
             For Each item In currentLevelMenu
                 'add root level
                 If item.ParentId = 0 Then
+                    'replace "username" string with the actual username
+                    If item.Name.ToLower() = "username" Then
+                        item.Name = _viewModel.Username
+                    End If
                     MainMenuStrip.Items.Add(item.Name, Nothing, AddressOf TadaCicked).Tag = item.Id
                     Continue For
                 End If
@@ -74,6 +78,7 @@ Public Class MainView
                 Next
 
             Next
+            iterationVariable += 1
         Next
 
     End Sub
@@ -105,7 +110,9 @@ Public Class MainView
                 Dim authView As New AuthDetailsModel()
                 authView.MenuJson = ""
                 OnAuthenticationSuccessful(authView)
-
+            Case ("Credit Management").ToLower()
+                ShowCreditManagementView()
+                Debug.WriteLine("crm HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             Case Else
 
         End Select
@@ -115,10 +122,10 @@ Public Class MainView
     Private Sub InitializeAuthorization()
         'TO DO: Check if any user is Authenticated
 
-        Dim menu As List(Of MenuModel) = New List(Of MenuModel)
-        menu.Add(New MenuModel() With {.Id = 1, .Name = "Username", .ParentId = 0})
-        menu.Add(New MenuModel() With {.Id = 2, .Name = "Log Out", .ParentId = 1})
-        menu.Add(New MenuModel() With {.Id = 3, .Name = "Exit", .ParentId = 1})
+        'Dim menu As List(Of MenuModel) = New List(Of MenuModel)
+        'menu.Add(New MenuModel() With {.Id = 1, .Name = "Username", .ParentId = 0})
+        'menu.Add(New MenuModel() With {.Id = 2, .Name = "Log Out", .ParentId = 1})
+        'menu.Add(New MenuModel() With {.Id = 3, .Name = "Exit", .ParentId = 1})
 
         'Open AuthView
         ShowAuthenticationView()
@@ -152,6 +159,17 @@ Public Class MainView
             _authView.Show()
         End If
 
+    End Sub
+
+    Private Sub ShowCreditManagementView()
+        Dim creditManagementView As CreditManagementView = New CreditManagementView(New CreditManagementViewModel())
+        creditManagementView.MdiParent = Me
+        'add any event handlers if necessarily
+        'check if user is authorized for this view
+        If IsViewAuthorized(creditManagementView) Then
+            'open authView
+            creditManagementView.Show()
+        End If
     End Sub
 
     Private Sub OnAuthenticationSuccessful(authDetails As AuthDetailsModel)

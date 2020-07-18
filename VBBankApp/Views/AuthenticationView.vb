@@ -20,8 +20,13 @@ Public Class AuthenticationView
 
         'Subscribe to Events
         AddHandler OK.Click, AddressOf OnOKClicked
+        AddHandler Cancel.Click, AddressOf OnCancelClick
         AddHandler _viewModel.PasswordVerified, AddressOf OnUserLoggedIn
         AddHandler Me.FormClosing, AddressOf AuthenticationView_Closing
+    End Sub
+
+    Private Sub OnCancelClick(sender As Object, e As EventArgs)
+        Application.Exit()
     End Sub
 
     Private Async Sub OnUserLoggedIn(authDetails As AuthDetailsModel)

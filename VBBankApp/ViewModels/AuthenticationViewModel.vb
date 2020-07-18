@@ -132,7 +132,7 @@ Public Class AuthenticationViewModel
             .UserRole = "Normal",
             .GoodHash = "SHA512:88:rvb0bbHRIxdO9DoZvhrv2NWC/tssaikt0Q==:4cq/04d1pjFir7COwEBrfe02z3u6xrYkyhI/a80X/5QEBZRo9ooEUONk0FhAIWTvSDjVrIZOxF3Oz9tgkn2p8w==",
             .IsLocked = False,
-            .MenuJson = "[{'Id':1,'Name':'Username','ParentId':0},{'Id':5,'Name':'Settings','ParentId':0},{'Id':2,'Name':'Log Out','ParentId':1},{'Id':3,'Name':'Change Password','ParentId':1},{'Id':4,'Name':'Exit','ParentId':1}]"}
+            .MenuJson = "[{'Id':1,'Name':'Username','ParentId':0},{'Id':2,'Name':'Log Out','ParentId':1},{'Id':3,'Name':'Change Password','ParentId':1},{'Id':4,'Name':'Exit','ParentId':1},{'Id':5,'Name':'Settings','ParentId':0},{'Id':6,'Name':'Operations','ParentId':0},{'Id':7,'Name':'Credit Management','ParentId':6}]"}
     End Function
 
     Private Sub IncrementRetryCount()
