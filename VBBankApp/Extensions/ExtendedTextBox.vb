@@ -50,6 +50,7 @@
         End Get
         Set(ByVal value As String)
             _nulltext = value
+            ManageNullText(Me, EventArgs.Empty)
         End Set
     End Property
 
