@@ -11,7 +11,8 @@
     End Sub
 
     Private Sub IntializeBinding()
-        'Bind Title
-        ComboBoxTitle.DataSource = _viewModel.TitleList
+        'Bind customer credits
+        DataGridViewCustomerCredits.DataSource = _viewModel.CustomerCredits
     End Sub
+
 End Class
