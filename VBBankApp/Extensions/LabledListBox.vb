@@ -12,4 +12,12 @@
             ListBoxLabel.Text = value
         End Set
     End Property
+    Public Property DataSource() As Object
+        Get
+            Return ListBox.DataSource
+        End Get
+        Set(ByVal value As Object)
+            ListBox.DataSource = value
+        End Set
+    End Property
 End Class
