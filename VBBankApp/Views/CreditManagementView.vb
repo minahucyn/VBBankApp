@@ -52,6 +52,8 @@
         DataGridViewCustomerCredits.DataSource = _viewModel.CustomerCredits
         'Bind security details for selected credit
         DataGridViewSecurity.DataSource = _viewModel.SecuritiesForSelectedCredit
+        'Bind credit specific repayments grid
+        DataGridViewRepayments.DataSource = _viewModel.RepaymentsForSelectedCredit
     End Sub
 
 End Class

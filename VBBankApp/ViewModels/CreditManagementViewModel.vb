@@ -27,8 +27,10 @@ Public Class CreditManagementViewModel
     Public Sub New()
         'Initialize lists
         CustomerCredits = New BindingList(Of CreditModel)
+        AllRepaymentsForCustomer = New BindingList(Of RepaymentModel)
         AllCreditSecuritiesForCustomer = New List(Of SecurityModel)
         SecuritiesForSelectedCredit = New BindingList(Of SecurityModel)
+        RepaymentsForSelectedCredit = New BindingList(Of RepaymentModel)
         InitializeDemoData()
 
         'Initialize internal variables
@@ -43,6 +45,8 @@ Public Class CreditManagementViewModel
     Public Property CustomerCredits() As BindingList(Of CreditModel)
     Private Property AllCreditSecuritiesForCustomer As List(Of SecurityModel)
     Public Property SecuritiesForSelectedCredit As BindingList(Of SecurityModel)
+    Public Property AllRepaymentsForCustomer As BindingList(Of RepaymentModel)
+    Public Property RepaymentsForSelectedCredit As BindingList(Of RepaymentModel)
 
     Public Property NidPp() As String
         Get
@@ -182,6 +186,38 @@ Public Class CreditManagementViewModel
         AllCreditSecuritiesForCustomer.Add(credit1Security1)
         AllCreditSecuritiesForCustomer.Add(credit1Security2)
         AllCreditSecuritiesForCustomer.Add(credit2Security1)
+
+        'create repayments
+        Dim repayments1 As RepaymentModel = New RepaymentModel() With {
+            .Id = 1,
+            .CreditsId = 1,
+            .Principle = 1000.0,
+            .Interest = 500.0,
+            .TimeStamp = New DateTime(2019, 4, 1)}
+        Dim repayments2 As RepaymentModel = New RepaymentModel() With {
+            .Id = 2,
+            .CreditsId = 1,
+            .Principle = 1000.0,
+            .Interest = 500.0,
+            .TimeStamp = New DateTime(2019, 5, 11)}
+        Dim repayments3 As RepaymentModel = New RepaymentModel() With {
+            .Id = 3,
+            .CreditsId = 1,
+            .Principle = 1000.0,
+            .Interest = 500.0,
+            .TimeStamp = New DateTime(2019, 6, 10)}
+        Dim repayments4 As RepaymentModel = New RepaymentModel() With {
+            .Id = 4,
+            .CreditsId = 1,
+            .Principle = 1000.0,
+            .Interest = 500.0,
+            .TimeStamp = New DateTime(2019, 7, 10)}
+
+        'Add the repayment instances to the binding list
+        AllRepaymentsForCustomer.Add(repayments1)
+        AllRepaymentsForCustomer.Add(repayments2)
+        AllRepaymentsForCustomer.Add(repayments3)
+        AllRepaymentsForCustomer.Add(repayments4)
     End Sub
 
     Private Sub PopulateCreditSpecificSecurities(creditId As Integer)
@@ -202,6 +238,28 @@ Public Class CreditManagementViewModel
         'Display securities for current selected credit
         For Each securityModel In selectedSecurities
             SecuritiesForSelectedCredit.Add(securityModel)
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' populates repayments data corresponding to the creditId to binding list 
+    ''' </summary>
+    Private Sub PopulateCreditRepayments(creditId As Integer)
+        'clear the binding list RepaymentsForSelectedCredit
+        RepaymentsForSelectedCredit.Clear()
+
+        'Search all repayments for customer by credits Id
+        Dim creditSpecificRepayments = AllRepaymentsForCustomer.Where(Function(x)
+                                                                          Return x.CreditsId = creditId
+                                                                      End Function).ToList()
+        'if no repayments for the selected credit...
+        If creditSpecificRepayments Is Nothing Then
+            Return
+        End If
+
+        'add credit specific repayments to binding list
+        For Each repayment In creditSpecificRepayments
+            RepaymentsForSelectedCredit.Add(repayment)
         Next
     End Sub
 
@@ -247,11 +305,12 @@ Public Class CreditManagementViewModel
         'load security details for selected credit item
         PopulateCreditSpecificSecurities(e)
         'load repayment details for selected credit
-
+        PopulateCreditRepayments(e)
     End Sub
 
     Public Sub OnCreditSecurityRowSelected(sender As Object, creditSecurityId As Integer)
         Debug.WriteLine(creditSecurityId)
     End Sub
 #End Region
+
 End Class

@@ -100,8 +100,15 @@
     <Compile Include="Models\CreditModel.vb" />
     <Compile Include="Models\MainViewModel.vb" />
     <Compile Include="Models\MenuModel.vb" />
+    <Compile Include="Models\RepaymentModel.vb" />
     <Compile Include="Models\SecurityModel.vb" />
     <Compile Include="ViewModels\AuthenticationViewModel.vb" />
+    <Compile Include="Views\ChangePasswordView.Designer.vb">
+      <DependentUpon>ChangePasswordView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangePasswordView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ViewModels\CreditManagementViewModel.vb" />
     <Compile Include="ViewModels\ViewModelBase.vb" />
     <Compile Include="Views\AuthenticationView.Designer.vb">
@@ -151,6 +158,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ChangePasswordView.resx">
+      <DependentUpon>ChangePasswordView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AuthenticationView.resx">
       <DependentUpon>AuthenticationView.vb</DependentUpon>
