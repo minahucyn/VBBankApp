@@ -14,7 +14,7 @@
     End Sub
 
     ''' <summary>
-    ''' Clears selection and selects the corresponding row
+    ''' When datagridviews' cell is clicked, clears selection and selects the corresponding row
     ''' </summary>
     Private Sub OnCellFocused(sender As Object, e As DataGridViewCellEventArgs)
         'get the sender grid...
