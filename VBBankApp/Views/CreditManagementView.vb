@@ -11,6 +11,16 @@
 
         'Subscribe for events
         AddHandler DataGridViewCustomerCredits.CellEnter, AddressOf OnCellFocused
+        AddHandler DataGridViewCustomerCredits.RowEnter, AddressOf OnRowFocused
+    End Sub
+
+    ''' <summary>
+    ''' Identifies the data rpw corresponding to the selected row.
+    ''' Call viewModel to display the security management data on the relavent grid and/or list view
+    ''' </summary>
+    Private Sub OnRowFocused(sender As Object, e As DataGridViewCellEventArgs)
+        'get the underlying datarow for the selected row
+        'Call view model to filter security data and diaplay selected data in credit listView
     End Sub
 
     ''' <summary>
