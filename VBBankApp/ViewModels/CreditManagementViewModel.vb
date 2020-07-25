@@ -5,6 +5,7 @@ Imports System.Text
 
 Public Class CreditManagementViewModel
     Inherits ViewModelBase
+
 #Region "Private Properties"
     Private _selectedTitle As String
     Private _nidPp As String
@@ -17,14 +18,15 @@ Public Class CreditManagementViewModel
     Private _selectedCreditIdForSecuritiesSearch As Integer
 
 #End Region
+
 #Region "Events"
 
 #End Region
+
 #Region "Default Constructor"
     Public Sub New()
         'Initialize lists
         CustomerCredits = New BindingList(Of CreditModel)
-        SelectedCreditsDisplayList = New BindingList(Of String)
         AllCreditSecuritiesForCustomer = New List(Of SecurityModel)
         SecuritiesForSelectedCredit = New BindingList(Of SecurityModel)
         InitializeDemoData()
@@ -39,7 +41,6 @@ Public Class CreditManagementViewModel
 
 #Region "Public Properties"
     Public Property CustomerCredits() As BindingList(Of CreditModel)
-    Public Property SelectedCreditsDisplayList() As BindingList(Of String)
     Private Property AllCreditSecuritiesForCustomer As List(Of SecurityModel)
     Public Property SecuritiesForSelectedCredit As BindingList(Of SecurityModel)
 
@@ -183,28 +184,6 @@ Public Class CreditManagementViewModel
         AllCreditSecuritiesForCustomer.Add(credit2Security1)
     End Sub
 
-    Private Sub PopulateCreditMangementList(creditId As Integer)
-        'Clear the current list
-        SelectedCreditsDisplayList.Clear()
-        'Get the new data
-        Dim selectedCredits = CustomerCredits.Where(Function(customerCredits)
-                                                        Return customerCredits.Id = creditId
-                                                    End Function).FirstOrDefault()
-        'null check on search results
-        If selectedCredits Is Nothing Then
-            Return
-        End If
-
-        'iterate through the search results model to add data to selected credits list.
-        'Source: https://stackoverflow.com/questions/9893028/c-sharp-foreach-property-in-object-is-there-a-simple-way-of-doing-this
-        For Each propertyInfo As PropertyInfo In selectedCredits.GetType().GetProperties
-            'Get property names with spaces inserted in between...
-            Dim spacedPropertyNames As String = AddSpacesToSentence(propertyInfo.Name, True)
-            'Insert the string to list in the format: Spaced Property Names: Value
-            SelectedCreditsDisplayList.Add($"{spacedPropertyNames}: {propertyInfo.GetValue(selectedCredits, Nothing)}")
-        Next
-    End Sub
-
     Private Sub PopulateCreditSpecificSecurities(creditId As Integer)
         'if the current credit is already the Id for which secutities are displayed...
         If creditId = _selectedCreditIdForSecuritiesSearch Then
@@ -226,35 +205,35 @@ Public Class CreditManagementViewModel
         Next
     End Sub
 
-    ''' <summary>
-    ''' Adds spaces to pascal case.
-    ''' Source: 
-    ''' </summary>
-    ''' <param name="text">The text to insert spaces</param>
-    ''' <param name="preserveAcronyms">true if no spaces are to be inserted into Acronyms</param>
-    ''' <returns>The text passed in with spaces inserted</returns>
-    Private Function AddSpacesToSentence(ByVal text As String, ByVal preserveAcronyms As Boolean) As String
-        'null check, if so... return null string 
-        If String.IsNullOrWhiteSpace(text) Then Return String.Empty
-        'instantiate string builder
-        Dim newText As StringBuilder = New StringBuilder(text.Length * 2)
-        newText.Append(text(0))
+    '''' <summary>
+    '''' Adds spaces to pascal case.
+    '''' Source: 
+    '''' </summary>
+    '''' <param name="text">The text to insert spaces</param>
+    '''' <param name="preserveAcronyms">true if no spaces are to be inserted into Acronyms</param>
+    '''' <returns>The text passed in with spaces inserted</returns>
+    'Private Function AddSpacesToSentence(ByVal text As String, ByVal preserveAcronyms As Boolean) As String
+    '    'null check, if so... return null string 
+    '    If String.IsNullOrWhiteSpace(text) Then Return String.Empty
+    '    'instantiate string builder
+    '    Dim newText As StringBuilder = New StringBuilder(text.Length * 2)
+    '    newText.Append(text(0))
 
-        For i As Integer = 1 To text.Length - 1
+    '    For i As Integer = 1 To text.Length - 1
 
-            If Char.IsUpper(text(i)) Then
-                If (text(i - 1) <> " "c AndAlso Not Char.IsUpper(text(i - 1))) OrElse
-                    (preserveAcronyms AndAlso Char.IsUpper(text(i - 1)) AndAlso
-                    i < text.Length - 1 AndAlso Not Char.IsUpper(text(i + 1))) Then
-                    newText.Append(" "c)
-                End If
-            End If
+    '        If Char.IsUpper(text(i)) Then
+    '            If (text(i - 1) <> " "c AndAlso Not Char.IsUpper(text(i - 1))) OrElse
+    '                (preserveAcronyms AndAlso Char.IsUpper(text(i - 1)) AndAlso
+    '                i < text.Length - 1 AndAlso Not Char.IsUpper(text(i + 1))) Then
+    '                newText.Append(" "c)
+    '            End If
+    '        End If
 
-            newText.Append(text(i))
-        Next
+    '        newText.Append(text(i))
+    '    Next
 
-        Return newText.ToString()
-    End Function
+    '    Return newText.ToString()
+    'End Function
 #End Region
 
 #Region "Public Methods"
@@ -265,10 +244,14 @@ Public Class CreditManagementViewModel
             Return
         End If
         _selectedCreditId = e
-        'load the items to display list.
-        PopulateCreditMangementList(e)
         'load security details for selected credit item
         PopulateCreditSpecificSecurities(e)
+        'load repayment details for selected credit
+
+    End Sub
+
+    Public Sub OnCreditSecurityRowSelected(sender As Object, creditSecurityId As Integer)
+        Debug.WriteLine(creditSecurityId)
     End Sub
 #End Region
 End Class

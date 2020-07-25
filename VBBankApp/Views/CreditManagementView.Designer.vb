@@ -23,7 +23,6 @@ Partial Class CreditManagementView
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageCredits = New System.Windows.Forms.TabPage()
         Me.DataGridViewCustomerCredits = New System.Windows.Forms.DataGridView()
@@ -36,9 +35,11 @@ Partial Class CreditManagementView
         Me.InterestOutstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Outstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CreditAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPageSecurity = New System.Windows.Forms.TabPage()
         Me.DataGridViewSecurity = New System.Windows.Forms.DataGridView()
-        Me.TabPagePayments = New System.Windows.Forms.TabPage()
+        Me.SecId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Security = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreditId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Worth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.ButtonCustomerSearch = New System.Windows.Forms.Button()
         Me.ButtonCustomerAddSave = New System.Windows.Forms.Button()
@@ -49,35 +50,31 @@ Partial Class CreditManagementView
         Me.ButtonAddSecurityDetails = New System.Windows.Forms.Button()
         Me.ButtonModifySecurity = New System.Windows.Forms.Button()
         Me.ButtonModifyPayments = New System.Windows.Forms.Button()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.TabControl2 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabControl3 = New System.Windows.Forms.TabControl()
+        Me.TabPageCreditSecurity = New System.Windows.Forms.TabPage()
         Me.ExtendedGroupBoxPaymentFunctions = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxCustomerFunctions = New VBBankApp.ExtendedGroupBox()
-        Me.LabledListBoxPaymentDetails = New VBBankApp.LabledListBox()
-        Me.LabledListBoxSecurityDetails = New VBBankApp.LabledListBox()
         Me.TextBox1 = New VBBankApp.ExtendedTextBox()
         Me.TextBoxPhoneNumber = New VBBankApp.ExtendedTextBox()
         Me.TextBoxAge = New VBBankApp.ExtendedTextBox()
         Me.TextBoxGender = New VBBankApp.ExtendedTextBox()
         Me.TextBoxBirthdate = New VBBankApp.ExtendedTextBox()
         Me.TextBoxNidPp = New VBBankApp.ExtendedTextBox()
-        Me.LabledListBoxCreditDetails = New VBBankApp.LabledListBox()
         Me.ExtendedGroupBox1 = New VBBankApp.ExtendedGroupBox()
-        Me.ExtendedGroupBox2 = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxCreditFunctions = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxSecurityFunctions = New VBBankApp.ExtendedGroupBox()
-        Me.SecId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Security = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreditId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Worth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPageCredits.SuspendLayout()
         CType(Me.DataGridViewCustomerCredits, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPageSecurity.SuspendLayout()
         CType(Me.DataGridViewSecurity, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPagePayments.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl2.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabControl3.SuspendLayout()
+        Me.TabPageCreditSecurity.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -88,27 +85,18 @@ Partial Class CreditManagementView
         Me.Panel1.Controls.Add(Me.TextBoxGender)
         Me.Panel1.Controls.Add(Me.TextBoxBirthdate)
         Me.Panel1.Controls.Add(Me.TextBoxNidPp)
-        Me.Panel1.Location = New System.Drawing.Point(15, 30)
+        Me.Panel1.Location = New System.Drawing.Point(9, 32)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(418, 96)
+        Me.Panel1.Size = New System.Drawing.Size(320, 174)
         Me.Panel1.TabIndex = 5
-        '
-        'Panel2
-        '
-        Me.Panel2.Location = New System.Drawing.Point(967, -4)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(306, 148)
-        Me.Panel2.TabIndex = 5
         '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPageCredits)
-        Me.TabControl1.Controls.Add(Me.TabPageSecurity)
-        Me.TabControl1.Controls.Add(Me.TabPagePayments)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 142)
+        Me.TabControl1.Location = New System.Drawing.Point(338, 7)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(445, 254)
+        Me.TabControl1.Size = New System.Drawing.Size(814, 203)
         Me.TabControl1.TabIndex = 7
         '
         'TabPageCredits
@@ -117,7 +105,7 @@ Partial Class CreditManagementView
         Me.TabPageCredits.Location = New System.Drawing.Point(4, 22)
         Me.TabPageCredits.Name = "TabPageCredits"
         Me.TabPageCredits.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageCredits.Size = New System.Drawing.Size(437, 228)
+        Me.TabPageCredits.Size = New System.Drawing.Size(806, 177)
         Me.TabPageCredits.TabIndex = 0
         Me.TabPageCredits.Text = "Credit Management"
         Me.TabPageCredits.UseVisualStyleBackColor = True
@@ -133,7 +121,7 @@ Partial Class CreditManagementView
         Me.DataGridViewCustomerCredits.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewCustomerCredits.Name = "DataGridViewCustomerCredits"
         Me.DataGridViewCustomerCredits.ReadOnly = True
-        Me.DataGridViewCustomerCredits.Size = New System.Drawing.Size(431, 222)
+        Me.DataGridViewCustomerCredits.Size = New System.Drawing.Size(800, 171)
         Me.DataGridViewCustomerCredits.TabIndex = 0
         '
         'Id
@@ -208,17 +196,6 @@ Partial Class CreditManagementView
         Me.CreditAmount.ReadOnly = True
         Me.CreditAmount.Width = 90
         '
-        'TabPageSecurity
-        '
-        Me.TabPageSecurity.Controls.Add(Me.DataGridViewSecurity)
-        Me.TabPageSecurity.Location = New System.Drawing.Point(4, 22)
-        Me.TabPageSecurity.Name = "TabPageSecurity"
-        Me.TabPageSecurity.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageSecurity.Size = New System.Drawing.Size(437, 228)
-        Me.TabPageSecurity.TabIndex = 1
-        Me.TabPageSecurity.Text = "Security Management"
-        Me.TabPageSecurity.UseVisualStyleBackColor = True
-        '
         'DataGridViewSecurity
         '
         Me.DataGridViewSecurity.AllowUserToAddRows = False
@@ -229,268 +206,8 @@ Partial Class CreditManagementView
         Me.DataGridViewSecurity.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewSecurity.Name = "DataGridViewSecurity"
         Me.DataGridViewSecurity.ReadOnly = True
-        Me.DataGridViewSecurity.Size = New System.Drawing.Size(431, 222)
+        Me.DataGridViewSecurity.Size = New System.Drawing.Size(313, 170)
         Me.DataGridViewSecurity.TabIndex = 0
-        '
-        'TabPagePayments
-        '
-        Me.TabPagePayments.Controls.Add(Me.DataGridView2)
-        Me.TabPagePayments.Location = New System.Drawing.Point(4, 22)
-        Me.TabPagePayments.Name = "TabPagePayments"
-        Me.TabPagePayments.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPagePayments.Size = New System.Drawing.Size(437, 228)
-        Me.TabPagePayments.TabIndex = 2
-        Me.TabPagePayments.Text = "Payment Management"
-        Me.TabPagePayments.UseVisualStyleBackColor = True
-        '
-        'DataGridView2
-        '
-        Me.DataGridView2.AllowUserToAddRows = False
-        Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView2.Location = New System.Drawing.Point(3, 3)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.Size = New System.Drawing.Size(431, 222)
-        Me.DataGridView2.TabIndex = 0
-        '
-        'ButtonCustomerSearch
-        '
-        Me.ButtonCustomerSearch.Location = New System.Drawing.Point(27, 433)
-        Me.ButtonCustomerSearch.Name = "ButtonCustomerSearch"
-        Me.ButtonCustomerSearch.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonCustomerSearch.TabIndex = 9
-        Me.ButtonCustomerSearch.Text = "Search (F2)"
-        Me.ButtonCustomerSearch.UseVisualStyleBackColor = True
-        '
-        'ButtonCustomerAddSave
-        '
-        Me.ButtonCustomerAddSave.Location = New System.Drawing.Point(108, 433)
-        Me.ButtonCustomerAddSave.Name = "ButtonCustomerAddSave"
-        Me.ButtonCustomerAddSave.Size = New System.Drawing.Size(86, 26)
-        Me.ButtonCustomerAddSave.TabIndex = 10
-        Me.ButtonCustomerAddSave.Text = "Add/Save (F3)"
-        Me.ButtonCustomerAddSave.UseVisualStyleBackColor = True
-        '
-        'ButtonCustomerModify
-        '
-        Me.ButtonCustomerModify.Location = New System.Drawing.Point(200, 433)
-        Me.ButtonCustomerModify.Name = "ButtonCustomerModify"
-        Me.ButtonCustomerModify.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonCustomerModify.TabIndex = 11
-        Me.ButtonCustomerModify.Text = "Modify (F4)"
-        Me.ButtonCustomerModify.UseVisualStyleBackColor = True
-        '
-        'ButtonModifyCreditDetails
-        '
-        Me.ButtonModifyCreditDetails.Location = New System.Drawing.Point(382, 433)
-        Me.ButtonModifyCreditDetails.Name = "ButtonModifyCreditDetails"
-        Me.ButtonModifyCreditDetails.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonModifyCreditDetails.TabIndex = 12
-        Me.ButtonModifyCreditDetails.Text = "Modify (F6)"
-        Me.ButtonModifyCreditDetails.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.ButtonModifyCreditDetails.UseVisualStyleBackColor = True
-        '
-        'ButtonAddPayments
-        '
-        Me.ButtonAddPayments.Location = New System.Drawing.Point(674, 430)
-        Me.ButtonAddPayments.Name = "ButtonAddPayments"
-        Me.ButtonAddPayments.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonAddPayments.TabIndex = 13
-        Me.ButtonAddPayments.Text = "Add (F9)"
-        Me.ButtonAddPayments.UseVisualStyleBackColor = True
-        '
-        'ButtonAddCreditDetails
-        '
-        Me.ButtonAddCreditDetails.Location = New System.Drawing.Point(301, 433)
-        Me.ButtonAddCreditDetails.Name = "ButtonAddCreditDetails"
-        Me.ButtonAddCreditDetails.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonAddCreditDetails.TabIndex = 14
-        Me.ButtonAddCreditDetails.Text = "Add (F5)"
-        Me.ButtonAddCreditDetails.UseVisualStyleBackColor = True
-        '
-        'ButtonAddSecurityDetails
-        '
-        Me.ButtonAddSecurityDetails.Location = New System.Drawing.Point(489, 430)
-        Me.ButtonAddSecurityDetails.Name = "ButtonAddSecurityDetails"
-        Me.ButtonAddSecurityDetails.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonAddSecurityDetails.TabIndex = 15
-        Me.ButtonAddSecurityDetails.Text = "Add (F7)"
-        Me.ButtonAddSecurityDetails.UseVisualStyleBackColor = True
-        '
-        'ButtonModifySecurity
-        '
-        Me.ButtonModifySecurity.Location = New System.Drawing.Point(572, 431)
-        Me.ButtonModifySecurity.Name = "ButtonModifySecurity"
-        Me.ButtonModifySecurity.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonModifySecurity.TabIndex = 16
-        Me.ButtonModifySecurity.Text = "Modify (F8)"
-        Me.ButtonModifySecurity.UseVisualStyleBackColor = True
-        '
-        'ButtonModifyPayments
-        '
-        Me.ButtonModifyPayments.Location = New System.Drawing.Point(755, 430)
-        Me.ButtonModifyPayments.Name = "ButtonModifyPayments"
-        Me.ButtonModifyPayments.Size = New System.Drawing.Size(75, 26)
-        Me.ButtonModifyPayments.TabIndex = 17
-        Me.ButtonModifyPayments.Text = "Modify (F10)"
-        Me.ButtonModifyPayments.UseVisualStyleBackColor = True
-        '
-        'Panel3
-        '
-        Me.Panel3.Location = New System.Drawing.Point(967, 150)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(306, 148)
-        Me.Panel3.TabIndex = 6
-        '
-        'Panel4
-        '
-        Me.Panel4.Location = New System.Drawing.Point(967, 304)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(306, 148)
-        Me.Panel4.TabIndex = 7
-        '
-        'ExtendedGroupBoxPaymentFunctions
-        '
-        Me.ExtendedGroupBoxPaymentFunctions.Caption = "Payments Details Fuctions"
-        Me.ExtendedGroupBoxPaymentFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
-        Me.ExtendedGroupBoxPaymentFunctions.Location = New System.Drawing.Point(666, 402)
-        Me.ExtendedGroupBoxPaymentFunctions.Name = "ExtendedGroupBoxPaymentFunctions"
-        Me.ExtendedGroupBoxPaymentFunctions.Size = New System.Drawing.Size(168, 75)
-        Me.ExtendedGroupBoxPaymentFunctions.TabIndex = 20
-        '
-        'ExtendedGroupBoxCustomerFunctions
-        '
-        Me.ExtendedGroupBoxCustomerFunctions.Caption = "Customer Functions"
-        Me.ExtendedGroupBoxCustomerFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
-        Me.ExtendedGroupBoxCustomerFunctions.Location = New System.Drawing.Point(12, 402)
-        Me.ExtendedGroupBoxCustomerFunctions.Name = "ExtendedGroupBoxCustomerFunctions"
-        Me.ExtendedGroupBoxCustomerFunctions.Size = New System.Drawing.Size(272, 75)
-        Me.ExtendedGroupBoxCustomerFunctions.TabIndex = 8
-        '
-        'LabledListBoxPaymentDetails
-        '
-        Me.LabledListBoxPaymentDetails.Caption = "Payment Details"
-        Me.LabledListBoxPaymentDetails.DataSource = Nothing
-        Me.LabledListBoxPaymentDetails.Location = New System.Drawing.Point(482, 271)
-        Me.LabledListBoxPaymentDetails.Name = "LabledListBoxPaymentDetails"
-        Me.LabledListBoxPaymentDetails.Size = New System.Drawing.Size(343, 113)
-        Me.LabledListBoxPaymentDetails.TabIndex = 2
-        '
-        'LabledListBoxSecurityDetails
-        '
-        Me.LabledListBoxSecurityDetails.Caption = "Security Details"
-        Me.LabledListBoxSecurityDetails.DataSource = Nothing
-        Me.LabledListBoxSecurityDetails.Location = New System.Drawing.Point(482, 150)
-        Me.LabledListBoxSecurityDetails.Name = "LabledListBoxSecurityDetails"
-        Me.LabledListBoxSecurityDetails.Size = New System.Drawing.Size(343, 115)
-        Me.LabledListBoxSecurityDetails.TabIndex = 1
-        '
-        'TextBox1
-        '
-        Me.TextBox1.ForeColor = System.Drawing.Color.Gray
-        Me.TextBox1.Location = New System.Drawing.Point(146, 13)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.NullText = "Customer name"
-        Me.TextBox1.Size = New System.Drawing.Size(231, 20)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "Customer name"
-        '
-        'TextBoxPhoneNumber
-        '
-        Me.TextBoxPhoneNumber.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxPhoneNumber.Location = New System.Drawing.Point(146, 65)
-        Me.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber"
-        Me.TextBoxPhoneNumber.NullText = "Phone Number"
-        Me.TextBoxPhoneNumber.Size = New System.Drawing.Size(231, 20)
-        Me.TextBoxPhoneNumber.TabIndex = 2
-        Me.TextBoxPhoneNumber.Text = "Phone Number"
-        '
-        'TextBoxAge
-        '
-        Me.TextBoxAge.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxAge.Location = New System.Drawing.Point(12, 39)
-        Me.TextBoxAge.Name = "TextBoxAge"
-        Me.TextBoxAge.NullText = "Age"
-        Me.TextBoxAge.Size = New System.Drawing.Size(128, 20)
-        Me.TextBoxAge.TabIndex = 1
-        Me.TextBoxAge.Text = "Age"
-        '
-        'TextBoxGender
-        '
-        Me.TextBoxGender.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxGender.Location = New System.Drawing.Point(12, 65)
-        Me.TextBoxGender.Name = "TextBoxGender"
-        Me.TextBoxGender.NullText = "Gender"
-        Me.TextBoxGender.Size = New System.Drawing.Size(128, 20)
-        Me.TextBoxGender.TabIndex = 1
-        Me.TextBoxGender.Text = "Gender"
-        '
-        'TextBoxBirthdate
-        '
-        Me.TextBoxBirthdate.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxBirthdate.Location = New System.Drawing.Point(146, 39)
-        Me.TextBoxBirthdate.Name = "TextBoxBirthdate"
-        Me.TextBoxBirthdate.NullText = "Birthdate"
-        Me.TextBoxBirthdate.Size = New System.Drawing.Size(231, 20)
-        Me.TextBoxBirthdate.TabIndex = 3
-        Me.TextBoxBirthdate.Text = "Birthdate"
-        '
-        'TextBoxNidPp
-        '
-        Me.TextBoxNidPp.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxNidPp.Location = New System.Drawing.Point(12, 13)
-        Me.TextBoxNidPp.Name = "TextBoxNidPp"
-        Me.TextBoxNidPp.NullText = "Nid/Pp"
-        Me.TextBoxNidPp.Size = New System.Drawing.Size(128, 20)
-        Me.TextBoxNidPp.TabIndex = 4
-        Me.TextBoxNidPp.Text = "Nid/Pp"
-        '
-        'LabledListBoxCreditDetails
-        '
-        Me.LabledListBoxCreditDetails.Caption = "Credit Details"
-        Me.LabledListBoxCreditDetails.DataSource = Nothing
-        Me.LabledListBoxCreditDetails.Location = New System.Drawing.Point(482, 32)
-        Me.LabledListBoxCreditDetails.Name = "LabledListBoxCreditDetails"
-        Me.LabledListBoxCreditDetails.Size = New System.Drawing.Size(343, 112)
-        Me.LabledListBoxCreditDetails.TabIndex = 0
-        '
-        'ExtendedGroupBox1
-        '
-        Me.ExtendedGroupBox1.Caption = "Customer Details"
-        Me.ExtendedGroupBox1.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
-        Me.ExtendedGroupBox1.Location = New System.Drawing.Point(12, 5)
-        Me.ExtendedGroupBox1.Name = "ExtendedGroupBox1"
-        Me.ExtendedGroupBox1.Size = New System.Drawing.Size(441, 131)
-        Me.ExtendedGroupBox1.TabIndex = 2
-        '
-        'ExtendedGroupBox2
-        '
-        Me.ExtendedGroupBox2.Caption = "Credit Management Summary"
-        Me.ExtendedGroupBox2.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
-        Me.ExtendedGroupBox2.Location = New System.Drawing.Point(473, 5)
-        Me.ExtendedGroupBox2.Name = "ExtendedGroupBox2"
-        Me.ExtendedGroupBox2.Size = New System.Drawing.Size(361, 391)
-        Me.ExtendedGroupBox2.TabIndex = 6
-        '
-        'ExtendedGroupBoxCreditFunctions
-        '
-        Me.ExtendedGroupBoxCreditFunctions.Caption = "Credit Details Fuctions"
-        Me.ExtendedGroupBoxCreditFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
-        Me.ExtendedGroupBoxCreditFunctions.Location = New System.Drawing.Point(290, 402)
-        Me.ExtendedGroupBoxCreditFunctions.Name = "ExtendedGroupBoxCreditFunctions"
-        Me.ExtendedGroupBoxCreditFunctions.Size = New System.Drawing.Size(182, 75)
-        Me.ExtendedGroupBoxCreditFunctions.TabIndex = 18
-        '
-        'ExtendedGroupBoxSecurityFunctions
-        '
-        Me.ExtendedGroupBoxSecurityFunctions.Caption = "Security Details Fuctions"
-        Me.ExtendedGroupBoxSecurityFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
-        Me.ExtendedGroupBoxSecurityFunctions.Location = New System.Drawing.Point(478, 402)
-        Me.ExtendedGroupBoxSecurityFunctions.Name = "ExtendedGroupBoxSecurityFunctions"
-        Me.ExtendedGroupBoxSecurityFunctions.Size = New System.Drawing.Size(182, 75)
-        Me.ExtendedGroupBoxSecurityFunctions.TabIndex = 19
         '
         'SecId
         '
@@ -521,17 +238,257 @@ Partial Class CreditManagementView
         Me.Worth.Name = "Worth"
         Me.Worth.ReadOnly = True
         '
+        'DataGridView2
+        '
+        Me.DataGridView2.AllowUserToAddRows = False
+        Me.DataGridView2.AllowUserToDeleteRows = False
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView2.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.ReadOnly = True
+        Me.DataGridView2.Size = New System.Drawing.Size(800, 170)
+        Me.DataGridView2.TabIndex = 0
+        '
+        'ButtonCustomerSearch
+        '
+        Me.ButtonCustomerSearch.Location = New System.Drawing.Point(154, 455)
+        Me.ButtonCustomerSearch.Name = "ButtonCustomerSearch"
+        Me.ButtonCustomerSearch.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonCustomerSearch.TabIndex = 9
+        Me.ButtonCustomerSearch.Text = "Search (F2)"
+        Me.ButtonCustomerSearch.UseVisualStyleBackColor = True
+        '
+        'ButtonCustomerAddSave
+        '
+        Me.ButtonCustomerAddSave.Location = New System.Drawing.Point(235, 455)
+        Me.ButtonCustomerAddSave.Name = "ButtonCustomerAddSave"
+        Me.ButtonCustomerAddSave.Size = New System.Drawing.Size(86, 26)
+        Me.ButtonCustomerAddSave.TabIndex = 10
+        Me.ButtonCustomerAddSave.Text = "Add/Save (F3)"
+        Me.ButtonCustomerAddSave.UseVisualStyleBackColor = True
+        '
+        'ButtonCustomerModify
+        '
+        Me.ButtonCustomerModify.Location = New System.Drawing.Point(327, 455)
+        Me.ButtonCustomerModify.Name = "ButtonCustomerModify"
+        Me.ButtonCustomerModify.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonCustomerModify.TabIndex = 11
+        Me.ButtonCustomerModify.Text = "Modify (F4)"
+        Me.ButtonCustomerModify.UseVisualStyleBackColor = True
+        '
+        'ButtonModifyCreditDetails
+        '
+        Me.ButtonModifyCreditDetails.Location = New System.Drawing.Point(509, 455)
+        Me.ButtonModifyCreditDetails.Name = "ButtonModifyCreditDetails"
+        Me.ButtonModifyCreditDetails.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonModifyCreditDetails.TabIndex = 12
+        Me.ButtonModifyCreditDetails.Text = "Modify (F6)"
+        Me.ButtonModifyCreditDetails.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.ButtonModifyCreditDetails.UseVisualStyleBackColor = True
+        '
+        'ButtonAddPayments
+        '
+        Me.ButtonAddPayments.Location = New System.Drawing.Point(801, 452)
+        Me.ButtonAddPayments.Name = "ButtonAddPayments"
+        Me.ButtonAddPayments.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonAddPayments.TabIndex = 13
+        Me.ButtonAddPayments.Text = "Add (F9)"
+        Me.ButtonAddPayments.UseVisualStyleBackColor = True
+        '
+        'ButtonAddCreditDetails
+        '
+        Me.ButtonAddCreditDetails.Location = New System.Drawing.Point(428, 455)
+        Me.ButtonAddCreditDetails.Name = "ButtonAddCreditDetails"
+        Me.ButtonAddCreditDetails.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonAddCreditDetails.TabIndex = 14
+        Me.ButtonAddCreditDetails.Text = "Add (F5)"
+        Me.ButtonAddCreditDetails.UseVisualStyleBackColor = True
+        '
+        'ButtonAddSecurityDetails
+        '
+        Me.ButtonAddSecurityDetails.Location = New System.Drawing.Point(616, 452)
+        Me.ButtonAddSecurityDetails.Name = "ButtonAddSecurityDetails"
+        Me.ButtonAddSecurityDetails.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonAddSecurityDetails.TabIndex = 15
+        Me.ButtonAddSecurityDetails.Text = "Add (F7)"
+        Me.ButtonAddSecurityDetails.UseVisualStyleBackColor = True
+        '
+        'ButtonModifySecurity
+        '
+        Me.ButtonModifySecurity.Location = New System.Drawing.Point(699, 453)
+        Me.ButtonModifySecurity.Name = "ButtonModifySecurity"
+        Me.ButtonModifySecurity.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonModifySecurity.TabIndex = 16
+        Me.ButtonModifySecurity.Text = "Modify (F8)"
+        Me.ButtonModifySecurity.UseVisualStyleBackColor = True
+        '
+        'ButtonModifyPayments
+        '
+        Me.ButtonModifyPayments.Location = New System.Drawing.Point(882, 452)
+        Me.ButtonModifyPayments.Name = "ButtonModifyPayments"
+        Me.ButtonModifyPayments.Size = New System.Drawing.Size(75, 26)
+        Me.ButtonModifyPayments.TabIndex = 17
+        Me.ButtonModifyPayments.Text = "Modify (F10)"
+        Me.ButtonModifyPayments.UseVisualStyleBackColor = True
+        '
+        'TabControl2
+        '
+        Me.TabControl2.Controls.Add(Me.TabPage1)
+        Me.TabControl2.Location = New System.Drawing.Point(338, 212)
+        Me.TabControl2.Name = "TabControl2"
+        Me.TabControl2.SelectedIndex = 0
+        Me.TabControl2.Size = New System.Drawing.Size(814, 202)
+        Me.TabControl2.TabIndex = 21
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.DataGridView2)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(806, 176)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Repayments For Selected Credit"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabControl3
+        '
+        Me.TabControl3.Controls.Add(Me.TabPageCreditSecurity)
+        Me.TabControl3.Location = New System.Drawing.Point(9, 212)
+        Me.TabControl3.Name = "TabControl3"
+        Me.TabControl3.SelectedIndex = 0
+        Me.TabControl3.Size = New System.Drawing.Size(327, 202)
+        Me.TabControl3.TabIndex = 22
+        '
+        'TabPageCreditSecurity
+        '
+        Me.TabPageCreditSecurity.Controls.Add(Me.DataGridViewSecurity)
+        Me.TabPageCreditSecurity.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageCreditSecurity.Name = "TabPageCreditSecurity"
+        Me.TabPageCreditSecurity.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPageCreditSecurity.Size = New System.Drawing.Size(319, 176)
+        Me.TabPageCreditSecurity.TabIndex = 0
+        Me.TabPageCreditSecurity.Text = "Selected Credit Security"
+        Me.TabPageCreditSecurity.UseVisualStyleBackColor = True
+        '
+        'ExtendedGroupBoxPaymentFunctions
+        '
+        Me.ExtendedGroupBoxPaymentFunctions.Caption = "Payments Details Fuctions"
+        Me.ExtendedGroupBoxPaymentFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
+        Me.ExtendedGroupBoxPaymentFunctions.Location = New System.Drawing.Point(793, 424)
+        Me.ExtendedGroupBoxPaymentFunctions.Name = "ExtendedGroupBoxPaymentFunctions"
+        Me.ExtendedGroupBoxPaymentFunctions.Size = New System.Drawing.Size(168, 67)
+        Me.ExtendedGroupBoxPaymentFunctions.TabIndex = 20
+        '
+        'ExtendedGroupBoxCustomerFunctions
+        '
+        Me.ExtendedGroupBoxCustomerFunctions.Caption = "Customer Functions"
+        Me.ExtendedGroupBoxCustomerFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
+        Me.ExtendedGroupBoxCustomerFunctions.Location = New System.Drawing.Point(139, 424)
+        Me.ExtendedGroupBoxCustomerFunctions.Name = "ExtendedGroupBoxCustomerFunctions"
+        Me.ExtendedGroupBoxCustomerFunctions.Size = New System.Drawing.Size(272, 67)
+        Me.ExtendedGroupBoxCustomerFunctions.TabIndex = 8
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.LavenderBlush
+        Me.TextBox1.ForeColor = System.Drawing.Color.Gray
+        Me.TextBox1.Location = New System.Drawing.Point(12, 39)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.NullText = "Customer name"
+        Me.TextBox1.Size = New System.Drawing.Size(254, 20)
+        Me.TextBox1.TabIndex = 1
+        Me.TextBox1.Text = "Customer name"
+        '
+        'TextBoxPhoneNumber
+        '
+        Me.TextBoxPhoneNumber.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxPhoneNumber.Location = New System.Drawing.Point(12, 143)
+        Me.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber"
+        Me.TextBoxPhoneNumber.NullText = "Phone Number"
+        Me.TextBoxPhoneNumber.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxPhoneNumber.TabIndex = 2
+        Me.TextBoxPhoneNumber.Text = "Phone Number"
+        '
+        'TextBoxAge
+        '
+        Me.TextBoxAge.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxAge.Location = New System.Drawing.Point(12, 65)
+        Me.TextBoxAge.Name = "TextBoxAge"
+        Me.TextBoxAge.NullText = "Age"
+        Me.TextBoxAge.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxAge.TabIndex = 1
+        Me.TextBoxAge.Text = "Age"
+        '
+        'TextBoxGender
+        '
+        Me.TextBoxGender.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxGender.Location = New System.Drawing.Point(12, 91)
+        Me.TextBoxGender.Name = "TextBoxGender"
+        Me.TextBoxGender.NullText = "Gender"
+        Me.TextBoxGender.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxGender.TabIndex = 1
+        Me.TextBoxGender.Text = "Gender"
+        '
+        'TextBoxBirthdate
+        '
+        Me.TextBoxBirthdate.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxBirthdate.Location = New System.Drawing.Point(12, 117)
+        Me.TextBoxBirthdate.Name = "TextBoxBirthdate"
+        Me.TextBoxBirthdate.NullText = "Birthdate"
+        Me.TextBoxBirthdate.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxBirthdate.TabIndex = 3
+        Me.TextBoxBirthdate.Text = "Birthdate"
+        '
+        'TextBoxNidPp
+        '
+        Me.TextBoxNidPp.BackColor = System.Drawing.Color.LavenderBlush
+        Me.TextBoxNidPp.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxNidPp.Location = New System.Drawing.Point(12, 13)
+        Me.TextBoxNidPp.Name = "TextBoxNidPp"
+        Me.TextBoxNidPp.NullText = "Nid/Pp"
+        Me.TextBoxNidPp.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxNidPp.TabIndex = 4
+        Me.TextBoxNidPp.Text = "Nid/Pp"
+        '
+        'ExtendedGroupBox1
+        '
+        Me.ExtendedGroupBox1.Caption = "Customer Details"
+        Me.ExtendedGroupBox1.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
+        Me.ExtendedGroupBox1.Location = New System.Drawing.Point(6, 7)
+        Me.ExtendedGroupBox1.Name = "ExtendedGroupBox1"
+        Me.ExtendedGroupBox1.Size = New System.Drawing.Size(326, 203)
+        Me.ExtendedGroupBox1.TabIndex = 2
+        '
+        'ExtendedGroupBoxCreditFunctions
+        '
+        Me.ExtendedGroupBoxCreditFunctions.Caption = "Credit Details Fuctions"
+        Me.ExtendedGroupBoxCreditFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
+        Me.ExtendedGroupBoxCreditFunctions.Location = New System.Drawing.Point(417, 424)
+        Me.ExtendedGroupBoxCreditFunctions.Name = "ExtendedGroupBoxCreditFunctions"
+        Me.ExtendedGroupBoxCreditFunctions.Size = New System.Drawing.Size(182, 67)
+        Me.ExtendedGroupBoxCreditFunctions.TabIndex = 18
+        '
+        'ExtendedGroupBoxSecurityFunctions
+        '
+        Me.ExtendedGroupBoxSecurityFunctions.Caption = "Security Details Fuctions"
+        Me.ExtendedGroupBoxSecurityFunctions.CaptionAlignment = VBBankApp.ExtendedGroupBox.Alignment.Center
+        Me.ExtendedGroupBoxSecurityFunctions.Location = New System.Drawing.Point(605, 424)
+        Me.ExtendedGroupBoxSecurityFunctions.Name = "ExtendedGroupBoxSecurityFunctions"
+        Me.ExtendedGroupBoxSecurityFunctions.Size = New System.Drawing.Size(182, 67)
+        Me.ExtendedGroupBoxSecurityFunctions.TabIndex = 19
+        '
         'CreditManagementView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(841, 482)
+        Me.ClientSize = New System.Drawing.Size(1158, 496)
+        Me.Controls.Add(Me.TabControl3)
+        Me.Controls.Add(Me.TabControl2)
         Me.Controls.Add(Me.ButtonModifyPayments)
         Me.Controls.Add(Me.ButtonAddPayments)
         Me.Controls.Add(Me.ExtendedGroupBoxPaymentFunctions)
-        Me.Controls.Add(Me.Panel4)
-        Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.ButtonModifySecurity)
         Me.Controls.Add(Me.ButtonAddSecurityDetails)
         Me.Controls.Add(Me.ButtonAddCreditDetails)
@@ -541,12 +498,8 @@ Partial Class CreditManagementView
         Me.Controls.Add(Me.ButtonCustomerSearch)
         Me.Controls.Add(Me.ExtendedGroupBoxCustomerFunctions)
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.LabledListBoxPaymentDetails)
-        Me.Controls.Add(Me.LabledListBoxSecurityDetails)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.LabledListBoxCreditDetails)
         Me.Controls.Add(Me.ExtendedGroupBox1)
-        Me.Controls.Add(Me.ExtendedGroupBox2)
         Me.Controls.Add(Me.ExtendedGroupBoxCreditFunctions)
         Me.Controls.Add(Me.ExtendedGroupBoxSecurityFunctions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -560,10 +513,12 @@ Partial Class CreditManagementView
         Me.TabControl1.ResumeLayout(False)
         Me.TabPageCredits.ResumeLayout(False)
         CType(Me.DataGridViewCustomerCredits, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPageSecurity.ResumeLayout(False)
         CType(Me.DataGridViewSecurity, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPagePayments.ResumeLayout(False)
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl2.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabControl3.ResumeLayout(False)
+        Me.TabPageCreditSecurity.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -574,14 +529,9 @@ Partial Class CreditManagementView
     Friend WithEvents TextBoxAge As ExtendedTextBox
     Friend WithEvents TextBox1 As ExtendedTextBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents LabledListBoxPaymentDetails As LabledListBox
-    Friend WithEvents LabledListBoxSecurityDetails As LabledListBox
-    Friend WithEvents LabledListBoxCreditDetails As LabledListBox
     Friend WithEvents ExtendedGroupBox1 As ExtendedGroupBox
-    Friend WithEvents ExtendedGroupBox2 As ExtendedGroupBox
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPageCredits As TabPage
-    Friend WithEvents TabPageSecurity As TabPage
     Friend WithEvents ExtendedGroupBoxCustomerFunctions As ExtendedGroupBox
     Friend WithEvents ButtonCustomerSearch As Button
     Friend WithEvents ButtonCustomerAddSave As Button
@@ -592,10 +542,6 @@ Partial Class CreditManagementView
     Friend WithEvents ButtonAddSecurityDetails As Button
     Friend WithEvents ButtonModifySecurity As Button
     Friend WithEvents ButtonModifyPayments As Button
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents TabPagePayments As TabPage
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Panel4 As Panel
     Friend WithEvents ExtendedGroupBoxCreditFunctions As ExtendedGroupBox
     Friend WithEvents ExtendedGroupBoxSecurityFunctions As ExtendedGroupBox
     Friend WithEvents ExtendedGroupBoxPaymentFunctions As ExtendedGroupBox
@@ -615,4 +561,8 @@ Partial Class CreditManagementView
     Friend WithEvents Security As DataGridViewTextBoxColumn
     Friend WithEvents CreditId As DataGridViewTextBoxColumn
     Friend WithEvents Worth As DataGridViewTextBoxColumn
+    Friend WithEvents TabControl2 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabControl3 As TabControl
+    Friend WithEvents TabPageCreditSecurity As TabPage
 End Class
