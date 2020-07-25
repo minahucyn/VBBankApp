@@ -8,7 +8,15 @@
     Private _interestDue As Double
     Private _totalDue As Double
 
-
+    Private _id As Integer
+    Public Property Id() As Integer
+        Get
+            Return _id
+        End Get
+        Set(ByVal value As Integer)
+            _id = value
+        End Set
+    End Property
     Public Property Description() As String
         Get
             Return _description

@@ -24,6 +24,7 @@ Public Class CreditManagementViewModel
     Private Sub InitializeDemoData()
         'create demo credits
         Dim credit1 = New CreditModel() With {
+            .Id = 1,
             .Description = "Lui Loan",
             .CreditAmount = 100000.0,
             .Outstanding = 100000.0,
@@ -34,6 +35,7 @@ Public Class CreditManagementViewModel
             .TotalDue = 1500.0
         }
         Dim credit2 = New CreditModel() With {
+            .Id = 2,
             .Description = "Not So Lui Loan",
             .CreditAmount = 100000000.0,
             .Outstanding = 100000000.0,
