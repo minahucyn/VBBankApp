@@ -4,6 +4,11 @@
     Private _interestOutstanding As Double
     Private _principleOutstanding As Double
     Private _outstanding As Double
+    Private _principleDue As Double
+    Private _interestDue As Double
+    Private _totalDue As Double
+
+
     Public Property Description() As String
         Get
             Return _description
@@ -20,8 +25,6 @@
             _creditAmount = value
         End Set
     End Property
-
-
     Public Property PrincipleOutstanding() As Double
         Get
             Return _principleOutstanding
@@ -30,7 +33,6 @@
             _principleOutstanding = value
         End Set
     End Property
-
     Public Property InterestOutstanding() As Double
         Get
             Return _interestOutstanding
@@ -45,6 +47,30 @@
         End Get
         Set(ByVal value As Double)
             _outstanding = value
+        End Set
+    End Property
+    Public Property PrincipleDue() As Double
+        Get
+            Return _principleDue
+        End Get
+        Set(ByVal value As Double)
+            _principleDue = value
+        End Set
+    End Property
+    Public Property InterestDue() As Double
+        Get
+            Return _interestDue
+        End Get
+        Set(ByVal value As Double)
+            _interestDue = value
+        End Set
+    End Property
+    Public Property TotalDue() As Double
+        Get
+            Return _totalDue
+        End Get
+        Set(ByVal value As Double)
+            _totalDue = value
         End Set
     End Property
 

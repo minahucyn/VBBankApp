@@ -28,14 +28,20 @@ Public Class CreditManagementViewModel
             .CreditAmount = 100000.0,
             .Outstanding = 100000.0,
             .InterestOutstanding = 187878.0,
-            .PrincipleOutstanding = 100000.0
+            .PrincipleOutstanding = 100000.0,
+            .PrincipleDue = 1000.0,
+            .InterestDue = 500.0,
+            .TotalDue = 1500.0
         }
         Dim credit2 = New CreditModel() With {
             .Description = "Not So Lui Loan",
             .CreditAmount = 100000000.0,
             .Outstanding = 100000000.0,
             .InterestOutstanding = 18787834656.0,
-            .PrincipleOutstanding = 100000000.0
+            .PrincipleOutstanding = 100000000.0,
+            .PrincipleDue = 1000.0,
+            .InterestDue = 500.0,
+            .TotalDue = 1500.0
         }
         'add the demo credits to the datasource for UI, Binding List
         CustomerCredits.Add(credit1)
