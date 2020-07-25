@@ -2,10 +2,12 @@
     Inherits TextBox
     Private _nulltext As String
     Private _initialForeColor As Color
+    Private _IsPasswordField As Boolean
+
     Public Sub New()
         'new-up the textbox
         MyBase.New()
-
+        UseSystemPasswordChar = False
         'subscribe for events from base
         AddHandler Leave, AddressOf ManageNullText
         AddHandler Enter, AddressOf ManageGotFocus
@@ -23,10 +25,19 @@
         'Set text as empty string if Text = NullText
         If Text = NullText Then
             Text = String.Empty
+
+            If IsPasswordField Then
+                ManagePasswordProperty(True)
+            End If
         End If
         UnSubscribeToForeColorChanged()
         ForeColor = Color.Black
         SubscribeToForeColorChanged()
+
+    End Sub
+
+    Private Sub ManagePasswordProperty(isMasked As Boolean)
+        UseSystemPasswordChar = isMasked
     End Sub
 
     ''' <summary>
@@ -40,6 +51,7 @@
             ForeColor = Color.Gray
             'Sets the Text property to NullText value if assigned.
             Text = NullText
+            ManagePasswordProperty(False)
         End If
         Me.Refresh()
     End Sub
@@ -54,6 +66,14 @@
         End Set
     End Property
 
+    Public Property IsPasswordField() As Boolean
+        Get
+            Return _IsPasswordField
+        End Get
+        Set(ByVal value As Boolean)
+            _IsPasswordField = value
+        End Set
+    End Property
 
     Sub UnSubscribeToForeColorChanged()
         RemoveHandler ForeColorChanged, AddressOf GetInitialForeColor
