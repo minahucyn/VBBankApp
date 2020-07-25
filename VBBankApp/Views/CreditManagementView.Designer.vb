@@ -26,8 +26,20 @@ Partial Class CreditManagementView
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageCredits = New System.Windows.Forms.TabPage()
+        Me.DataGridViewCustomerCredits = New System.Windows.Forms.DataGridView()
+        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PrincipleDue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InterestDue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalDue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PrincipleOutstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InterestOutstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Outstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreditAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPageSecurity = New System.Windows.Forms.TabPage()
+        Me.DataGridViewSecurity = New System.Windows.Forms.DataGridView()
         Me.TabPagePayments = New System.Windows.Forms.TabPage()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.ButtonCustomerSearch = New System.Windows.Forms.Button()
         Me.ButtonCustomerAddSave = New System.Windows.Forms.Button()
         Me.ButtonCustomerModify = New System.Windows.Forms.Button()
@@ -54,20 +66,18 @@ Partial Class CreditManagementView
         Me.ExtendedGroupBox2 = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxCreditFunctions = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxSecurityFunctions = New VBBankApp.ExtendedGroupBox()
-        Me.CreditAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Outstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InterestOutstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PrincipleOutstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TotalDue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InterestDue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PrincipleDue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewCustomerCredits = New System.Windows.Forms.DataGridView()
+        Me.SecId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Security = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreditId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Worth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPageCredits.SuspendLayout()
         CType(Me.DataGridViewCustomerCredits, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPageSecurity.SuspendLayout()
+        CType(Me.DataGridViewSecurity, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPagePayments.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -112,8 +122,95 @@ Partial Class CreditManagementView
         Me.TabPageCredits.Text = "Credit Management"
         Me.TabPageCredits.UseVisualStyleBackColor = True
         '
+        'DataGridViewCustomerCredits
+        '
+        Me.DataGridViewCustomerCredits.AllowUserToAddRows = False
+        Me.DataGridViewCustomerCredits.AllowUserToDeleteRows = False
+        Me.DataGridViewCustomerCredits.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DataGridViewCustomerCredits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewCustomerCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id, Me.Description, Me.PrincipleDue, Me.InterestDue, Me.TotalDue, Me.PrincipleOutstanding, Me.InterestOutstanding, Me.Outstanding, Me.CreditAmount})
+        Me.DataGridViewCustomerCredits.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridViewCustomerCredits.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridViewCustomerCredits.Name = "DataGridViewCustomerCredits"
+        Me.DataGridViewCustomerCredits.ReadOnly = True
+        Me.DataGridViewCustomerCredits.Size = New System.Drawing.Size(431, 222)
+        Me.DataGridViewCustomerCredits.TabIndex = 0
+        '
+        'Id
+        '
+        Me.Id.DataPropertyName = "Id"
+        Me.Id.HeaderText = "Id"
+        Me.Id.Name = "Id"
+        Me.Id.ReadOnly = True
+        Me.Id.Width = 41
+        '
+        'Description
+        '
+        Me.Description.DataPropertyName = "Description"
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.ReadOnly = True
+        Me.Description.Width = 85
+        '
+        'PrincipleDue
+        '
+        Me.PrincipleDue.DataPropertyName = "PrincipleDue"
+        Me.PrincipleDue.HeaderText = "Principle Due"
+        Me.PrincipleDue.Name = "PrincipleDue"
+        Me.PrincipleDue.ReadOnly = True
+        Me.PrincipleDue.Width = 95
+        '
+        'InterestDue
+        '
+        Me.InterestDue.DataPropertyName = "InterestDue"
+        Me.InterestDue.HeaderText = "Interest Due"
+        Me.InterestDue.Name = "InterestDue"
+        Me.InterestDue.ReadOnly = True
+        Me.InterestDue.Width = 90
+        '
+        'TotalDue
+        '
+        Me.TotalDue.DataPropertyName = "TotalDue"
+        Me.TotalDue.HeaderText = "Total Due"
+        Me.TotalDue.Name = "TotalDue"
+        Me.TotalDue.ReadOnly = True
+        Me.TotalDue.Width = 79
+        '
+        'PrincipleOutstanding
+        '
+        Me.PrincipleOutstanding.DataPropertyName = "PrincipleOutstanding"
+        Me.PrincipleOutstanding.HeaderText = "Principle Outstanding"
+        Me.PrincipleOutstanding.Name = "PrincipleOutstanding"
+        Me.PrincipleOutstanding.ReadOnly = True
+        Me.PrincipleOutstanding.Width = 121
+        '
+        'InterestOutstanding
+        '
+        Me.InterestOutstanding.DataPropertyName = "InterestOutstanding"
+        Me.InterestOutstanding.HeaderText = "Inerest Outstanding"
+        Me.InterestOutstanding.Name = "InterestOutstanding"
+        Me.InterestOutstanding.ReadOnly = True
+        Me.InterestOutstanding.Width = 114
+        '
+        'Outstanding
+        '
+        Me.Outstanding.DataPropertyName = "Outstanding"
+        Me.Outstanding.HeaderText = "Outstanding"
+        Me.Outstanding.Name = "Outstanding"
+        Me.Outstanding.ReadOnly = True
+        Me.Outstanding.Width = 89
+        '
+        'CreditAmount
+        '
+        Me.CreditAmount.DataPropertyName = "CreditAmount"
+        Me.CreditAmount.HeaderText = "Credit Amount"
+        Me.CreditAmount.Name = "CreditAmount"
+        Me.CreditAmount.ReadOnly = True
+        Me.CreditAmount.Width = 90
+        '
         'TabPageSecurity
         '
+        Me.TabPageSecurity.Controls.Add(Me.DataGridViewSecurity)
         Me.TabPageSecurity.Location = New System.Drawing.Point(4, 22)
         Me.TabPageSecurity.Name = "TabPageSecurity"
         Me.TabPageSecurity.Padding = New System.Windows.Forms.Padding(3)
@@ -122,8 +219,22 @@ Partial Class CreditManagementView
         Me.TabPageSecurity.Text = "Security Management"
         Me.TabPageSecurity.UseVisualStyleBackColor = True
         '
+        'DataGridViewSecurity
+        '
+        Me.DataGridViewSecurity.AllowUserToAddRows = False
+        Me.DataGridViewSecurity.AllowUserToDeleteRows = False
+        Me.DataGridViewSecurity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewSecurity.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SecId, Me.Security, Me.CreditId, Me.Worth})
+        Me.DataGridViewSecurity.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridViewSecurity.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridViewSecurity.Name = "DataGridViewSecurity"
+        Me.DataGridViewSecurity.ReadOnly = True
+        Me.DataGridViewSecurity.Size = New System.Drawing.Size(431, 222)
+        Me.DataGridViewSecurity.TabIndex = 0
+        '
         'TabPagePayments
         '
+        Me.TabPagePayments.Controls.Add(Me.DataGridView2)
         Me.TabPagePayments.Location = New System.Drawing.Point(4, 22)
         Me.TabPagePayments.Name = "TabPagePayments"
         Me.TabPagePayments.Padding = New System.Windows.Forms.Padding(3)
@@ -131,6 +242,18 @@ Partial Class CreditManagementView
         Me.TabPagePayments.TabIndex = 2
         Me.TabPagePayments.Text = "Payment Management"
         Me.TabPagePayments.UseVisualStyleBackColor = True
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.AllowUserToAddRows = False
+        Me.DataGridView2.AllowUserToDeleteRows = False
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView2.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.ReadOnly = True
+        Me.DataGridView2.Size = New System.Drawing.Size(431, 222)
+        Me.DataGridView2.TabIndex = 0
         '
         'ButtonCustomerSearch
         '
@@ -249,6 +372,7 @@ Partial Class CreditManagementView
         'LabledListBoxPaymentDetails
         '
         Me.LabledListBoxPaymentDetails.Caption = "Payment Details"
+        Me.LabledListBoxPaymentDetails.DataSource = Nothing
         Me.LabledListBoxPaymentDetails.Location = New System.Drawing.Point(482, 271)
         Me.LabledListBoxPaymentDetails.Name = "LabledListBoxPaymentDetails"
         Me.LabledListBoxPaymentDetails.Size = New System.Drawing.Size(343, 113)
@@ -257,6 +381,7 @@ Partial Class CreditManagementView
         'LabledListBoxSecurityDetails
         '
         Me.LabledListBoxSecurityDetails.Caption = "Security Details"
+        Me.LabledListBoxSecurityDetails.DataSource = Nothing
         Me.LabledListBoxSecurityDetails.Location = New System.Drawing.Point(482, 150)
         Me.LabledListBoxSecurityDetails.Name = "LabledListBoxSecurityDetails"
         Me.LabledListBoxSecurityDetails.Size = New System.Drawing.Size(343, 115)
@@ -325,6 +450,7 @@ Partial Class CreditManagementView
         'LabledListBoxCreditDetails
         '
         Me.LabledListBoxCreditDetails.Caption = "Credit Details"
+        Me.LabledListBoxCreditDetails.DataSource = Nothing
         Me.LabledListBoxCreditDetails.Location = New System.Drawing.Point(482, 32)
         Me.LabledListBoxCreditDetails.Name = "LabledListBoxCreditDetails"
         Me.LabledListBoxCreditDetails.Size = New System.Drawing.Size(343, 112)
@@ -366,91 +492,34 @@ Partial Class CreditManagementView
         Me.ExtendedGroupBoxSecurityFunctions.Size = New System.Drawing.Size(182, 75)
         Me.ExtendedGroupBoxSecurityFunctions.TabIndex = 19
         '
-        'CreditAmount
+        'SecId
         '
-        Me.CreditAmount.DataPropertyName = "CreditAmount"
-        Me.CreditAmount.HeaderText = "Credit Amount"
-        Me.CreditAmount.Name = "CreditAmount"
-        Me.CreditAmount.ReadOnly = True
-        Me.CreditAmount.Width = 90
+        Me.SecId.DataPropertyName = "Id"
+        Me.SecId.HeaderText = "Id"
+        Me.SecId.Name = "SecId"
+        Me.SecId.ReadOnly = True
         '
-        'Outstanding
+        'Security
         '
-        Me.Outstanding.DataPropertyName = "Outstanding"
-        Me.Outstanding.HeaderText = "Outstanding"
-        Me.Outstanding.Name = "Outstanding"
-        Me.Outstanding.ReadOnly = True
-        Me.Outstanding.Width = 89
+        Me.Security.DataPropertyName = "Description"
+        Me.Security.HeaderText = "Security"
+        Me.Security.Name = "Security"
+        Me.Security.ReadOnly = True
         '
-        'InterestOutstanding
+        'CreditId
         '
-        Me.InterestOutstanding.DataPropertyName = "InterestOutstanding"
-        Me.InterestOutstanding.HeaderText = "Inerest Outstanding"
-        Me.InterestOutstanding.Name = "InterestOutstanding"
-        Me.InterestOutstanding.ReadOnly = True
-        Me.InterestOutstanding.Width = 114
+        Me.CreditId.DataPropertyName = "CreditId"
+        Me.CreditId.HeaderText = "Credit Id"
+        Me.CreditId.Name = "CreditId"
+        Me.CreditId.ReadOnly = True
+        Me.CreditId.Visible = False
         '
-        'PrincipleOutstanding
+        'Worth
         '
-        Me.PrincipleOutstanding.DataPropertyName = "PrincipleOutstanding"
-        Me.PrincipleOutstanding.HeaderText = "Principle Outstanding"
-        Me.PrincipleOutstanding.Name = "PrincipleOutstanding"
-        Me.PrincipleOutstanding.ReadOnly = True
-        Me.PrincipleOutstanding.Width = 121
-        '
-        'TotalDue
-        '
-        Me.TotalDue.DataPropertyName = "TotalDue"
-        Me.TotalDue.HeaderText = "Total Due"
-        Me.TotalDue.Name = "TotalDue"
-        Me.TotalDue.ReadOnly = True
-        Me.TotalDue.Width = 73
-        '
-        'InterestDue
-        '
-        Me.InterestDue.DataPropertyName = "InterestDue"
-        Me.InterestDue.HeaderText = "Interest Due"
-        Me.InterestDue.Name = "InterestDue"
-        Me.InterestDue.ReadOnly = True
-        Me.InterestDue.Width = 83
-        '
-        'PrincipleDue
-        '
-        Me.PrincipleDue.DataPropertyName = "PrincipleDue"
-        Me.PrincipleDue.HeaderText = "Principle Due"
-        Me.PrincipleDue.Name = "PrincipleDue"
-        Me.PrincipleDue.ReadOnly = True
-        Me.PrincipleDue.Width = 87
-        '
-        'Description
-        '
-        Me.Description.DataPropertyName = "Description"
-        Me.Description.HeaderText = "Description"
-        Me.Description.Name = "Description"
-        Me.Description.ReadOnly = True
-        Me.Description.Width = 85
-        '
-        'Id
-        '
-        Me.Id.DataPropertyName = "Id"
-        Me.Id.HeaderText = "Id"
-        Me.Id.Name = "Id"
-        Me.Id.ReadOnly = True
-        Me.Id.Width = 41
-        '
-        'DataGridViewCustomerCredits
-        '
-        Me.DataGridViewCustomerCredits.AllowUserToAddRows = False
-        Me.DataGridViewCustomerCredits.AllowUserToDeleteRows = False
-        Me.DataGridViewCustomerCredits.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DataGridViewCustomerCredits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewCustomerCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id, Me.Description, Me.PrincipleDue, Me.InterestDue, Me.TotalDue, Me.PrincipleOutstanding, Me.InterestOutstanding, Me.Outstanding, Me.CreditAmount})
-        Me.DataGridViewCustomerCredits.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridViewCustomerCredits.Location = New System.Drawing.Point(3, 3)
-        Me.DataGridViewCustomerCredits.Name = "DataGridViewCustomerCredits"
-        Me.DataGridViewCustomerCredits.ReadOnly = True
-        Me.DataGridViewCustomerCredits.Size = New System.Drawing.Size(431, 222)
-        Me.DataGridViewCustomerCredits.TabIndex = 0
+        Me.Worth.DataPropertyName = "Worth"
+        Me.Worth.HeaderText = "Worth"
+        Me.Worth.Name = "Worth"
+        Me.Worth.ReadOnly = True
         '
         'CreditManagementView
         '
@@ -491,6 +560,10 @@ Partial Class CreditManagementView
         Me.TabControl1.ResumeLayout(False)
         Me.TabPageCredits.ResumeLayout(False)
         CType(Me.DataGridViewCustomerCredits, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPageSecurity.ResumeLayout(False)
+        CType(Me.DataGridViewSecurity, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPagePayments.ResumeLayout(False)
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -536,4 +609,10 @@ Partial Class CreditManagementView
     Friend WithEvents InterestOutstanding As DataGridViewTextBoxColumn
     Friend WithEvents Outstanding As DataGridViewTextBoxColumn
     Friend WithEvents CreditAmount As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewSecurity As DataGridView
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents SecId As DataGridViewTextBoxColumn
+    Friend WithEvents Security As DataGridViewTextBoxColumn
+    Friend WithEvents CreditId As DataGridViewTextBoxColumn
+    Friend WithEvents Worth As DataGridViewTextBoxColumn
 End Class

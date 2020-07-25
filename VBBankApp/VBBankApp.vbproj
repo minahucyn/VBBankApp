@@ -100,6 +100,7 @@
     <Compile Include="Models\CreditModel.vb" />
     <Compile Include="Models\MainViewModel.vb" />
     <Compile Include="Models\MenuModel.vb" />
+    <Compile Include="Models\SecurityModel.vb" />
     <Compile Include="ViewModels\AuthenticationViewModel.vb" />
     <Compile Include="ViewModels\CreditManagementViewModel.vb" />
     <Compile Include="ViewModels\ViewModelBase.vb" />
