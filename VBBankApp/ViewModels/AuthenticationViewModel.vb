@@ -23,6 +23,11 @@ Public Class AuthenticationViewModel
         'Listen for property changed events
         AddHandler Me.PropertyChanged, AddressOf ActingOnPropertyChanges
         'AddHandler Me.PasswordVerified, AddressOf OnPasswordVerified
+
+#If DEBUG Then
+        Username = "minahucyn"
+        Password = "sleep"
+#End If
     End Sub
 
 #End Region
@@ -99,7 +104,7 @@ Public Class AuthenticationViewModel
         Dim IsVerified As Boolean = Hashing.VerifyPassword(_password, authDetails.GoodHash)
 
         'Checking if the password matched
-        If IsVerified Then
+        If IsVerified And authDetails.Username = Username Then
             ' Completed password verification..., 
             RaiseEvent PasswordVerified(authDetails)
             Debug.WriteLine("User authenticated")
@@ -114,10 +119,6 @@ Public Class AuthenticationViewModel
 #End Region
 
 #Region "Private Methods"
-
-    'Private Sub OnPasswordVerified(authDetails As AuthDetailsModel)
-    '    MsgBox("Password verified!" & vbCrLf & $"Username: {authDetails.Username}, Role: {authDetails.UserRole}, name: {authDetails.Fullname}")
-    'End Sub
 
     ''' <summary>
     ''' Gets the good Hash from the database for the specified username.
