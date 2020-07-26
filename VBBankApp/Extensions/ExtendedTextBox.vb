@@ -11,7 +11,7 @@ Public Class ExtendedTextBox
     Private _regexListToValidate As String
     Private _regexList As List(Of String)
 
-    Public Event LengthRequirementChanged As EventHandler(Of Boolean)
+    Public Event ValidationAgainstLengthRequirementChanged As EventHandler(Of Boolean)
     Public Event RegexEvaluated As EventHandler(Of RegexValidEventArgs)
 
     Public Sub New()
@@ -60,13 +60,17 @@ Public Class ExtendedTextBox
         Dim IsValidTracker As Boolean = False
 
         'Run length check first, that is less costly.
-        If Text.Length > MinimumValidLength Then
+        If Text.Length >= MinimumValidLength Then
             IsValidTracker = True
         Else
             IsAllValidationsPassed = False
             IsValidTracker = False
         End If
-        RaiseEvent LengthRequirementChanged(Me, IsValidTracker)
+        Debug.WriteLine($"Password: {Text}")
+        Debug.WriteLine($"Text Length: {Text.Length}")
+        Debug.WriteLine($"Minimum Valid Length: {MinimumValidLength}")
+        Debug.WriteLine($"Is valid Length Reached: {IsValidTracker}")
+        RaiseEvent ValidationAgainstLengthRequirementChanged(Me, IsValidTracker)
 
         'tacking current index
         Dim index As Integer = 0
