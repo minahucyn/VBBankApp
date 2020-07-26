@@ -29,6 +29,9 @@ Public Class ChangePasswordView
         Me.ActiveControl = ExtendedTextBoxPassword
     End Sub
 
+    ''' <summary>
+    ''' Shows labels for extended textboxes when they are in focus
+    ''' </summary>
     Private Sub ShowHideLabels(sender As Object, e As EventArgs)
         Dim textBox As ExtendedTextBox = sender
         Select Case textBox.Name
