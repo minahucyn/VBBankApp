@@ -1,22 +1,79 @@
-﻿Public Class ExtendedTextBox
+﻿Imports System.Text.RegularExpressions
+
+Public Class ExtendedTextBox
     Inherits TextBox
     Private _nulltext As String
     Private _initialForeColor As Color
+    Private _initialBackColor As Color
     Private _IsPasswordField As Boolean
+    Private _isFocused As Boolean = True
+    Private _autoValidate As Boolean
+    Private _regexListToValidate As String
+    Private _regexList As List(Of String)
+
+
 
     Public Sub New()
         'new-up the textbox
         MyBase.New()
+        'Set the password character property as false. IsPasswordField is used instead
         UseSystemPasswordChar = False
+        'instantiate regex list 
+        _regexList = New List(Of String)
+        'minimum valid length by default is 0
+        MinimumValidLength = 0
+        'set default text valid and Invalid Color
+        TextValidColor = Color.Honeydew
+        TextInvalidColor = Color.LavenderBlush
+
         'subscribe for events from base
         AddHandler Leave, AddressOf ManageNullText
+        AddHandler MyBase.TextChanged, AddressOf ManageAutoValidation
         AddHandler Enter, AddressOf ManageGotFocus
         SubscribeToForeColorChanged()
     End Sub
 
+    Private Sub ManageAutoValidation(sender As Object, e As EventArgs)
+        'Ignore if autovalidation is false
+        If Not AutoValidate Then Return
+        'if no content to validate, return
+        If String.IsNullOrEmpty(Text) Or Text = NullText Then
+            'Set default back color
+            BackColor = _initialBackColor
+            Return
+        End If
+
+        'Run validations
+        If RunAllValidations() Then
+            BackColor = TextValidColor
+        Else
+            BackColor = TextInvalidColor
+        End If
+    End Sub
+
+    Private Function RunAllValidations() As Boolean
+        'initial flag
+        Dim IsValid As Boolean = False
+
+        'Run length check first, that is less costly.
+        If Text.Length < MinimumValidLength Then Return IsValid
+
+        'validate against all expressions
+        For Each expression In _regexList
+            'Instantiate and evaluate expression
+            Dim regex As New Regex(expression)
+            IsValid = regex.IsMatch(Text)
+
+            'return if false, no need to continue
+            If Not IsValid Then Return IsValid
+        Next
+        Return IsValid
+    End Function
+
     Private Sub GetInitialForeColor(sender As Object, e As EventArgs)
-        'set the initial forecolor
+        'set the initial forecolor and back color
         _initialForeColor = Me.ForeColor
+        _initialBackColor = Me.BackColor
         'manage properties depending on Text property being not / equal to NullText
         ManageNullText(Me, EventArgs.Empty)
     End Sub
@@ -75,11 +132,72 @@
         End Set
     End Property
 
+    ''' <summary>
+    ''' Comma separated regex statements for validation. This is used with AutoValidate 
+    ''' property as True
+    ''' </summary>
+    Public Property RegexListToValidateCSV() As String
+        Get
+            Return _regexListToValidate
+        End Get
+        Set(ByVal value As String)
+            _regexListToValidate = value
+            InitializeRegexList(value)
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' tries to initialize the regex list from user supplied CSV. 
+    ''' Ignores any errors
+    ''' </summary>
+    ''' <param name="value">User supplied CSV regex statements</param>
+    Private Sub InitializeRegexList(value As String)
+        Try
+            _regexList = value.Split(ChrW(44)).ToList()
+        Catch ex As Exception
+            'ignore
+        End Try
+    End Sub
+
+    Public Property AutoValidate() As Boolean
+        Get
+            Return _autoValidate
+        End Get
+        Set(ByVal value As Boolean)
+            _autoValidate = value
+        End Set
+    End Property
+    Private _minimumValidLength As Integer
+    Public Property MinimumValidLength() As Integer
+        Get
+            Return _minimumValidLength
+        End Get
+        Set(ByVal value As Integer)
+            _minimumValidLength = value
+        End Set
+    End Property
+    Private _textValidColor As Color
+    Public Property TextValidColor() As Color
+        Get
+            Return _textValidColor
+        End Get
+        Set(ByVal value As Color)
+            _textValidColor = value
+        End Set
+    End Property
+    Private _textInvalidColor As Color
+    Public Property TextInvalidColor() As Color
+        Get
+            Return _textInvalidColor
+        End Get
+        Set(ByVal value As Color)
+            _textInvalidColor = value
+        End Set
+    End Property
     Sub UnSubscribeToForeColorChanged()
         RemoveHandler ForeColorChanged, AddressOf GetInitialForeColor
     End Sub
     Sub SubscribeToForeColorChanged()
         AddHandler ForeColorChanged, AddressOf GetInitialForeColor
     End Sub
-
 End Class
