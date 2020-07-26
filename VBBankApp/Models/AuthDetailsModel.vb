@@ -1,4 +1,7 @@
 ﻿Public Class AuthDetailsModel
+    Public Sub New()
+        UserClaims = New ClaimsModel
+    End Sub
     Public Property Fullname As String
     Public Property Username As String
     Public Property UserRole As String
