@@ -11,7 +11,8 @@ Public Class ExtendedTextBox
     Private _regexListToValidate As String
     Private _regexList As List(Of String)
 
-
+    Public Event LengthRequirementChanged As EventHandler(Of Boolean)
+    Public Event RegexEvaluated As EventHandler(Of RegexValidEventArgs)
 
     Public Sub New()
         'new-up the textbox
@@ -52,22 +53,35 @@ Public Class ExtendedTextBox
     End Sub
 
     Private Function RunAllValidations() As Boolean
-        'initial flag
-        Dim IsValid As Boolean = False
+        'IsAllValidationsPassed: This is set as false if even one evaluation is false and is never set to true
+        'even when an evaluation is true. Therefore this can indicate if one or more evealuation failed.
+        Dim IsAllValidationsPassed As Boolean = True
+        'The tracker is dynamic and cannot be used to determine whether all validations passed.
+        Dim IsValidTracker As Boolean = False
 
         'Run length check first, that is less costly.
-        If Text.Length < MinimumValidLength Then Return IsValid
+        If Text.Length > MinimumValidLength Then
+            IsValidTracker = True
+        Else
+            IsAllValidationsPassed = False
+            IsValidTracker = False
+        End If
+        RaiseEvent LengthRequirementChanged(Me, IsValidTracker)
 
+        'tacking current index
+        Dim index As Integer = 0
         'validate against all expressions
         For Each expression In _regexList
             'Instantiate and evaluate expression
             Dim regex As New Regex(expression)
-            IsValid = regex.IsMatch(Text)
-
-            'return if false, no need to continue
-            If Not IsValid Then Return IsValid
+            IsValidTracker = regex.IsMatch(Text)
+            'setting IsAllValidationsPassed if regex evaluation failed
+            If Not IsValidTracker Then IsAllValidationsPassed = IsValidTracker
+            'raise event to tell notify evaluationStatus for regex at index
+            RaiseEvent RegexEvaluated(Me, New RegexValidEventArgs() With {.Isvalid = IsValidTracker, .RegexIndex = index})
+            index += 1
         Next
-        Return IsValid
+        Return IsAllValidationsPassed
     End Function
 
     Private Sub GetInitialForeColor(sender As Object, e As EventArgs)
@@ -200,4 +214,11 @@ Public Class ExtendedTextBox
     Sub SubscribeToForeColorChanged()
         AddHandler ForeColorChanged, AddressOf GetInitialForeColor
     End Sub
+End Class
+
+
+Public Class RegexValidEventArgs
+    Inherits EventArgs
+    Public Property RegexIndex As Integer
+    Public Property Isvalid As Boolean
 End Class
