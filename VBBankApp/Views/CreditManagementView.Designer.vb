@@ -23,18 +23,13 @@ Partial Class CreditManagementView
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New VBBankApp.ExtendedTextBox()
+        Me.TextBoxPhoneNumber = New VBBankApp.ExtendedTextBox()
+        Me.TextBoxAge = New VBBankApp.ExtendedTextBox()
+        Me.TextBoxGender = New VBBankApp.ExtendedTextBox()
+        Me.TextBoxBirthdate = New VBBankApp.ExtendedTextBox()
+        Me.TextBoxNidPp = New VBBankApp.ExtendedTextBox()
         Me.DataGridViewCustomerCredits = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewSecurity = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewRepayments = New System.Windows.Forms.DataGridView()
-        Me.ButtonCustomerSearch = New System.Windows.Forms.Button()
-        Me.ButtonCustomerAddSave = New System.Windows.Forms.Button()
-        Me.ButtonCustomerModify = New System.Windows.Forms.Button()
-        Me.ButtonModifyCreditDetails = New System.Windows.Forms.Button()
-        Me.ButtonAddPayments = New System.Windows.Forms.Button()
-        Me.ButtonAddCreditDetails = New System.Windows.Forms.Button()
-        Me.ButtonAddSecurityDetails = New System.Windows.Forms.Button()
-        Me.ButtonModifySecurity = New System.Windows.Forms.Button()
-        Me.ButtonModifyPayments = New System.Windows.Forms.Button()
         Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PrincipleDue = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,23 +39,28 @@ Partial Class CreditManagementView
         Me.InterestOutstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Outstanding = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CreditAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewSecurity = New System.Windows.Forms.DataGridView()
         Me.SecId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Security = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CreditId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Worth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewRepayments = New System.Windows.Forms.DataGridView()
         Me.RepaymentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RepaymentCreditsId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Principle = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Interest = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TimeStamp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ButtonCustomerSearch = New System.Windows.Forms.Button()
+        Me.ButtonCustomerAddSave = New System.Windows.Forms.Button()
+        Me.ButtonCustomerModify = New System.Windows.Forms.Button()
+        Me.ButtonModifyCreditDetails = New System.Windows.Forms.Button()
+        Me.ButtonAddPayments = New System.Windows.Forms.Button()
+        Me.ButtonAddCreditDetails = New System.Windows.Forms.Button()
+        Me.ButtonAddSecurityDetails = New System.Windows.Forms.Button()
+        Me.ButtonModifySecurity = New System.Windows.Forms.Button()
+        Me.ButtonModifyPayments = New System.Windows.Forms.Button()
         Me.ExtendedGroupBoxPaymentFunctions = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxCustomerFunctions = New VBBankApp.ExtendedGroupBox()
-        Me.TextBox1 = New VBBankApp.ExtendedTextBox()
-        Me.TextBoxPhoneNumber = New VBBankApp.ExtendedTextBox()
-        Me.TextBoxAge = New VBBankApp.ExtendedTextBox()
-        Me.TextBoxGender = New VBBankApp.ExtendedTextBox()
-        Me.TextBoxBirthdate = New VBBankApp.ExtendedTextBox()
-        Me.TextBoxNidPp = New VBBankApp.ExtendedTextBox()
         Me.ExtendedGroupBox1 = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxCreditFunctions = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxSecurityFunctions = New VBBankApp.ExtendedGroupBox()
@@ -87,6 +87,105 @@ Partial Class CreditManagementView
         Me.Panel1.Size = New System.Drawing.Size(320, 174)
         Me.Panel1.TabIndex = 5
         '
+        'TextBox1
+        '
+        Me.TextBox1.AutoValidate = False
+        Me.TextBox1.BackColor = System.Drawing.Color.LavenderBlush
+        Me.TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox1.ForeColor = System.Drawing.Color.Gray
+        Me.TextBox1.IsPasswordField = False
+        Me.TextBox1.Location = New System.Drawing.Point(12, 39)
+        Me.TextBox1.MinimumValidLength = 0
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.NullText = "Customer name"
+        Me.TextBox1.RegexListToValidateCSV = Nothing
+        Me.TextBox1.Size = New System.Drawing.Size(254, 22)
+        Me.TextBox1.TabIndex = 1
+        Me.TextBox1.Text = "CUSTOMER NAME"
+        Me.TextBox1.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.TextBox1.TextValidColor = System.Drawing.Color.Honeydew
+        '
+        'TextBoxPhoneNumber
+        '
+        Me.TextBoxPhoneNumber.AutoValidate = False
+        Me.TextBoxPhoneNumber.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxPhoneNumber.IsPasswordField = False
+        Me.TextBoxPhoneNumber.Location = New System.Drawing.Point(12, 143)
+        Me.TextBoxPhoneNumber.MinimumValidLength = 0
+        Me.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber"
+        Me.TextBoxPhoneNumber.NullText = "Phone Number"
+        Me.TextBoxPhoneNumber.RegexListToValidateCSV = Nothing
+        Me.TextBoxPhoneNumber.Size = New System.Drawing.Size(254, 22)
+        Me.TextBoxPhoneNumber.TabIndex = 2
+        Me.TextBoxPhoneNumber.Text = "Phone Number"
+        Me.TextBoxPhoneNumber.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.TextBoxPhoneNumber.TextValidColor = System.Drawing.Color.Honeydew
+        '
+        'TextBoxAge
+        '
+        Me.TextBoxAge.AutoValidate = False
+        Me.TextBoxAge.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxAge.IsPasswordField = False
+        Me.TextBoxAge.Location = New System.Drawing.Point(12, 65)
+        Me.TextBoxAge.MinimumValidLength = 0
+        Me.TextBoxAge.Name = "TextBoxAge"
+        Me.TextBoxAge.NullText = "Age"
+        Me.TextBoxAge.RegexListToValidateCSV = Nothing
+        Me.TextBoxAge.Size = New System.Drawing.Size(254, 22)
+        Me.TextBoxAge.TabIndex = 1
+        Me.TextBoxAge.Text = "Age"
+        Me.TextBoxAge.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.TextBoxAge.TextValidColor = System.Drawing.Color.Honeydew
+        '
+        'TextBoxGender
+        '
+        Me.TextBoxGender.AutoValidate = False
+        Me.TextBoxGender.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxGender.IsPasswordField = False
+        Me.TextBoxGender.Location = New System.Drawing.Point(12, 91)
+        Me.TextBoxGender.MinimumValidLength = 0
+        Me.TextBoxGender.Name = "TextBoxGender"
+        Me.TextBoxGender.NullText = "Gender"
+        Me.TextBoxGender.RegexListToValidateCSV = Nothing
+        Me.TextBoxGender.Size = New System.Drawing.Size(254, 22)
+        Me.TextBoxGender.TabIndex = 1
+        Me.TextBoxGender.Text = "Gender"
+        Me.TextBoxGender.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.TextBoxGender.TextValidColor = System.Drawing.Color.Honeydew
+        '
+        'TextBoxBirthdate
+        '
+        Me.TextBoxBirthdate.AutoValidate = False
+        Me.TextBoxBirthdate.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxBirthdate.IsPasswordField = False
+        Me.TextBoxBirthdate.Location = New System.Drawing.Point(12, 117)
+        Me.TextBoxBirthdate.MinimumValidLength = 0
+        Me.TextBoxBirthdate.Name = "TextBoxBirthdate"
+        Me.TextBoxBirthdate.NullText = "Birthdate"
+        Me.TextBoxBirthdate.RegexListToValidateCSV = Nothing
+        Me.TextBoxBirthdate.Size = New System.Drawing.Size(254, 22)
+        Me.TextBoxBirthdate.TabIndex = 3
+        Me.TextBoxBirthdate.Text = "Birthdate"
+        Me.TextBoxBirthdate.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.TextBoxBirthdate.TextValidColor = System.Drawing.Color.Honeydew
+        '
+        'TextBoxNidPp
+        '
+        Me.TextBoxNidPp.AutoValidate = False
+        Me.TextBoxNidPp.BackColor = System.Drawing.Color.LavenderBlush
+        Me.TextBoxNidPp.ForeColor = System.Drawing.Color.Gray
+        Me.TextBoxNidPp.IsPasswordField = False
+        Me.TextBoxNidPp.Location = New System.Drawing.Point(12, 13)
+        Me.TextBoxNidPp.MinimumValidLength = 0
+        Me.TextBoxNidPp.Name = "TextBoxNidPp"
+        Me.TextBoxNidPp.NullText = "Nid/Pp"
+        Me.TextBoxNidPp.RegexListToValidateCSV = Nothing
+        Me.TextBoxNidPp.Size = New System.Drawing.Size(254, 22)
+        Me.TextBoxNidPp.TabIndex = 4
+        Me.TextBoxNidPp.Text = "Nid/Pp"
+        Me.TextBoxNidPp.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.TextBoxNidPp.TextValidColor = System.Drawing.Color.Honeydew
+        '
         'DataGridViewCustomerCredits
         '
         Me.DataGridViewCustomerCredits.AllowUserToAddRows = False
@@ -100,6 +199,79 @@ Partial Class CreditManagementView
         Me.DataGridViewCustomerCredits.Size = New System.Drawing.Size(813, 174)
         Me.DataGridViewCustomerCredits.TabIndex = 0
         '
+        'Id
+        '
+        Me.Id.DataPropertyName = "Id"
+        Me.Id.HeaderText = "Id"
+        Me.Id.Name = "Id"
+        Me.Id.ReadOnly = True
+        Me.Id.Visible = False
+        Me.Id.Width = 41
+        '
+        'Description
+        '
+        Me.Description.DataPropertyName = "Description"
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.ReadOnly = True
+        Me.Description.Width = 91
+        '
+        'PrincipleDue
+        '
+        Me.PrincipleDue.DataPropertyName = "PrincipleDue"
+        Me.PrincipleDue.HeaderText = "Principle Due"
+        Me.PrincipleDue.Name = "PrincipleDue"
+        Me.PrincipleDue.ReadOnly = True
+        Me.PrincipleDue.Width = 92
+        '
+        'InterestDue
+        '
+        Me.InterestDue.DataPropertyName = "InterestDue"
+        Me.InterestDue.HeaderText = "Interest Due"
+        Me.InterestDue.Name = "InterestDue"
+        Me.InterestDue.ReadOnly = True
+        Me.InterestDue.Width = 87
+        '
+        'TotalDue
+        '
+        Me.TotalDue.DataPropertyName = "TotalDue"
+        Me.TotalDue.HeaderText = "Total Due"
+        Me.TotalDue.Name = "TotalDue"
+        Me.TotalDue.ReadOnly = True
+        Me.TotalDue.Width = 75
+        '
+        'PrincipleOutstanding
+        '
+        Me.PrincipleOutstanding.DataPropertyName = "PrincipleOutstanding"
+        Me.PrincipleOutstanding.HeaderText = "Principle Outstanding"
+        Me.PrincipleOutstanding.Name = "PrincipleOutstanding"
+        Me.PrincipleOutstanding.ReadOnly = True
+        Me.PrincipleOutstanding.Width = 132
+        '
+        'InterestOutstanding
+        '
+        Me.InterestOutstanding.DataPropertyName = "InterestOutstanding"
+        Me.InterestOutstanding.HeaderText = "Inerest Outstanding"
+        Me.InterestOutstanding.Name = "InterestOutstanding"
+        Me.InterestOutstanding.ReadOnly = True
+        Me.InterestOutstanding.Width = 124
+        '
+        'Outstanding
+        '
+        Me.Outstanding.DataPropertyName = "Outstanding"
+        Me.Outstanding.HeaderText = "Outstanding"
+        Me.Outstanding.Name = "Outstanding"
+        Me.Outstanding.ReadOnly = True
+        Me.Outstanding.Width = 98
+        '
+        'CreditAmount
+        '
+        Me.CreditAmount.DataPropertyName = "CreditAmount"
+        Me.CreditAmount.HeaderText = "Credit Amount"
+        Me.CreditAmount.Name = "CreditAmount"
+        Me.CreditAmount.ReadOnly = True
+        Me.CreditAmount.Width = 98
+        '
         'DataGridViewSecurity
         '
         Me.DataGridViewSecurity.AllowUserToAddRows = False
@@ -112,6 +284,36 @@ Partial Class CreditManagementView
         Me.DataGridViewSecurity.Size = New System.Drawing.Size(320, 170)
         Me.DataGridViewSecurity.TabIndex = 0
         '
+        'SecId
+        '
+        Me.SecId.DataPropertyName = "Id"
+        Me.SecId.HeaderText = "Id"
+        Me.SecId.Name = "SecId"
+        Me.SecId.ReadOnly = True
+        Me.SecId.Visible = False
+        '
+        'Security
+        '
+        Me.Security.DataPropertyName = "Description"
+        Me.Security.HeaderText = "Security"
+        Me.Security.Name = "Security"
+        Me.Security.ReadOnly = True
+        '
+        'CreditId
+        '
+        Me.CreditId.DataPropertyName = "CreditId"
+        Me.CreditId.HeaderText = "Credit Id"
+        Me.CreditId.Name = "CreditId"
+        Me.CreditId.ReadOnly = True
+        Me.CreditId.Visible = False
+        '
+        'Worth
+        '
+        Me.Worth.DataPropertyName = "Worth"
+        Me.Worth.HeaderText = "Worth"
+        Me.Worth.Name = "Worth"
+        Me.Worth.ReadOnly = True
+        '
         'DataGridViewRepayments
         '
         Me.DataGridViewRepayments.AllowUserToAddRows = False
@@ -123,6 +325,44 @@ Partial Class CreditManagementView
         Me.DataGridViewRepayments.ReadOnly = True
         Me.DataGridViewRepayments.Size = New System.Drawing.Size(391, 170)
         Me.DataGridViewRepayments.TabIndex = 0
+        '
+        'RepaymentId
+        '
+        Me.RepaymentId.DataPropertyName = "Id"
+        Me.RepaymentId.HeaderText = "Id"
+        Me.RepaymentId.Name = "RepaymentId"
+        Me.RepaymentId.ReadOnly = True
+        Me.RepaymentId.Visible = False
+        '
+        'RepaymentCreditsId
+        '
+        Me.RepaymentCreditsId.DataPropertyName = "CreditsId"
+        Me.RepaymentCreditsId.HeaderText = "Credit Id"
+        Me.RepaymentCreditsId.Name = "RepaymentCreditsId"
+        Me.RepaymentCreditsId.ReadOnly = True
+        Me.RepaymentCreditsId.Visible = False
+        '
+        'Principle
+        '
+        Me.Principle.DataPropertyName = "Principle"
+        Me.Principle.HeaderText = "Principle Amount"
+        Me.Principle.Name = "Principle"
+        Me.Principle.ReadOnly = True
+        '
+        'Interest
+        '
+        Me.Interest.DataPropertyName = "Interest"
+        Me.Interest.HeaderText = "Interest"
+        Me.Interest.Name = "Interest"
+        Me.Interest.ReadOnly = True
+        '
+        'TimeStamp
+        '
+        Me.TimeStamp.DataPropertyName = "TimeStamp"
+        Me.TimeStamp.HeaderText = "Repayment Date"
+        Me.TimeStamp.Name = "TimeStamp"
+        Me.TimeStamp.ReadOnly = True
+        Me.TimeStamp.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'ButtonCustomerSearch
         '
@@ -206,147 +446,6 @@ Partial Class CreditManagementView
         Me.ButtonModifyPayments.Text = "Modify (F10)"
         Me.ButtonModifyPayments.UseVisualStyleBackColor = True
         '
-        'Id
-        '
-        Me.Id.DataPropertyName = "Id"
-        Me.Id.HeaderText = "Id"
-        Me.Id.Name = "Id"
-        Me.Id.ReadOnly = True
-        Me.Id.Visible = False
-        Me.Id.Width = 41
-        '
-        'Description
-        '
-        Me.Description.DataPropertyName = "Description"
-        Me.Description.HeaderText = "Description"
-        Me.Description.Name = "Description"
-        Me.Description.ReadOnly = True
-        Me.Description.Width = 85
-        '
-        'PrincipleDue
-        '
-        Me.PrincipleDue.DataPropertyName = "PrincipleDue"
-        Me.PrincipleDue.HeaderText = "Principle Due"
-        Me.PrincipleDue.Name = "PrincipleDue"
-        Me.PrincipleDue.ReadOnly = True
-        Me.PrincipleDue.Width = 95
-        '
-        'InterestDue
-        '
-        Me.InterestDue.DataPropertyName = "InterestDue"
-        Me.InterestDue.HeaderText = "Interest Due"
-        Me.InterestDue.Name = "InterestDue"
-        Me.InterestDue.ReadOnly = True
-        Me.InterestDue.Width = 90
-        '
-        'TotalDue
-        '
-        Me.TotalDue.DataPropertyName = "TotalDue"
-        Me.TotalDue.HeaderText = "Total Due"
-        Me.TotalDue.Name = "TotalDue"
-        Me.TotalDue.ReadOnly = True
-        Me.TotalDue.Width = 79
-        '
-        'PrincipleOutstanding
-        '
-        Me.PrincipleOutstanding.DataPropertyName = "PrincipleOutstanding"
-        Me.PrincipleOutstanding.HeaderText = "Principle Outstanding"
-        Me.PrincipleOutstanding.Name = "PrincipleOutstanding"
-        Me.PrincipleOutstanding.ReadOnly = True
-        Me.PrincipleOutstanding.Width = 121
-        '
-        'InterestOutstanding
-        '
-        Me.InterestOutstanding.DataPropertyName = "InterestOutstanding"
-        Me.InterestOutstanding.HeaderText = "Inerest Outstanding"
-        Me.InterestOutstanding.Name = "InterestOutstanding"
-        Me.InterestOutstanding.ReadOnly = True
-        Me.InterestOutstanding.Width = 114
-        '
-        'Outstanding
-        '
-        Me.Outstanding.DataPropertyName = "Outstanding"
-        Me.Outstanding.HeaderText = "Outstanding"
-        Me.Outstanding.Name = "Outstanding"
-        Me.Outstanding.ReadOnly = True
-        Me.Outstanding.Width = 89
-        '
-        'CreditAmount
-        '
-        Me.CreditAmount.DataPropertyName = "CreditAmount"
-        Me.CreditAmount.HeaderText = "Credit Amount"
-        Me.CreditAmount.Name = "CreditAmount"
-        Me.CreditAmount.ReadOnly = True
-        Me.CreditAmount.Width = 90
-        '
-        'SecId
-        '
-        Me.SecId.DataPropertyName = "Id"
-        Me.SecId.HeaderText = "Id"
-        Me.SecId.Name = "SecId"
-        Me.SecId.ReadOnly = True
-        Me.SecId.Visible = False
-        '
-        'Security
-        '
-        Me.Security.DataPropertyName = "Description"
-        Me.Security.HeaderText = "Security"
-        Me.Security.Name = "Security"
-        Me.Security.ReadOnly = True
-        '
-        'CreditId
-        '
-        Me.CreditId.DataPropertyName = "CreditId"
-        Me.CreditId.HeaderText = "Credit Id"
-        Me.CreditId.Name = "CreditId"
-        Me.CreditId.ReadOnly = True
-        Me.CreditId.Visible = False
-        '
-        'Worth
-        '
-        Me.Worth.DataPropertyName = "Worth"
-        Me.Worth.HeaderText = "Worth"
-        Me.Worth.Name = "Worth"
-        Me.Worth.ReadOnly = True
-        '
-        'RepaymentId
-        '
-        Me.RepaymentId.DataPropertyName = "Id"
-        Me.RepaymentId.HeaderText = "Id"
-        Me.RepaymentId.Name = "RepaymentId"
-        Me.RepaymentId.ReadOnly = True
-        Me.RepaymentId.Visible = False
-        '
-        'RepaymentCreditsId
-        '
-        Me.RepaymentCreditsId.DataPropertyName = "CreditsId"
-        Me.RepaymentCreditsId.HeaderText = "Credit Id"
-        Me.RepaymentCreditsId.Name = "RepaymentCreditsId"
-        Me.RepaymentCreditsId.ReadOnly = True
-        Me.RepaymentCreditsId.Visible = False
-        '
-        'Principle
-        '
-        Me.Principle.DataPropertyName = "Principle"
-        Me.Principle.HeaderText = "Principle Amount"
-        Me.Principle.Name = "Principle"
-        Me.Principle.ReadOnly = True
-        '
-        'Interest
-        '
-        Me.Interest.DataPropertyName = "Interest"
-        Me.Interest.HeaderText = "Interest"
-        Me.Interest.Name = "Interest"
-        Me.Interest.ReadOnly = True
-        '
-        'TimeStamp
-        '
-        Me.TimeStamp.DataPropertyName = "TimeStamp"
-        Me.TimeStamp.HeaderText = "Repayment Date"
-        Me.TimeStamp.Name = "TimeStamp"
-        Me.TimeStamp.ReadOnly = True
-        Me.TimeStamp.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
         'ExtendedGroupBoxPaymentFunctions
         '
         Me.ExtendedGroupBoxPaymentFunctions.Caption = "Payments Details Fuctions"
@@ -364,69 +463,6 @@ Partial Class CreditManagementView
         Me.ExtendedGroupBoxCustomerFunctions.Name = "ExtendedGroupBoxCustomerFunctions"
         Me.ExtendedGroupBoxCustomerFunctions.Size = New System.Drawing.Size(272, 67)
         Me.ExtendedGroupBoxCustomerFunctions.TabIndex = 8
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BackColor = System.Drawing.Color.LavenderBlush
-        Me.TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TextBox1.ForeColor = System.Drawing.Color.Gray
-        Me.TextBox1.Location = New System.Drawing.Point(12, 39)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.NullText = "Customer name"
-        Me.TextBox1.Size = New System.Drawing.Size(254, 22)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "CUSTOMER NAME"
-        '
-        'TextBoxPhoneNumber
-        '
-        Me.TextBoxPhoneNumber.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxPhoneNumber.Location = New System.Drawing.Point(12, 143)
-        Me.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber"
-        Me.TextBoxPhoneNumber.NullText = "Phone Number"
-        Me.TextBoxPhoneNumber.Size = New System.Drawing.Size(254, 22)
-        Me.TextBoxPhoneNumber.TabIndex = 2
-        Me.TextBoxPhoneNumber.Text = "Phone Number"
-        '
-        'TextBoxAge
-        '
-        Me.TextBoxAge.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxAge.Location = New System.Drawing.Point(12, 65)
-        Me.TextBoxAge.Name = "TextBoxAge"
-        Me.TextBoxAge.NullText = "Age"
-        Me.TextBoxAge.Size = New System.Drawing.Size(254, 22)
-        Me.TextBoxAge.TabIndex = 1
-        Me.TextBoxAge.Text = "Age"
-        '
-        'TextBoxGender
-        '
-        Me.TextBoxGender.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxGender.Location = New System.Drawing.Point(12, 91)
-        Me.TextBoxGender.Name = "TextBoxGender"
-        Me.TextBoxGender.NullText = "Gender"
-        Me.TextBoxGender.Size = New System.Drawing.Size(254, 22)
-        Me.TextBoxGender.TabIndex = 1
-        Me.TextBoxGender.Text = "Gender"
-        '
-        'TextBoxBirthdate
-        '
-        Me.TextBoxBirthdate.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxBirthdate.Location = New System.Drawing.Point(12, 117)
-        Me.TextBoxBirthdate.Name = "TextBoxBirthdate"
-        Me.TextBoxBirthdate.NullText = "Birthdate"
-        Me.TextBoxBirthdate.Size = New System.Drawing.Size(254, 22)
-        Me.TextBoxBirthdate.TabIndex = 3
-        Me.TextBoxBirthdate.Text = "Birthdate"
-        '
-        'TextBoxNidPp
-        '
-        Me.TextBoxNidPp.BackColor = System.Drawing.Color.LavenderBlush
-        Me.TextBoxNidPp.ForeColor = System.Drawing.Color.Gray
-        Me.TextBoxNidPp.Location = New System.Drawing.Point(12, 13)
-        Me.TextBoxNidPp.Name = "TextBoxNidPp"
-        Me.TextBoxNidPp.NullText = "Nid/Pp"
-        Me.TextBoxNidPp.Size = New System.Drawing.Size(254, 22)
-        Me.TextBoxNidPp.TabIndex = 4
-        Me.TextBoxNidPp.Text = "Nid/Pp"
         '
         'ExtendedGroupBox1
         '
@@ -519,7 +555,7 @@ Partial Class CreditManagementView
         Me.Controls.Add(Me.ExtendedGroupBoxCreditFunctions)
         Me.Controls.Add(Me.ExtendedGroupBoxSecurityFunctions)
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "CreditManagementView"

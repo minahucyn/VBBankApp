@@ -24,9 +24,9 @@ Partial Class MainView
     Private Sub InitializeComponent()
         Me.MenuStripMain = New System.Windows.Forms.MenuStrip()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabelUserNameAndRole = New BindableToolStripStatusLabel()
+        Me.ToolStripLabelUserNameAndRole = New VBBankApp.BindableToolStripStatusLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabelUserRoleDisplay = New BindableToolStripStatusLabel()
+        Me.ToolStripLabelUserRoleDisplay = New VBBankApp.BindableToolStripStatusLabel()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,7 +50,7 @@ Partial Class MainView
         'ToolStripLabelUserNameAndRole
         '
         Me.ToolStripLabelUserNameAndRole.Name = "ToolStripLabelUserNameAndRole"
-        Me.ToolStripLabelUserNameAndRole.Size = New System.Drawing.Size(120, 22)
+        Me.ToolStripLabelUserNameAndRole.Size = New System.Drawing.Size(120, 20)
         Me.ToolStripLabelUserNameAndRole.Text = "Fullname [Username]"
         '
         'ToolStripSeparator1
@@ -61,7 +61,7 @@ Partial Class MainView
         'ToolStripLabelUserRoleDisplay
         '
         Me.ToolStripLabelUserRoleDisplay.Name = "ToolStripLabelUserRoleDisplay"
-        Me.ToolStripLabelUserRoleDisplay.Size = New System.Drawing.Size(56, 22)
+        Me.ToolStripLabelUserRoleDisplay.Size = New System.Drawing.Size(56, 20)
         Me.ToolStripLabelUserRoleDisplay.Text = "User Role"
         '
         'MainView
@@ -76,6 +76,7 @@ Partial Class MainView
         Me.Name = "MainView"
         Me.RightToLeftLayout = True
         Me.Text = "Bank"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
