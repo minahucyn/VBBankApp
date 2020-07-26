@@ -11,7 +11,6 @@ Public Class AuthenticationView
     Public Sub New(viewModel As AuthenticationViewModel)
 
         InitializeComponent()
-        Me.CenterToParent()
         _isAuthSuccessful = False
         'assign the view model to the field
         Me._viewModel = viewModel

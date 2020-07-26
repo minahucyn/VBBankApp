@@ -59,7 +59,7 @@ Partial Class AuthenticationView
         '
         'UsernameLabel
         '
-        Me.UsernameLabel.Location = New System.Drawing.Point(175, 27)
+        Me.UsernameLabel.Location = New System.Drawing.Point(175, 21)
         Me.UsernameLabel.Name = "UsernameLabel"
         Me.UsernameLabel.Size = New System.Drawing.Size(220, 23)
         Me.UsernameLabel.TabIndex = 0
@@ -68,7 +68,7 @@ Partial Class AuthenticationView
         '
         'PasswordLabel
         '
-        Me.PasswordLabel.Location = New System.Drawing.Point(175, 84)
+        Me.PasswordLabel.Location = New System.Drawing.Point(175, 66)
         Me.PasswordLabel.Name = "PasswordLabel"
         Me.PasswordLabel.Size = New System.Drawing.Size(220, 23)
         Me.PasswordLabel.TabIndex = 2
@@ -77,14 +77,14 @@ Partial Class AuthenticationView
         '
         'UsernameTextBox
         '
-        Me.UsernameTextBox.Location = New System.Drawing.Point(177, 47)
+        Me.UsernameTextBox.Location = New System.Drawing.Point(177, 41)
         Me.UsernameTextBox.Name = "UsernameTextBox"
         Me.UsernameTextBox.Size = New System.Drawing.Size(220, 22)
         Me.UsernameTextBox.TabIndex = 1
         '
         'PasswordTextBox
         '
-        Me.PasswordTextBox.Location = New System.Drawing.Point(177, 104)
+        Me.PasswordTextBox.Location = New System.Drawing.Point(177, 86)
         Me.PasswordTextBox.Name = "PasswordTextBox"
         Me.PasswordTextBox.Size = New System.Drawing.Size(220, 22)
         Me.PasswordTextBox.TabIndex = 3
@@ -112,7 +112,7 @@ Partial Class AuthenticationView
         Me.LabelLockedAlert.BackColor = System.Drawing.SystemColors.Control
         Me.LabelLockedAlert.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelLockedAlert.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.LabelLockedAlert.Location = New System.Drawing.Point(178, 128)
+        Me.LabelLockedAlert.Location = New System.Drawing.Point(178, 124)
         Me.LabelLockedAlert.Name = "LabelLockedAlert"
         Me.LabelLockedAlert.Size = New System.Drawing.Size(219, 34)
         Me.LabelLockedAlert.TabIndex = 6

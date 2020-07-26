@@ -108,8 +108,10 @@
     <Compile Include="Models\MenuModel.vb" />
     <Compile Include="Models\RepaymentModel.vb" />
     <Compile Include="Models\SecurityModel.vb" />
+    <Compile Include="Models\UserManagementModel.vb" />
     <Compile Include="ViewModels\AuthenticationViewModel.vb" />
     <Compile Include="ViewModels\ChangePasswordViewModel.vb" />
+    <Compile Include="ViewModels\UserManagementViewModel.vb" />
     <Compile Include="Views\ChangePasswordView.Designer.vb">
       <DependentUpon>ChangePasswordView.vb</DependentUpon>
     </Compile>

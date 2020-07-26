@@ -5,6 +5,7 @@ Public Class MainView
     Private ReadOnly _viewModel As MainViewModel
     Dim WithEvents _authView As AuthenticationView
     Public Shared AuthenticatedUserDetails As AuthDetailsModel = New AuthDetailsModel()
+    Public Shared MyLocation As Point = New Point
 
 #Region "Events"
     Public Event InitializeApplicationMenu(appMenu As List(Of MenuModel))
@@ -14,6 +15,8 @@ Public Class MainView
 
         ' This call is required by the designer.
         InitializeComponent()
+        MyLocation = GetMainViewCenter()
+
         ' Initialize Authorization.
         InitializeAuthorization()
         _viewModel = New MainViewModel()
@@ -103,10 +106,31 @@ Public Class MainView
                 Debug.WriteLine("crm HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             Case ("Change Password").ToLower()
                 OpenChangePasswordView()
+            Case ("User Management").ToLower()
+                OpenUserManagementView()
             Case Else
 
         End Select
 
+    End Sub
+
+    Public Function GetMainViewCenter() As Point
+
+        Dim x = Location.X + (Width - Me.Width) / 2
+        Dim y = Location.Y + (Height - Me.Height) / 2
+
+        Return New Point(Math.Max(x, 0), Math.Max(y, 0))
+    End Function
+
+    Private Sub OpenUserManagementView()
+        'Initialize user management view
+        Dim userManagementView As UserManagementView = New UserManagementView() With {
+            .MdiParent = Me,
+            .StartPosition = FormStartPosition.CenterScreen}
+        If IsViewAuthorized(userManagementView) Then
+            userManagementView.StartPosition = FormStartPosition.CenterScreen
+            userManagementView.Show()
+        End If
     End Sub
 
     Private Sub OpenChangePasswordView()
@@ -116,6 +140,7 @@ Public Class MainView
             .StartPosition = FormStartPosition.CenterParent}
         'Check if user is authorized to change password.. hehe
         If IsViewAuthorized(changePasswordView) Then
+            changePasswordView.StartPosition = FormStartPosition.CenterScreen
             changePasswordView.Show()
         End If
     End Sub
@@ -132,6 +157,8 @@ Public Class MainView
         AuthenticatedUserDetails = New AuthDetailsModel()
         'start the AuthView
         ShowAuthenticationView()
+
+        'logout the user
         Dim authView As New AuthDetailsModel()
         authView.MenuJson = ""
         OnAuthenticationSuccessful(authView)
@@ -139,12 +166,6 @@ Public Class MainView
 
     Private Sub InitializeAuthorization()
         'TO DO: Check if any user is Authenticated
-
-        'Dim menu As List(Of MenuModel) = New List(Of MenuModel)
-        'menu.Add(New MenuModel() With {.Id = 1, .Name = "Username", .ParentId = 0})
-        'menu.Add(New MenuModel() With {.Id = 2, .Name = "Log Out", .ParentId = 1})
-        'menu.Add(New MenuModel() With {.Id = 3, .Name = "Exit", .ParentId = 1})
-
         'Open AuthView
         ShowAuthenticationView()
     End Sub
@@ -156,6 +177,7 @@ Public Class MainView
         crmView.MdiParent = Me
         'check if user is authorized for this view
         If IsViewAuthorized(crmView) Then
+            crmView.StartPosition = FormStartPosition.CenterScreen
             'open authView
             crmView.Show()
         End If
@@ -172,9 +194,11 @@ Public Class MainView
         'Listen for successful authentication
         AddHandler _authView.AuthenticationSuccessful, AddressOf OnAuthenticationSuccessful
         'check if user is authorized for this view
-        If IsViewAuthorized(_authView) Then
+        If IsViewAuthorized(_authView) Then '
+            _authView.StartPosition = FormStartPosition.CenterScreen
             'open authView
             _authView.Show()
+
         End If
 
     End Sub

@@ -24,15 +24,6 @@ Partial Class UserManagementView
     Private Sub InitializeComponent()
         Me.ExtendedGroupBoxAllUsers = New VBBankApp.ExtendedGroupBox()
         Me.DataGridViewAllUsers = New System.Windows.Forms.DataGridView()
-        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FullnameUsername = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NidPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BirthdateAge = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Gender = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.IsUnLocked = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ExtendedGroupBoxUsers = New VBBankApp.ExtendedGroupBox()
         Me.ButtonAddSaveUser = New System.Windows.Forms.Button()
         Me.ButtonUnlock = New System.Windows.Forms.Button()
@@ -54,6 +45,15 @@ Partial Class UserManagementView
         Me.CheckBoxIsActive = New System.Windows.Forms.CheckBox()
         Me.CheckBoxIsUnocked = New System.Windows.Forms.CheckBox()
         Me.ExtendedTextBoxUsername = New VBBankApp.ExtendedTextBox()
+        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FullnameUsername = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NidPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BirthdateAge = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Gender = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.IsUnLocked = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         CType(Me.DataGridViewAllUsers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -68,57 +68,15 @@ Partial Class UserManagementView
         '
         'DataGridViewAllUsers
         '
+        Me.DataGridViewAllUsers.AllowUserToAddRows = False
+        Me.DataGridViewAllUsers.AllowUserToDeleteRows = False
         Me.DataGridViewAllUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewAllUsers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id, Me.FullnameUsername, Me.Role, Me.NidPp, Me.BirthdateAge, Me.Gender, Me.PhoneNumber, Me.IsActive, Me.IsUnLocked})
         Me.DataGridViewAllUsers.Location = New System.Drawing.Point(2, 25)
         Me.DataGridViewAllUsers.Name = "DataGridViewAllUsers"
+        Me.DataGridViewAllUsers.ReadOnly = True
         Me.DataGridViewAllUsers.Size = New System.Drawing.Size(778, 440)
         Me.DataGridViewAllUsers.TabIndex = 1
-        '
-        'Id
-        '
-        Me.Id.HeaderText = "Id"
-        Me.Id.Name = "Id"
-        '
-        'FullnameUsername
-        '
-        Me.FullnameUsername.HeaderText = "Fullname (Username)"
-        Me.FullnameUsername.Name = "FullnameUsername"
-        '
-        'Role
-        '
-        Me.Role.HeaderText = "User Role"
-        Me.Role.Name = "Role"
-        '
-        'NidPp
-        '
-        Me.NidPp.HeaderText = "Nid / Pp"
-        Me.NidPp.Name = "NidPp"
-        '
-        'BirthdateAge
-        '
-        Me.BirthdateAge.HeaderText = "Birthdate (Age)"
-        Me.BirthdateAge.Name = "BirthdateAge"
-        '
-        'Gender
-        '
-        Me.Gender.HeaderText = "Gender"
-        Me.Gender.Name = "Gender"
-        '
-        'PhoneNumber
-        '
-        Me.PhoneNumber.HeaderText = "Phone Number"
-        Me.PhoneNumber.Name = "PhoneNumber"
-        '
-        'IsActive
-        '
-        Me.IsActive.HeaderText = "IsActive"
-        Me.IsActive.Name = "IsActive"
-        '
-        'IsUnLocked
-        '
-        Me.IsUnLocked.HeaderText = "Is Unlocked"
-        Me.IsUnLocked.Name = "IsUnLocked"
         '
         'ExtendedGroupBoxUsers
         '
@@ -340,6 +298,69 @@ Partial Class UserManagementView
         Me.ExtendedTextBoxUsername.TextInvalidColor = System.Drawing.Color.LavenderBlush
         Me.ExtendedTextBoxUsername.TextValidColor = System.Drawing.Color.Honeydew
         '
+        'Id
+        '
+        Me.Id.DataPropertyName = "Id"
+        Me.Id.HeaderText = "Id"
+        Me.Id.Name = "Id"
+        Me.Id.ReadOnly = True
+        '
+        'FullnameUsername
+        '
+        Me.FullnameUsername.DataPropertyName = "FullnameUsername"
+        Me.FullnameUsername.HeaderText = "Fullname (Username)"
+        Me.FullnameUsername.Name = "FullnameUsername"
+        Me.FullnameUsername.ReadOnly = True
+        '
+        'Role
+        '
+        Me.Role.DataPropertyName = "Role"
+        Me.Role.HeaderText = "User Role"
+        Me.Role.Name = "Role"
+        Me.Role.ReadOnly = True
+        '
+        'NidPp
+        '
+        Me.NidPp.DataPropertyName = "NidPp"
+        Me.NidPp.HeaderText = "National Id / Passport"
+        Me.NidPp.Name = "NidPp"
+        Me.NidPp.ReadOnly = True
+        '
+        'BirthdateAge
+        '
+        Me.BirthdateAge.DataPropertyName = "BirthdateAge"
+        Me.BirthdateAge.HeaderText = "Birthdate (Age)"
+        Me.BirthdateAge.Name = "BirthdateAge"
+        Me.BirthdateAge.ReadOnly = True
+        '
+        'Gender
+        '
+        Me.Gender.DataPropertyName = "Gender"
+        Me.Gender.HeaderText = "Gender"
+        Me.Gender.Name = "Gender"
+        Me.Gender.ReadOnly = True
+        '
+        'PhoneNumber
+        '
+        Me.PhoneNumber.DataPropertyName = "PhoneNumber"
+        Me.PhoneNumber.HeaderText = "Phone Number"
+        Me.PhoneNumber.Name = "PhoneNumber"
+        Me.PhoneNumber.ReadOnly = True
+        '
+        'IsActive
+        '
+        Me.IsActive.DataPropertyName = "IsActive"
+        Me.IsActive.HeaderText = "IsActive"
+        Me.IsActive.Name = "IsActive"
+        Me.IsActive.ReadOnly = True
+        '
+        'IsUnLocked
+        '
+        Me.IsUnLocked.DataPropertyName = "IsUnLocked"
+        Me.IsUnLocked.HeaderText = "Is Unlocked"
+        Me.IsUnLocked.Name = "IsUnLocked"
+        Me.IsUnLocked.ReadOnly = True
+        '
         'UserManagementView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -373,7 +394,8 @@ Partial Class UserManagementView
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "UserManagementView"
-        Me.Text = "UserManagementView"
+        Me.Tag = "UserManagementViewAccess"
+        Me.Text = "User Management"
         CType(Me.DataGridViewAllUsers, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -382,15 +404,6 @@ Partial Class UserManagementView
 
     Friend WithEvents ExtendedGroupBoxAllUsers As ExtendedGroupBox
     Friend WithEvents DataGridViewAllUsers As DataGridView
-    Friend WithEvents Id As DataGridViewTextBoxColumn
-    Friend WithEvents FullnameUsername As DataGridViewTextBoxColumn
-    Friend WithEvents Role As DataGridViewTextBoxColumn
-    Friend WithEvents NidPp As DataGridViewTextBoxColumn
-    Friend WithEvents BirthdateAge As DataGridViewTextBoxColumn
-    Friend WithEvents Gender As DataGridViewTextBoxColumn
-    Friend WithEvents PhoneNumber As DataGridViewTextBoxColumn
-    Friend WithEvents IsActive As DataGridViewCheckBoxColumn
-    Friend WithEvents IsUnLocked As DataGridViewCheckBoxColumn
     Friend WithEvents ExtendedGroupBoxUsers As ExtendedGroupBox
     Friend WithEvents ButtonAddSaveUser As Button
     Friend WithEvents ButtonUnlock As Button
@@ -412,4 +425,13 @@ Partial Class UserManagementView
     Friend WithEvents CheckBoxIsActive As CheckBox
     Friend WithEvents CheckBoxIsUnocked As CheckBox
     Friend WithEvents ExtendedTextBoxUsername As ExtendedTextBox
+    Friend WithEvents Id As DataGridViewTextBoxColumn
+    Friend WithEvents FullnameUsername As DataGridViewTextBoxColumn
+    Friend WithEvents Role As DataGridViewTextBoxColumn
+    Friend WithEvents NidPp As DataGridViewTextBoxColumn
+    Friend WithEvents BirthdateAge As DataGridViewTextBoxColumn
+    Friend WithEvents Gender As DataGridViewTextBoxColumn
+    Friend WithEvents PhoneNumber As DataGridViewTextBoxColumn
+    Friend WithEvents IsActive As DataGridViewCheckBoxColumn
+    Friend WithEvents IsUnLocked As DataGridViewCheckBoxColumn
 End Class
