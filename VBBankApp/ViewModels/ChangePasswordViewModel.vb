@@ -139,8 +139,10 @@ Public Class ChangePasswordViewModel
             End If
 
         'Enable change password button on entering confirm new password
-        If e.PropertyName = NameOf(ConfirmNewPassword) Or e.PropertyName = NameOf(NewPassword) Then
-            If _isPasswordValidated And _isNewPasswordMatchConfirmed Then
+        If e.PropertyName = NameOf(ConfirmNewPassword) Or
+                e.PropertyName = NameOf(NewPassword) Or
+                    e.PropertyName = NameOf(Password) Then
+            If _isPasswordValidated And _isNewPasswordMatchConfirmed And Password <> "Current Password" Then
                 IsButtonChangePasswordEnabled = True
             Else
                 IsButtonChangePasswordEnabled = False
