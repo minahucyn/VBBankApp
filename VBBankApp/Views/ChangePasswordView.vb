@@ -12,7 +12,12 @@ Public Class ChangePasswordView
         AddHandler ExtendedTextBoxNewPassword.BackColorChanged, AddressOf OnManageValidationStatus
         AddHandler ExtendedTextBoxNewPassword.RegexEvaluated, AddressOf OnUpdateUIOnValidation
         AddHandler ExtendedTextBoxNewPassword.ValidationAgainstLengthRequirementChanged, AddressOf OnValidatedAgainstLength
+        AddHandler ButtonChangePassword.Click, AddressOf EmulateSuccessFullPasswordChange
+    End Sub
 
+    Private Sub EmulateSuccessFullPasswordChange(sender As Object, e As EventArgs)
+        PanelSuccessful.Location = PanelChangePassword.Location
+        PanelChangePassword.Hide()
     End Sub
 
     Private Sub OnValidatedAgainstLength(sender As Object, e As Boolean)
