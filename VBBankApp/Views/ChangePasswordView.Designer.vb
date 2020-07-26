@@ -37,9 +37,9 @@ Partial Class ChangePasswordView
         Me.ExtendedTextBoxConfirmNewPassword = New VBBankApp.ExtendedTextBox()
         Me.LabelPasswordMismatch = New System.Windows.Forms.Label()
         Me.PanelSuccessful = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PanelConditions.SuspendLayout()
         Me.PanelChangePassword.SuspendLayout()
         Me.PanelSuccessful.SuspendLayout()
@@ -216,15 +216,15 @@ Partial Class ChangePasswordView
         Me.PanelSuccessful.Size = New System.Drawing.Size(509, 243)
         Me.PanelSuccessful.TabIndex = 11
         '
-        'PictureBox1
+        'Label3
         '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(203, 39)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(100, 100)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(114, 182)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(277, 17)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Your password has been changed successfully"
         '
         'Label2
         '
@@ -236,15 +236,15 @@ Partial Class ChangePasswordView
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "Password updated!"
         '
-        'Label3
+        'PictureBox1
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(114, 182)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(277, 17)
-        Me.Label3.TabIndex = 9
-        Me.Label3.Text = "Your password has been changed successfully"
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(203, 39)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(100, 100)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
         '
         'ChangePasswordView
         '
@@ -254,8 +254,10 @@ Partial Class ChangePasswordView
         Me.Controls.Add(Me.PanelSuccessful)
         Me.Controls.Add(Me.PanelChangePassword)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "ChangePasswordView"
         Me.Tag = "ChangePasswordAccess"
         Me.PanelConditions.ResumeLayout(False)
