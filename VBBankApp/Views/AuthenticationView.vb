@@ -1,4 +1,5 @@
 Imports System.ComponentModel
+Imports Newtonsoft.Json
 Imports VBBankApp
 
 Public Class AuthenticationView
@@ -23,6 +24,7 @@ Public Class AuthenticationView
         AddHandler Cancel.Click, AddressOf OnCancelClick
         AddHandler _viewModel.PasswordVerified, AddressOf OnUserLoggedIn
         AddHandler Me.FormClosing, AddressOf AuthenticationView_Closing
+        'TestingCode
     End Sub
 
     Private Sub OnCancelClick(sender As Object, e As EventArgs)

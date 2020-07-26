@@ -368,13 +368,14 @@ Partial Class CreditManagementView
         'TextBox1
         '
         Me.TextBox1.BackColor = System.Drawing.Color.LavenderBlush
+        Me.TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox1.ForeColor = System.Drawing.Color.Gray
         Me.TextBox1.Location = New System.Drawing.Point(12, 39)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.NullText = "Customer name"
-        Me.TextBox1.Size = New System.Drawing.Size(254, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(254, 22)
         Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "Customer name"
+        Me.TextBox1.Text = "CUSTOMER NAME"
         '
         'TextBoxPhoneNumber
         '
@@ -382,7 +383,7 @@ Partial Class CreditManagementView
         Me.TextBoxPhoneNumber.Location = New System.Drawing.Point(12, 143)
         Me.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber"
         Me.TextBoxPhoneNumber.NullText = "Phone Number"
-        Me.TextBoxPhoneNumber.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxPhoneNumber.Size = New System.Drawing.Size(254, 22)
         Me.TextBoxPhoneNumber.TabIndex = 2
         Me.TextBoxPhoneNumber.Text = "Phone Number"
         '
@@ -392,7 +393,7 @@ Partial Class CreditManagementView
         Me.TextBoxAge.Location = New System.Drawing.Point(12, 65)
         Me.TextBoxAge.Name = "TextBoxAge"
         Me.TextBoxAge.NullText = "Age"
-        Me.TextBoxAge.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxAge.Size = New System.Drawing.Size(254, 22)
         Me.TextBoxAge.TabIndex = 1
         Me.TextBoxAge.Text = "Age"
         '
@@ -402,7 +403,7 @@ Partial Class CreditManagementView
         Me.TextBoxGender.Location = New System.Drawing.Point(12, 91)
         Me.TextBoxGender.Name = "TextBoxGender"
         Me.TextBoxGender.NullText = "Gender"
-        Me.TextBoxGender.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxGender.Size = New System.Drawing.Size(254, 22)
         Me.TextBoxGender.TabIndex = 1
         Me.TextBoxGender.Text = "Gender"
         '
@@ -412,7 +413,7 @@ Partial Class CreditManagementView
         Me.TextBoxBirthdate.Location = New System.Drawing.Point(12, 117)
         Me.TextBoxBirthdate.Name = "TextBoxBirthdate"
         Me.TextBoxBirthdate.NullText = "Birthdate"
-        Me.TextBoxBirthdate.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxBirthdate.Size = New System.Drawing.Size(254, 22)
         Me.TextBoxBirthdate.TabIndex = 3
         Me.TextBoxBirthdate.Text = "Birthdate"
         '
@@ -423,7 +424,7 @@ Partial Class CreditManagementView
         Me.TextBoxNidPp.Location = New System.Drawing.Point(12, 13)
         Me.TextBoxNidPp.Name = "TextBoxNidPp"
         Me.TextBoxNidPp.NullText = "Nid/Pp"
-        Me.TextBoxNidPp.Size = New System.Drawing.Size(254, 20)
+        Me.TextBoxNidPp.Size = New System.Drawing.Size(254, 22)
         Me.TextBoxNidPp.TabIndex = 4
         Me.TextBoxNidPp.Text = "Nid/Pp"
         '
@@ -517,6 +518,7 @@ Partial Class CreditManagementView
         Me.Controls.Add(Me.ExtendedGroupBox1)
         Me.Controls.Add(Me.ExtendedGroupBoxCreditFunctions)
         Me.Controls.Add(Me.ExtendedGroupBoxSecurityFunctions)
+        Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

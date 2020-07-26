@@ -3,8 +3,8 @@ Imports VBBankApp
 
 Public Class MainView
     Private ReadOnly _viewModel As MainViewModel
-    Private _claims As New ClaimsModel
     Dim WithEvents _authView As AuthenticationView
+    Public Shared AuthenticatedUserDetails As AuthDetailsModel = New AuthDetailsModel()
 
 #Region "Events"
     Public Event InitializeApplicationMenu(appMenu As List(Of MenuModel))
@@ -90,10 +90,6 @@ Public Class MainView
         ToolStripLabelUserRoleDisplay.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.UserRole)))
     End Sub
 
-    Private Sub TadaClicked(sender As Object, e As EventArgs)
-        Throw New NotImplementedException()
-    End Sub
-
     Private Sub TadaCicked(sender As Object, e As EventArgs)
         Dim og_boom As ToolStripMenuItem = sender
 
@@ -101,22 +97,44 @@ Public Class MainView
             Case ("Exit").ToLower()
                 Environment.Exit(0)
             Case ("Log out").ToLower()
-                'close all open the mdi child views
-                For Each frm As Form In Me.MdiChildren
-                    frm.Close()
-                Next
-                'start the AuthView
-                ShowAuthenticationView()
-                Dim authView As New AuthDetailsModel()
-                authView.MenuJson = ""
-                OnAuthenticationSuccessful(authView)
+                LogoutUser()
             Case ("Credit Management").ToLower()
                 ShowCreditManagementView()
                 Debug.WriteLine("crm HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            Case ("Change Password").ToLower()
+                OpenChangePasswordView()
             Case Else
 
         End Select
 
+    End Sub
+
+    Private Sub OpenChangePasswordView()
+        'Initialize change password view
+        Dim changePasswordView As ChangePasswordView = New ChangePasswordView With {
+            .MdiParent = Me,
+            .StartPosition = FormStartPosition.CenterParent}
+        'Check if user is authorized to change password.. hehe
+        If IsViewAuthorized(changePasswordView) Then
+            changePasswordView.Show()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Closes all open MDI children and opens AuthView
+    ''' </summary>
+    Private Sub LogoutUser()
+        'close all open the mdi child views
+        For Each frm As Form In Me.MdiChildren
+            frm.Close()
+        Next
+        'clear cached auth data
+        AuthenticatedUserDetails = New AuthDetailsModel()
+        'start the AuthView
+        ShowAuthenticationView()
+        Dim authView As New AuthDetailsModel()
+        authView.MenuJson = ""
+        OnAuthenticationSuccessful(authView)
     End Sub
 
     Private Sub InitializeAuthorization()
@@ -173,6 +191,8 @@ Public Class MainView
     End Sub
 
     Private Sub OnAuthenticationSuccessful(authDetails As AuthDetailsModel)
+        'assign the authenticated user details to global variable
+        MainView.AuthenticatedUserDetails = authDetails
         _viewModel.Fullname = authDetails.Fullname
         _viewModel.UserRole = authDetails.UserRole
         _viewModel.Username = authDetails.Username
@@ -193,7 +213,7 @@ Public Class MainView
     ''' <returns>true if authorized, else returns false</returns>
     Private Function IsViewAuthorized(view As Form) As Boolean
         'Look for the claim of view from the list of claims for user
-        Dim claim = _claims.Claims.Find(Function(x) x = view.Tag)
+        Dim claim = AuthenticatedUserDetails.UserClaims.Claims.Find(Function(x) x = view.Tag)
         'if no claim is found....
         If String.IsNullOrEmpty(claim) Then
             MsgBox($"You are not authorized for {view.Tag}!", MsgBoxStyle.Exclamation, "Not Authorized")

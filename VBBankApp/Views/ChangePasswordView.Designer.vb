@@ -27,19 +27,21 @@ Partial Class ChangePasswordView
         Me.LabelConditionUpper = New System.Windows.Forms.Label()
         Me.LabelConditionNumberOfletters = New System.Windows.Forms.Label()
         Me.LabelConditionSpecialCharacter = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LabelConditionNumeric = New System.Windows.Forms.Label()
         Me.PanelConditions = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ExtendedTextBox1 = New VBBankApp.ExtendedTextBox()
-        Me.ExtendedTextBox2 = New VBBankApp.ExtendedTextBox()
-        Me.ExtendedTextBox3 = New VBBankApp.ExtendedTextBox()
+        Me.LabelChangePasswordHeading = New System.Windows.Forms.Label()
+        Me.LabelPasswordMismatch = New System.Windows.Forms.Label()
+        Me.ExtendedTextBoxPassword = New VBBankApp.ExtendedTextBox()
+        Me.ExtendedTextBoxNewPassword = New VBBankApp.ExtendedTextBox()
+        Me.ExtendedTextBoxConfirmNewPassword = New VBBankApp.ExtendedTextBox()
         Me.PanelConditions.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ButtonChangePassword
         '
-        Me.ButtonChangePassword.Location = New System.Drawing.Point(22, 131)
+        Me.ButtonChangePassword.Location = New System.Drawing.Point(22, 200)
         Me.ButtonChangePassword.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ButtonChangePassword.Name = "ButtonChangePassword"
         Me.ButtonChangePassword.Size = New System.Drawing.Size(194, 30)
@@ -87,87 +89,127 @@ Partial Class ChangePasswordView
         Me.LabelConditionSpecialCharacter.TabIndex = 7
         Me.LabelConditionSpecialCharacter.Text = "At least one special charater"
         '
-        'Label2
+        'LabelConditionNumeric
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(4, 64)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(165, 17)
-        Me.Label2.TabIndex = 8
-        Me.Label2.Text = "At least one number (0 - 9)"
+        Me.LabelConditionNumeric.AutoSize = True
+        Me.LabelConditionNumeric.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelConditionNumeric.Location = New System.Drawing.Point(4, 64)
+        Me.LabelConditionNumeric.Name = "LabelConditionNumeric"
+        Me.LabelConditionNumeric.Size = New System.Drawing.Size(165, 17)
+        Me.LabelConditionNumeric.TabIndex = 8
+        Me.LabelConditionNumeric.Text = "At least one number (0 - 9)"
         '
         'PanelConditions
         '
         Me.PanelConditions.Controls.Add(Me.Label1)
-        Me.PanelConditions.Controls.Add(Me.Label2)
+        Me.PanelConditions.Controls.Add(Me.LabelConditionNumeric)
         Me.PanelConditions.Controls.Add(Me.LabelConditionUpper)
         Me.PanelConditions.Controls.Add(Me.LabelConditionSpecialCharacter)
         Me.PanelConditions.Controls.Add(Me.LabelConditionNumberOfletters)
-        Me.PanelConditions.Location = New System.Drawing.Point(269, 18)
+        Me.PanelConditions.Location = New System.Drawing.Point(269, 69)
         Me.PanelConditions.Name = "PanelConditions"
         Me.PanelConditions.Size = New System.Drawing.Size(211, 102)
         Me.PanelConditions.TabIndex = 9
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.ExtendedTextBox1)
+        Me.Panel1.Controls.Add(Me.LabelChangePasswordHeading)
+        Me.Panel1.Controls.Add(Me.ExtendedTextBoxPassword)
         Me.Panel1.Controls.Add(Me.PanelConditions)
-        Me.Panel1.Controls.Add(Me.ExtendedTextBox2)
+        Me.Panel1.Controls.Add(Me.ExtendedTextBoxNewPassword)
         Me.Panel1.Controls.Add(Me.ButtonChangePassword)
-        Me.Panel1.Controls.Add(Me.ExtendedTextBox3)
+        Me.Panel1.Controls.Add(Me.ExtendedTextBoxConfirmNewPassword)
+        Me.Panel1.Controls.Add(Me.LabelPasswordMismatch)
         Me.Panel1.Location = New System.Drawing.Point(1, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(509, 188)
+        Me.Panel1.Size = New System.Drawing.Size(509, 243)
         Me.Panel1.TabIndex = 10
         '
-        'ExtendedTextBox1
+        'LabelChangePasswordHeading
         '
-        Me.ExtendedTextBox1.ForeColor = System.Drawing.Color.Gray
-        Me.ExtendedTextBox1.IsPasswordField = True
-        Me.ExtendedTextBox1.Location = New System.Drawing.Point(22, 21)
-        Me.ExtendedTextBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.ExtendedTextBox1.Name = "ExtendedTextBox1"
-        Me.ExtendedTextBox1.NullText = "Current Password"
-        Me.ExtendedTextBox1.Size = New System.Drawing.Size(194, 25)
-        Me.ExtendedTextBox1.TabIndex = 0
-        Me.ExtendedTextBox1.Text = "Current Password"
+        Me.LabelChangePasswordHeading.AutoSize = True
+        Me.LabelChangePasswordHeading.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelChangePasswordHeading.Location = New System.Drawing.Point(17, 21)
+        Me.LabelChangePasswordHeading.Name = "LabelChangePasswordHeading"
+        Me.LabelChangePasswordHeading.Size = New System.Drawing.Size(244, 25)
+        Me.LabelChangePasswordHeading.TabIndex = 9
+        Me.LabelChangePasswordHeading.Text = "Change password for user"
         '
-        'ExtendedTextBox2
+        'LabelPasswordMismatch
         '
-        Me.ExtendedTextBox2.ForeColor = System.Drawing.Color.Gray
-        Me.ExtendedTextBox2.IsPasswordField = True
-        Me.ExtendedTextBox2.Location = New System.Drawing.Point(22, 55)
-        Me.ExtendedTextBox2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.ExtendedTextBox2.Name = "ExtendedTextBox2"
-        Me.ExtendedTextBox2.NullText = "New Password"
-        Me.ExtendedTextBox2.Size = New System.Drawing.Size(194, 25)
-        Me.ExtendedTextBox2.TabIndex = 1
-        Me.ExtendedTextBox2.Text = "New Password"
+        Me.LabelPasswordMismatch.AutoSize = True
+        Me.LabelPasswordMismatch.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPasswordMismatch.ForeColor = System.Drawing.Color.DarkRed
+        Me.LabelPasswordMismatch.Location = New System.Drawing.Point(19, 169)
+        Me.LabelPasswordMismatch.Name = "LabelPasswordMismatch"
+        Me.LabelPasswordMismatch.Size = New System.Drawing.Size(137, 15)
+        Me.LabelPasswordMismatch.TabIndex = 9
+        Me.LabelPasswordMismatch.Text = "Passwords do not match"
         '
-        'ExtendedTextBox3
+        'ExtendedTextBoxPassword
         '
-        Me.ExtendedTextBox3.ForeColor = System.Drawing.Color.Gray
-        Me.ExtendedTextBox3.IsPasswordField = True
-        Me.ExtendedTextBox3.Location = New System.Drawing.Point(22, 89)
-        Me.ExtendedTextBox3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.ExtendedTextBox3.Name = "ExtendedTextBox3"
-        Me.ExtendedTextBox3.NullText = "New Password"
-        Me.ExtendedTextBox3.Size = New System.Drawing.Size(194, 25)
-        Me.ExtendedTextBox3.TabIndex = 2
-        Me.ExtendedTextBox3.Text = "New Password"
+        Me.ExtendedTextBoxPassword.AutoValidate = False
+        Me.ExtendedTextBoxPassword.ForeColor = System.Drawing.Color.Gray
+        Me.ExtendedTextBoxPassword.IsPasswordField = True
+        Me.ExtendedTextBoxPassword.Location = New System.Drawing.Point(22, 72)
+        Me.ExtendedTextBoxPassword.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ExtendedTextBoxPassword.MinimumValidLength = 0
+        Me.ExtendedTextBoxPassword.Name = "ExtendedTextBoxPassword"
+        Me.ExtendedTextBoxPassword.NullText = "Current Password"
+        Me.ExtendedTextBoxPassword.RegexListToValidateCSV = ""
+        Me.ExtendedTextBoxPassword.Size = New System.Drawing.Size(194, 25)
+        Me.ExtendedTextBoxPassword.TabIndex = 0
+        Me.ExtendedTextBoxPassword.Text = "Current Password"
+        Me.ExtendedTextBoxPassword.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.ExtendedTextBoxPassword.TextValidColor = System.Drawing.Color.Honeydew
+        '
+        'ExtendedTextBoxNewPassword
+        '
+        Me.ExtendedTextBoxNewPassword.AutoValidate = True
+        Me.ExtendedTextBoxNewPassword.BackColor = System.Drawing.SystemColors.Window
+        Me.ExtendedTextBoxNewPassword.ForeColor = System.Drawing.Color.Gray
+        Me.ExtendedTextBoxNewPassword.IsPasswordField = True
+        Me.ExtendedTextBoxNewPassword.Location = New System.Drawing.Point(22, 106)
+        Me.ExtendedTextBoxNewPassword.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ExtendedTextBoxNewPassword.MinimumValidLength = 8
+        Me.ExtendedTextBoxNewPassword.Name = "ExtendedTextBoxNewPassword"
+        Me.ExtendedTextBoxNewPassword.NullText = "New Password"
+        Me.ExtendedTextBoxNewPassword.RegexListToValidateCSV = "[A-Za-z],[0-9],[\x20-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E]"
+        Me.ExtendedTextBoxNewPassword.Size = New System.Drawing.Size(194, 25)
+        Me.ExtendedTextBoxNewPassword.TabIndex = 1
+        Me.ExtendedTextBoxNewPassword.Text = "New Password"
+        Me.ExtendedTextBoxNewPassword.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.ExtendedTextBoxNewPassword.TextValidColor = System.Drawing.Color.Honeydew
+        '
+        'ExtendedTextBoxConfirmNewPassword
+        '
+        Me.ExtendedTextBoxConfirmNewPassword.AutoValidate = True
+        Me.ExtendedTextBoxConfirmNewPassword.BackColor = System.Drawing.SystemColors.Window
+        Me.ExtendedTextBoxConfirmNewPassword.ForeColor = System.Drawing.Color.Gray
+        Me.ExtendedTextBoxConfirmNewPassword.IsPasswordField = True
+        Me.ExtendedTextBoxConfirmNewPassword.Location = New System.Drawing.Point(22, 140)
+        Me.ExtendedTextBoxConfirmNewPassword.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ExtendedTextBoxConfirmNewPassword.MinimumValidLength = 8
+        Me.ExtendedTextBoxConfirmNewPassword.Name = "ExtendedTextBoxConfirmNewPassword"
+        Me.ExtendedTextBoxConfirmNewPassword.NullText = "Confirm New Password"
+        Me.ExtendedTextBoxConfirmNewPassword.RegexListToValidateCSV = "[A-Za-z],[\x30-\x39],[\x20-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E]"
+        Me.ExtendedTextBoxConfirmNewPassword.Size = New System.Drawing.Size(194, 25)
+        Me.ExtendedTextBoxConfirmNewPassword.TabIndex = 2
+        Me.ExtendedTextBoxConfirmNewPassword.Text = "Confirm New Password"
+        Me.ExtendedTextBoxConfirmNewPassword.TextInvalidColor = System.Drawing.Color.LavenderBlush
+        Me.ExtendedTextBoxConfirmNewPassword.TextValidColor = System.Drawing.Color.Honeydew
         '
         'ChangePasswordView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(510, 189)
+        Me.ClientSize = New System.Drawing.Size(510, 243)
         Me.Controls.Add(Me.Panel1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "ChangePasswordView"
-        Me.Text = "Change your password"
+        Me.Tag = "ChangePasswordAccess"
         Me.PanelConditions.ResumeLayout(False)
         Me.PanelConditions.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -176,15 +218,17 @@ Partial Class ChangePasswordView
 
     End Sub
 
-    Friend WithEvents ExtendedTextBox1 As ExtendedTextBox
-    Friend WithEvents ExtendedTextBox2 As ExtendedTextBox
-    Friend WithEvents ExtendedTextBox3 As ExtendedTextBox
+    Friend WithEvents ExtendedTextBoxPassword As ExtendedTextBox
+    Friend WithEvents ExtendedTextBoxNewPassword As ExtendedTextBox
+    Friend WithEvents ExtendedTextBoxConfirmNewPassword As ExtendedTextBox
     Friend WithEvents ButtonChangePassword As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents LabelConditionUpper As Label
     Friend WithEvents LabelConditionNumberOfletters As Label
     Friend WithEvents LabelConditionSpecialCharacter As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LabelConditionNumeric As Label
     Friend WithEvents PanelConditions As Panel
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents LabelChangePasswordHeading As Label
+    Friend WithEvents LabelPasswordMismatch As Label
 End Class

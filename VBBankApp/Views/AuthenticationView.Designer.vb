@@ -79,14 +79,14 @@ Partial Class AuthenticationView
         '
         Me.UsernameTextBox.Location = New System.Drawing.Point(177, 47)
         Me.UsernameTextBox.Name = "UsernameTextBox"
-        Me.UsernameTextBox.Size = New System.Drawing.Size(220, 20)
+        Me.UsernameTextBox.Size = New System.Drawing.Size(220, 22)
         Me.UsernameTextBox.TabIndex = 1
         '
         'PasswordTextBox
         '
         Me.PasswordTextBox.Location = New System.Drawing.Point(177, 104)
         Me.PasswordTextBox.Name = "PasswordTextBox"
-        Me.PasswordTextBox.Size = New System.Drawing.Size(220, 20)
+        Me.PasswordTextBox.Size = New System.Drawing.Size(220, 22)
         Me.PasswordTextBox.TabIndex = 3
         Me.PasswordTextBox.UseSystemPasswordChar = True
         '
@@ -129,6 +129,7 @@ Partial Class AuthenticationView
         Me.PanelAuth.Controls.Add(Me.Cancel)
         Me.PanelAuth.Controls.Add(Me.PasswordLabel)
         Me.PanelAuth.Controls.Add(Me.OK)
+        Me.PanelAuth.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelAuth.Location = New System.Drawing.Point(0, 0)
         Me.PanelAuth.Name = "PanelAuth"
         Me.PanelAuth.Size = New System.Drawing.Size(408, 196)
@@ -156,10 +157,11 @@ Partial Class AuthenticationView
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(406, 196)
+        Me.ClientSize = New System.Drawing.Size(408, 196)
         Me.ControlBox = False
         Me.Controls.Add(Me.PanelAnimation)
         Me.Controls.Add(Me.PanelAuth)
+        Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False

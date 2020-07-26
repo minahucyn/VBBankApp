@@ -103,6 +103,7 @@
     <Compile Include="Models\RepaymentModel.vb" />
     <Compile Include="Models\SecurityModel.vb" />
     <Compile Include="ViewModels\AuthenticationViewModel.vb" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.vb" />
     <Compile Include="Views\ChangePasswordView.Designer.vb">
       <DependentUpon>ChangePasswordView.vb</DependentUpon>
     </Compile>
