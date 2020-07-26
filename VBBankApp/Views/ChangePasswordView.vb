@@ -7,12 +7,47 @@ Public Class ChangePasswordView
         InitializeComponent()
         Me._viewModel = New ChangePasswordViewModel()
         InitializeDatabinding()
+        InitializeBugWorkAround()
 
         'Handle events
         AddHandler ExtendedTextBoxNewPassword.BackColorChanged, AddressOf OnManageValidationStatus
         AddHandler ExtendedTextBoxNewPassword.RegexEvaluated, AddressOf OnUpdateUIOnValidation
         AddHandler ExtendedTextBoxNewPassword.ValidationAgainstLengthRequirementChanged, AddressOf OnValidatedAgainstLength
         AddHandler ButtonChangePassword.Click, AddressOf EmulateSuccessFullPasswordChange
+        'show/hide labels
+        AddHandler ExtendedTextBoxPassword.Enter, AddressOf ShowHideLabels
+        AddHandler ExtendedTextBoxPassword.Leave, AddressOf ShowHideLabels
+        AddHandler ExtendedTextBoxNewPassword.Enter, AddressOf ShowHideLabels
+        AddHandler ExtendedTextBoxNewPassword.Leave, AddressOf ShowHideLabels
+        AddHandler ExtendedTextBoxConfirmNewPassword.Enter, AddressOf ShowHideLabels
+        AddHandler ExtendedTextBoxConfirmNewPassword.Leave, AddressOf ShowHideLabels
+
+    End Sub
+
+    Private Sub InitializeBugWorkAround()
+        Me.ActiveControl = ExtendedTextBoxNewPassword
+        Me.ActiveControl = ExtendedTextBoxPassword
+    End Sub
+
+    Private Sub ShowHideLabels(sender As Object, e As EventArgs)
+        Dim textBox As ExtendedTextBox = sender
+        Select Case textBox.Name
+            Case NameOf(ExtendedTextBoxPassword)
+                If textBox.NullText = textBox.Text Then LabelCurrentPassword.Visible = False
+                If textBox.NullText <> textBox.Text Then LabelCurrentPassword.Visible = True
+
+            Case NameOf(ExtendedTextBoxNewPassword)
+                If textBox.NullText = textBox.Text Then LabelNewPassword.Visible = False
+                If textBox.NullText <> textBox.Text Then LabelNewPassword.Visible = True
+
+
+            Case NameOf(ExtendedTextBoxConfirmNewPassword)
+                If textBox.NullText = textBox.Text Then LabelConfirmNewPassword.Visible = False
+                If textBox.NullText <> textBox.Text Then LabelConfirmNewPassword.Visible = True
+
+            Case Else
+
+        End Select
     End Sub
 
     Private Sub EmulateSuccessFullPasswordChange(sender As Object, e As EventArgs)
