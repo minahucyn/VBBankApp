@@ -69,8 +69,13 @@
     <Build Include="dbo\Tables\Roles.sql" />
     <Build Include="dbo\Tables\Claims.sql" />
     <Build Include="dbo\Tables\RoleSpecificMenus.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateUserHash.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ReadGoodHash.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BankData.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BankData.publish.xml" />
   </ItemGroup>
 </Project>
