@@ -3,12 +3,12 @@
 Public Class ChangePasswordDataAccess
     Inherits DataAccessBase
 
-    Public Function UpdateUserHash(userId As Integer, userHash As String) As Integer
+    Public Function UpdateUserHash(username As String, userHash As String) As Integer
         'configure stored procedure and sql parameters
         Dim storedProcedure = "[dbo].[usp_UpdateUserHash]"
         Dim parameters = New List(Of SqlParameter) From {
             New SqlParameter("Hash", userHash),
-            New SqlParameter("UserId", userId)}
+            New SqlParameter("Username", username)}
         Try
             'call the update function
             Return Update(storedProcedure, parameters)

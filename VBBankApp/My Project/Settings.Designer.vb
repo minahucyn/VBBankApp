@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Server=(LocalDB)\MSSQLLocalDB;Database=ExperimentalData;Trusted_Connection=True;")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Server=(LocalDB)\MSSQLLocalDB;Database=BankData;Trusted_Connection=True;")>  _
         Public Property ConnectionString() As String
             Get
                 Return CType(Me("ConnectionString"),String)

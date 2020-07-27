@@ -54,8 +54,11 @@ Public Class ChangePasswordView
     End Sub
 
     Private Sub EmulateSuccessFullPasswordChange(sender As Object, e As EventArgs)
-        PanelSuccessful.Location = PanelChangePassword.Location
-        PanelChangePassword.Hide()
+        If _viewModel.ChangePassword() Then
+            PanelSuccessful.Location = PanelChangePassword.Location
+            PanelChangePassword.Hide()
+        End If
+
     End Sub
 
     Private Sub OnValidatedAgainstLength(sender As Object, e As Boolean)

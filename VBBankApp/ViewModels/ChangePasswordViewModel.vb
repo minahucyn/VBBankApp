@@ -12,7 +12,7 @@ Public Class ChangePasswordViewModel
     Private _isNewPasswordMatchConfirmed As Boolean
     Private _isLabelPasswordMisMatchVisible As Boolean
     Private _isPasswordValidated As Boolean
-
+    Private _passwordDataAccess As ChangePasswordDataAccess = New ChangePasswordDataAccess()
 
 #End Region
 
@@ -88,12 +88,21 @@ Public Class ChangePasswordViewModel
 #End Region
 
 #Region "Public Methods"
-    Public Sub ChangePassword(sender As Object, e As EventArgs)
+    Public Function ChangePassword() As Boolean
         'if the entered current password Hash matches with good hash...
         If VerifyCurrentPassword() Then
-
+            'get the password hash
+            Dim newGoodHash = Hashing.CreateHashSHA512(NewPassword)
+            'update the database
+            Try
+                _passwordDataAccess.UpdateUserHash(MainView.AuthenticatedUserDetails.Username, newGoodHash)
+                Return True
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
         End If
-    End Sub
+        Return False
+    End Function
 
     Public Sub SetPasswordValidatedStatus(isValidated As Boolean)
         _isPasswordValidated = isValidated
