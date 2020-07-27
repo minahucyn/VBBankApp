@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[usp_UpdateUserHash]
 	@Hash VARCHAR(135),
-	@UserId int
+	@Username VARCHAR(100)
 AS
 BEGIN
 	UPDATE [dbo].[UserDetails]
 	SET [PasswordHash] = @Hash
-	WHERE [Id] = @UserId;
+	WHERE [Username] = @Username;
 END
