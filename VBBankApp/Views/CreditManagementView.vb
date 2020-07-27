@@ -1,6 +1,6 @@
 ﻿Public Class CreditManagementView
     Private WithEvents _viewModel As CreditManagementViewModel
-
+    Private _selectedIndex As Integer = -1
 #Region "Events"
     Public Event CreditRowSelected As EventHandler(Of Integer)
     Public Event CreditSecurityRowSelected As EventHandler(Of Integer)
@@ -26,6 +26,11 @@
     ''' Call viewModel to display the security and payment management data on the relavent grid
     ''' </summary>
     Private Sub OnRowFocused(sender As Object, e As DataGridViewCellEventArgs)
+        'bypass multiple invokes with same row index
+        If _selectedIndex = -1 Then Return
+        If _selectedIndex = e.RowIndex Then Return
+        _selectedIndex = e.RowIndex
+
         'get the underlying datarow's credit management ID
         'get the sender grid...
         Dim grid As DataGridView = sender
