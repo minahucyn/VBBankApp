@@ -23,7 +23,7 @@ An admin user should be able to:
     * should contain letters, 
     * numbers and 
     * special characters.
-##### 3. Login
+##### 3. Authentication and Authorisation
 - Authentication
 -  A user should be given three attempts to login in to the system. Upon three unsuccessful login attempts, the account should be locked
 	
