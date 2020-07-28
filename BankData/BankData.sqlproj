@@ -78,6 +78,9 @@
     <Build Include="dbo\StoredProcedures\usp_ResetUserPassword.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateUnlockUser.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateChangesToUser.sql" />
+    <Build Include="dbo\StoredProcedures\usp_IncrementRetryCount.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ResetRetryCount.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ReadUserStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BankData.refactorlog" />

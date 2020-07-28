@@ -105,46 +105,98 @@ Public Class AuthenticationViewModel
 
 #Region "Public Methods"
     Public Sub VerifyPassword()
-        'fetch the password hash from database for the username
-        Dim authDetails = GetAuthDetails()
-        'handle null auth details
-        If authDetails Is Nothing Then
-            MsgBox("Could not find a match for the username and/or password. Please try again!")
-            Return
-        End If
-        'check whether the user is active
-        If Not authDetails.IsActive Then
-            IsLockedInactiveAlertVisible = True
-            AlertText = "THE USER DEACTIVATED!" & vbCrLf & " PLEASE CONTACT YOUR ADMIN."
-            Return
-        End If
-        'Check whether the user is locked....
-        If authDetails.IsLocked Then
-            'Show the notification....
-            IsLockedInactiveAlertVisible = True
-            AlertText = "THE USER IS LOCKED!" & vbCrLf & " PLEASE CONTACT YOUR ADMIN."
-            'abort authentication
-            Return
-        End If
-        'compare with hash of user provided password
-        Dim IsVerified As Boolean = Hashing.VerifyPassword(_password, authDetails.GoodHash)
+        Try
+            'fetch the password hash from database for the username
+            Dim authDetails = GetAuthDetails()
+            'handle null auth details
+            If authDetails Is Nothing Then
+                MsgBox("Could not find a match for the username and/or password. Please try again!")
+                Return
+            End If
+            'check whether the user is active
+            If Not authDetails.IsActive Then
+                DisplayDeactivatedAlert()
+                Return
+            End If
+            'Check whether the user is locked....
+            If authDetails.IsLocked Then
+                DisplayAccountlockedAlert()
+                'abort authentication
+                Return
+            End If
+            'compare with hash of user provided password
+            Dim IsVerified As Boolean = Hashing.VerifyPassword(_password, authDetails.GoodHash)
 
-        'Checking if the password matched
-        If IsVerified And authDetails.Username = Username Then
-            ' Completed password verification..., 
-            RaiseEvent PasswordVerified(authDetails)
-            Debug.WriteLine("User authenticated")
-        Else
-            'Notify user that the credetials did not match.
-            MsgBox("Authentication failed! Username and Password did not match!")
-            'Increment Retry count
+            'Checking if the password matched
+            If IsVerified And authDetails.Username = Username Then
+                'resetRetryCount
+                ResetRetryCount(authDetails.Username)
 
-        End If
+                ' Completed password verification..., 
+                RaiseEvent PasswordVerified(authDetails)
+                Debug.WriteLine("User authenticated")
+            Else
+                'Notify user that the credetials did not match.
+                MsgBox("Authentication failed! Username and Password did not match!")
+                'Increment Retry count
+                IncrementRetryCount(authDetails.Username)
+                CheckUserStatus(authDetails.Username)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
 
     End Sub
+
+
 #End Region
 
 #Region "Private Methods"
+    Public Sub CheckUserStatus(username As String)
+        Try
+            Dim userStatus = _authDataAccess.ReadUserStatus(username)
+            'handle locked status
+            If userStatus.IsLockedOut Then
+                DisplayAccountlockedAlert()
+            End If
+            'handle active status
+            If Not userStatus.IsActive Then
+                DisplayAccountlockedAlert()
+            End If
+            '
+        Catch ex As Exception
+            MsgBox("Cannot check user IsActive and / or locked status" & vbCrLf & ex.Message)
+        End Try
+    End Sub
+    Private Sub DisplayAccountlockedAlert()
+        'Show the notification....
+        IsLockedInactiveAlertVisible = True
+        AlertText = "THE USER IS LOCKED!" & vbCrLf & " PLEASE CONTACT YOUR ADMIN."
+    End Sub
+    Private Sub DisplayDeactivatedAlert()
+        IsLockedInactiveAlertVisible = True
+        AlertText = "THE USER DEACTIVATED!" & vbCrLf & " PLEASE CONTACT YOUR ADMIN."
+    End Sub
+    Public Sub IncrementRetryCount(username As String)
+        Try
+            _authDataAccess.IncrementRetryCount(username)
+        Catch ex As Exception
+            'ignore. No point in showing this error
+            Debug.WriteLine(ex.Message)
+        End Try
+    End Sub
+    ''' <summary>
+    ''' resets retry count for the specified username to zero
+    ''' </summary>
+    ''' <param name="username">The username for which to reset the retry count</param>
+    Public Sub ResetRetryCount(username As String)
+        Try
+            _authDataAccess.ResetRetryCount(username)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
+    End Sub
 
     ''' <summary>
     ''' Gets the good Hash from the database for the specified username.
@@ -154,6 +206,7 @@ Public Class AuthenticationViewModel
         'read auth details from database
         Try
             Dim authDetails = _authDataAccess.ReadAuthData(Me.Username)
+            If authDetails Is Nothing Then Throw New Exception($"Cannot find the specified username: {Me.Username} on the database. Please make sure that the username is correct.")
             Return New AuthDetailsModel() With {
                 .Fullname = authDetails.Fullname,
                 .UserClaims = ClaimsModel.GetClaimsModel(authDetails.RoleClaimsCSV),
@@ -164,7 +217,7 @@ Public Class AuthenticationViewModel
                 .IsActive = authDetails.IsActive,
                 .MenuJson = authDetails.MenuJson}
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Throw
         End Try
 
 

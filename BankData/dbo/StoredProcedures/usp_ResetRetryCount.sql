@@ -1,9 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[usp_UpdateUnlockUser]
+﻿CREATE PROCEDURE [dbo].[usp_ResetRetryCount]
 	@Username VARCHAR(100)
 AS
 BEGIN
 	UPDATE [dbo].[UserDetails]
-	SET [IsLockedOut] = 0,
-		[RetryCount] = 0
+	SET [RetryCount] = 0
 	WHERE [Username] = @Username;
 END
