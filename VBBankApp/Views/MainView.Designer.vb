@@ -22,6 +22,7 @@ Partial Class MainView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainView))
         Me.MenuStripMain = New System.Windows.Forms.MenuStrip()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabelUserNameAndRole = New VBBankApp.BindableToolStripStatusLabel()
@@ -68,6 +69,7 @@ Partial Class MainView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(954, 490)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStripMain)
