@@ -10,6 +10,7 @@ Public Class AuthenticationViewModel
     Private _isLockedAlertVisible As Boolean
     Private _isOKButtonEnabled As Boolean
     Private _authDataAccess As AuthDataAccess = New AuthDataAccess
+    Private _AlertText As String
 #End Region
 
 #Region "Events"
@@ -19,10 +20,10 @@ Public Class AuthenticationViewModel
 #Region "Default Constructor"
 
     Public Sub New()
-        IsLockedAlertVisible = False
+        IsLockedInactiveAlertVisible = False
         IsOKButtonEnabled = False
         'Listen for property changed events
-        AddHandler Me.PropertyChanged, AddressOf ActingOnPropertyChanges
+        AddHandler Me.PropertyChanged, AddressOf LogicOnPropertyChange
         'AddHandler Me.PasswordVerified, AddressOf OnPasswordVerified
 
 #If DEBUG Then
@@ -34,6 +35,17 @@ Public Class AuthenticationViewModel
 #End Region
 
 #Region "Public Properties"
+
+    Public Property AlertText As String 'The alert text for user locked and/or inactive
+        Get
+            Return _AlertText
+        End Get
+        Set
+            _AlertText = Value
+            OnPropertyChanged()
+        End Set
+    End Property
+
     Public Property Username() As String
         Get
             Return _username
@@ -65,7 +77,7 @@ Public Class AuthenticationViewModel
             OnPropertyChanged()
         End Set
     End Property
-    Public Property IsLockedAlertVisible() As Boolean
+    Public Property IsLockedInactiveAlertVisible() As Boolean
         Get
             Return _isLockedAlertVisible
         End Get
@@ -88,6 +100,7 @@ Public Class AuthenticationViewModel
             OnPropertyChanged()
         End Set
     End Property
+
 #End Region
 
 #Region "Public Methods"
@@ -99,10 +112,17 @@ Public Class AuthenticationViewModel
             MsgBox("Could not find a match for the username and/or password. Please try again!")
             Return
         End If
+        'check whether the user is active
+        If Not authDetails.IsActive Then
+            IsLockedInactiveAlertVisible = True
+            AlertText = "THE USER DEACTIVATED!" & vbCrLf & " PLEASE CONTACT YOUR ADMIN."
+            Return
+        End If
         'Check whether the user is locked....
         If authDetails.IsLocked Then
             'Show the notification....
-            IsLockedAlertVisible = True
+            IsLockedInactiveAlertVisible = True
+            AlertText = "THE USER IS LOCKED!" & vbCrLf & " PLEASE CONTACT YOUR ADMIN."
             'abort authentication
             Return
         End If
@@ -141,6 +161,7 @@ Public Class AuthenticationViewModel
                 .UserRole = authDetails.UserRole,
                 .GoodHash = authDetails.GoodHash,
                 .IsLocked = authDetails.IsLocked,
+                .IsActive = authDetails.IsActive,
                 .MenuJson = authDetails.MenuJson}
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -153,13 +174,13 @@ Public Class AuthenticationViewModel
 
     End Sub
 
-    Private Sub ActingOnPropertyChanges(sender As Object, e As PropertyChangedEventArgs)
+    Private Sub LogicOnPropertyChange(sender As Object, e As PropertyChangedEventArgs)
         'Look for username changes
         If e.PropertyName = NameOf(Username) Then
             'if the IsLockedAlert is visible...
-            If IsLockedAlertVisible Then
+            If IsLockedInactiveAlertVisible Then
                 'hide it
-                IsLockedAlertVisible = False
+                IsLockedInactiveAlertVisible = False
             End If
         End If
 

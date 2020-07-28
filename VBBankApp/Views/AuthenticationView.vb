@@ -60,8 +60,10 @@ Public Class AuthenticationView
         'Bind password
         PasswordTextBox.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.Password),
                                                      False, DataSourceUpdateMode.OnPropertyChanged))
-        'Bind islockedalert
-        LabelLockedAlert.DataBindings.Add(New Binding("Visible", _viewModel, NameOf(_viewModel.IsLockedAlertVisible)))
+        'Bind islockedalert / inactive
+        LabelLockedAlert.DataBindings.Add(New Binding("Visible", _viewModel, NameOf(_viewModel.IsLockedInactiveAlertVisible)))
+        LabelLockedAlert.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.AlertText)))
+
         'Bind OKButton
         OK.DataBindings.Add(New Binding("Enabled", _viewModel, NameOf(_viewModel.IsOKButtonEnabled)))
 

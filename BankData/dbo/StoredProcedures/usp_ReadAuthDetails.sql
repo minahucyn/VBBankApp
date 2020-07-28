@@ -21,6 +21,7 @@ BEGIN
 	,[r].[Description] AS [UserRole]
 	,[ud].[PasswordHash] AS [GoodHash]
 	,[ud].[IsLockedOut] AS [IsLocked]
+	,[ud].[IsActive]
 	,[rsm].[MenuJson]
 	,@RoleClaimsCSV AS [RoleClaimsCSV]
 	FROM [dbo].[Users] [u]

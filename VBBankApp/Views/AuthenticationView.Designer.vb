@@ -111,12 +111,12 @@ Partial Class AuthenticationView
         '
         Me.LabelLockedAlert.BackColor = System.Drawing.SystemColors.Control
         Me.LabelLockedAlert.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelLockedAlert.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.LabelLockedAlert.ForeColor = System.Drawing.Color.Maroon
         Me.LabelLockedAlert.Location = New System.Drawing.Point(178, 124)
         Me.LabelLockedAlert.Name = "LabelLockedAlert"
         Me.LabelLockedAlert.Size = New System.Drawing.Size(219, 34)
         Me.LabelLockedAlert.TabIndex = 6
-        Me.LabelLockedAlert.Text = "THE USER IS LOCKED! " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PLEASE CONTACT YOUR ADMIN."
+        Me.LabelLockedAlert.Text = "ALERT TEXT"
         Me.LabelLockedAlert.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'PanelAuth
