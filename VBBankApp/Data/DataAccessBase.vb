@@ -60,11 +60,11 @@ Public Class DataAccessBase
 
         'initialize new sql command
         _dataAdapter.SelectCommand = New SqlCommand(storedProcedure, _connection) With {
-            .CommandType = storedProcedure}
+            .CommandType = CommandType.StoredProcedure}
         'IF REQUIRED: add all parameters to sql parameter collection
         If isParametersRequiredForQuery Then
             For Each parameter In sqlParameters
-                _dataAdapter.InsertCommand.Parameters.Add(parameter)
+                _dataAdapter.SelectCommand.Parameters.Add(parameter)
             Next
         End If
         'instantiate return type T
@@ -78,7 +78,7 @@ Public Class DataAccessBase
             Dim reader As SqlDataReader = _dataAdapter.SelectCommand.ExecuteReader()
             While reader.Read()
                 'read the results into a generic instance
-                For index = 1 To propertyInfo.Length
+                For index = 1 To propertyInfo.Length - 1
                     propertyInfo(index).SetValue(output, reader(index))
                 Next
                 'add the instance to generic list

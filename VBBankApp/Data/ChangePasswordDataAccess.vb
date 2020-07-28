@@ -17,7 +17,7 @@ Public Class ChangePasswordDataAccess
         End Try
     End Function
 
-    Public Function ReadGoodHash(username As String) As GoodHashModel
+    Public Function ReadGoodHash(username As String) As GoodHashDatabaseModel
         'configure stored procedure and sql parameters
         Dim storedProcedure = "[dbo].[usp_ReadGoodHash]"
         Dim parameters = New List(Of SqlParameter) From {
@@ -25,7 +25,7 @@ Public Class ChangePasswordDataAccess
 
         Try
             'read and return
-            Return Read(Of GoodHashModel)(storedProcedure, parameters).FirstOrDefault
+            Return Read(Of GoodHashDatabaseModel)(storedProcedure, parameters).FirstOrDefault
         Catch ex As Exception
             Throw
         End Try
