@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Fullname] VARCHAR(100) NOT NULL, 
-    [NidPp] VARCHAR(50) NOT NULL,
+    [NidPp] VARCHAR(50) NOT NULL UNIQUE,
 	[Birthdate] DATE NOT NULL,
 	[Gender] BIT NOT NULL,
 	[PhoneNumber] VARCHAR(15) NOT NULL
