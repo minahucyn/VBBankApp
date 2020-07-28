@@ -1,4 +1,9 @@
-# VBBankApp
+# Minimum Requirements
+- .Net Framework 4.6.1
+- Sql Server 2019 Express Edition
+
+
+# Application Specification
 #### Assignment II Bank App
 
 ##### 1. User registration
