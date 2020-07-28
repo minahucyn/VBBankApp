@@ -26,7 +26,7 @@ Public Class AuthenticationViewModel
         'AddHandler Me.PasswordVerified, AddressOf OnPasswordVerified
 
 #If DEBUG Then
-        Username = "ibrahimhucyn"
+        Username = "minahucyn"
         Password = "Bismillah.123!"
 #End If
     End Sub

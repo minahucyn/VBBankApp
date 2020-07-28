@@ -67,4 +67,28 @@ Public Class UserDataAccess
             Throw
         End Try
     End Function
+
+    Public Function UpdateUser(updateDbModel As UserUpdateDatebaseModel) As Integer
+        'configure stored procedure and parameters
+        Dim storedProcedure = "[dbo].[usp_UpdateChangesToUser]"
+        Dim parameters = New List(Of SqlParameter) From {
+            New SqlParameter("UserId", updateDbModel.UserId),
+            New SqlParameter("NidPp", updateDbModel.NidPp),
+            New SqlParameter("Fullname", updateDbModel.Fullname),
+            New SqlParameter("Username", updateDbModel.Username),
+            New SqlParameter("PhoneNumber", updateDbModel.PhoneNumber),
+            New SqlParameter("RoleId", updateDbModel.RolesIdForInsert),
+            New SqlParameter("Birthdate", updateDbModel.Birthdate),
+            New SqlParameter("Gender", updateDbModel.GenderForInsert),
+            New SqlParameter("IsActive", updateDbModel.IsActive)
+        }
+
+        Try
+            'call method to execute update
+            Return Update(storedProcedure, parameters)
+        Catch ex As Exception
+            'throw any exceptions. Will be handled down the line.
+            Throw
+        End Try
+    End Function
 End Class

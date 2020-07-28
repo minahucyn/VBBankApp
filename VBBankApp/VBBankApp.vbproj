@@ -112,6 +112,7 @@
     <Compile Include="Models\DatabaseModels\GoodHashDatabaseModel.vb" />
     <Compile Include="Models\DatabaseModels\UserInsertDatabaseModel.vb" />
     <Compile Include="Models\DatabaseModels\UserManagementDatabaseModel.vb" />
+    <Compile Include="Models\DatabaseModels\UserUpdateDatebaseModel.vb" />
     <Compile Include="Models\MainViewModel.vb" />
     <Compile Include="Models\MenuModel.vb" />
     <Compile Include="Models\RepaymentModel.vb" />

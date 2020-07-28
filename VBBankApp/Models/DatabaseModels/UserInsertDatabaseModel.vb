@@ -34,7 +34,7 @@
         End Set
     End Property
 
-    Public Property RoleId As String
+    Public Property Role As String
         Get
             Return _roleId
         End Get
@@ -78,3 +78,4 @@
         normal
     End Enum
 End Class
+

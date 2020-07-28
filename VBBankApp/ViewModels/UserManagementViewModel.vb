@@ -444,7 +444,7 @@ Public Class UserManagementViewModel
             .Birthdate = SelectedBirthdate,
             .Gender = SelectedGender,
             .PhoneNumber = SelectedPhoneNumber,
-            .RoleId = SelectedRole,
+            .Role = SelectedRole,
             .Username = SelectedUsername}
 
         Try
@@ -476,11 +476,23 @@ Public Class UserManagementViewModel
             .IsActive = SelectedIsActive,
             .IsUnlocked = SelectedIsUnlocked}
         'check for changes
-        Dim IsUpdateRequired = Not updatedUser.Equals(_LastSelectedUser)
+        If updatedUser.Equals(_LastSelectedUser) Then
+            MsgBox("User does not have any updates to be made.")
+            Return
+        End If
+        'get userupdate database model
+        Dim userUpdateDatabaseModel = UserUpdateDatebaseModel.GetUserInsertModel(updatedUser)
         'update details
+        Try
+            Dim NoRowsEffected = _userDataAccess.UpdateUser(userUpdateDatabaseModel)
+            If NoRowsEffected > 0 Then MsgBox("User updated successfully.")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
         'cancel edit mode
         EnableEditMode(False)
         'load data from datebase
+        LoadAllUsers()
     End Sub
 #End Region
 
