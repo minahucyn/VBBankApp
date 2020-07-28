@@ -9,6 +9,7 @@ Public Class AuthenticationViewModel
     Private _passwordHash As String
     Private _isLockedAlertVisible As Boolean
     Private _isOKButtonEnabled As Boolean
+    Private _authDataAccess As AuthDataAccess = New AuthDataAccess
 #End Region
 
 #Region "Events"
@@ -93,6 +94,11 @@ Public Class AuthenticationViewModel
     Public Sub VerifyPassword()
         'fetch the password hash from database for the username
         Dim authDetails = GetAuthDetails()
+        'handle null auth details
+        If authDetails Is Nothing Then
+            MsgBox("Could not find a match for the username and/or password. Please try again!")
+            Return
+        End If
         'Check whether the user is locked....
         If authDetails.IsLocked Then
             'Show the notification....
@@ -125,15 +131,22 @@ Public Class AuthenticationViewModel
     ''' </summary>
     ''' <returns> returns good hash model with hash and islocked property </returns>
     Private Function GetAuthDetails() As AuthDetailsModel
-        'Simulate calling database
-        Return New AuthDetailsModel() With {
-            .Fullname = "Mina Hucyn",
-            .UserClaims = New ClaimsModel(),
-            .Username = "minahucyn",
-            .UserRole = "Normal",
-            .GoodHash = "SHA512:88:rvb0bbHRIxdO9DoZvhrv2NWC/tssaikt0Q==:4cq/04d1pjFir7COwEBrfe02z3u6xrYkyhI/a80X/5QEBZRo9ooEUONk0FhAIWTvSDjVrIZOxF3Oz9tgkn2p8w==",
-            .IsLocked = False,
-            .MenuJson = "[{'Id':1,'Name':'Username','ParentId':0},{'Id':2,'Name':'Log Out','ParentId':1},{'Id':3,'Name':'Change Password','ParentId':1},{'Id':4,'Name':'Exit','ParentId':1},{'Id':5,'Name':'Settings','ParentId':0},{'Id':6,'Name':'Operations','ParentId':0},{'Id':7,'Name':'Credit Management','ParentId':6},{'Id':8,'Name':'User Management','ParentId':5}]"}
+        'read auth details from database
+        Try
+            Dim authDetails = _authDataAccess.ReadAuthData(Me.Username)
+            Return New AuthDetailsModel() With {
+                .Fullname = authDetails.Fullname,
+                .UserClaims = ClaimsModel.GetClaimsModel(authDetails.RoleClaimsCSV),
+                .Username = authDetails.Username,
+                .UserRole = authDetails.UserRole,
+                .GoodHash = authDetails.GoodHash,
+                .IsLocked = authDetails.IsLocked,
+                .MenuJson = authDetails.MenuJson}
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+
     End Function
 
     Private Sub IncrementRetryCount()

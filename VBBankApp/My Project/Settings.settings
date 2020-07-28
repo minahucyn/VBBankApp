@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Server=(LocalDB)\MSSQLLocalDB;Database=BankData;Trusted_Connection=True;</Value>
+      <Value Profile="(Default)">Server=.\SQLEXPRESS;Database=BankData;Trusted_Connection=True;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
