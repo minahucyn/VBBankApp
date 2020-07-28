@@ -25,6 +25,7 @@ BEGIN
 	,@RoleClaimsCSV AS [RoleClaimsCSV]
 	FROM [dbo].[Users] [u]
 	INNER JOIN [dbo].[UserDetails] [ud] ON [u].[Id] = [ud].[UsersId]
-	INNER JOIN [dbo].[Roles] [r] ON [u].[Id] = [ud].[RolesId]
-	INNER JOIN [dbo].[RoleSpecificMenus] [rsm] ON [rsm].[RolesId] = [r].[Id];
+	INNER JOIN [dbo].[Roles] [r] ON [r].[Id] = [ud].[RolesId]
+	INNER JOIN [dbo].[RoleSpecificMenus] [rsm] ON [rsm].[RolesId] = [r].[Id]
+	WHERE [ud].[Username] = @Username;
 END

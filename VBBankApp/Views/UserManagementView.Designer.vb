@@ -23,16 +23,6 @@ Partial Class UserManagementView
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridViewAllUsers = New System.Windows.Forms.DataGridView()
-        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fullname = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NidPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Birthdate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Gender = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.IsUnLocked = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ButtonSave = New System.Windows.Forms.Button()
         Me.ButtonResetPassword = New System.Windows.Forms.Button()
         Me.LabelFullname = New System.Windows.Forms.Label()
@@ -56,6 +46,17 @@ Partial Class UserManagementView
         Me.ExtendedTextBoxFullname = New VBBankApp.ExtendedTextBox()
         Me.ExtendedGroupBoxUsers = New VBBankApp.ExtendedGroupBox()
         Me.ExtendedGroupBoxAllUsers = New VBBankApp.ExtendedGroupBox()
+        Me.ButtonUnlockUser = New System.Windows.Forms.Button()
+        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fullname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NidPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Birthdate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Gender = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IsActive = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.IsUnLocked = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         CType(Me.DataGridViewAllUsers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -72,80 +73,9 @@ Partial Class UserManagementView
         Me.DataGridViewAllUsers.Size = New System.Drawing.Size(778, 440)
         Me.DataGridViewAllUsers.TabIndex = 1
         '
-        'Id
-        '
-        Me.Id.DataPropertyName = "Id"
-        Me.Id.HeaderText = "Id"
-        Me.Id.Name = "Id"
-        Me.Id.ReadOnly = True
-        Me.Id.Visible = False
-        '
-        'Fullname
-        '
-        Me.Fullname.DataPropertyName = "Fullname"
-        Me.Fullname.HeaderText = "Fullname"
-        Me.Fullname.Name = "Fullname"
-        Me.Fullname.ReadOnly = True
-        '
-        'Username
-        '
-        Me.Username.DataPropertyName = "Username"
-        Me.Username.HeaderText = "Username"
-        Me.Username.Name = "Username"
-        Me.Username.ReadOnly = True
-        '
-        'Role
-        '
-        Me.Role.DataPropertyName = "Role"
-        Me.Role.HeaderText = "User Role"
-        Me.Role.Name = "Role"
-        Me.Role.ReadOnly = True
-        '
-        'NidPp
-        '
-        Me.NidPp.DataPropertyName = "NidPp"
-        Me.NidPp.HeaderText = "National Id / Passport"
-        Me.NidPp.Name = "NidPp"
-        Me.NidPp.ReadOnly = True
-        '
-        'Birthdate
-        '
-        Me.Birthdate.DataPropertyName = "Birthdate"
-        Me.Birthdate.HeaderText = "Birthdate"
-        Me.Birthdate.Name = "Birthdate"
-        Me.Birthdate.ReadOnly = True
-        '
-        'Gender
-        '
-        Me.Gender.DataPropertyName = "Gender"
-        Me.Gender.HeaderText = "Gender"
-        Me.Gender.Name = "Gender"
-        Me.Gender.ReadOnly = True
-        '
-        'PhoneNumber
-        '
-        Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-        Me.PhoneNumber.HeaderText = "Phone Number"
-        Me.PhoneNumber.Name = "PhoneNumber"
-        Me.PhoneNumber.ReadOnly = True
-        '
-        'IsActive
-        '
-        Me.IsActive.DataPropertyName = "IsActive"
-        Me.IsActive.HeaderText = "Is Active"
-        Me.IsActive.Name = "IsActive"
-        Me.IsActive.ReadOnly = True
-        '
-        'IsUnLocked
-        '
-        Me.IsUnLocked.DataPropertyName = "IsUnLocked"
-        Me.IsUnLocked.HeaderText = "Is Unlocked"
-        Me.IsUnLocked.Name = "IsUnLocked"
-        Me.IsUnLocked.ReadOnly = True
-        '
         'ButtonSave
         '
-        Me.ButtonSave.Location = New System.Drawing.Point(957, 416)
+        Me.ButtonSave.Location = New System.Drawing.Point(957, 390)
         Me.ButtonSave.Name = "ButtonSave"
         Me.ButtonSave.Size = New System.Drawing.Size(102, 23)
         Me.ButtonSave.TabIndex = 3
@@ -154,7 +84,7 @@ Partial Class UserManagementView
         '
         'ButtonResetPassword
         '
-        Me.ButtonResetPassword.Location = New System.Drawing.Point(851, 387)
+        Me.ButtonResetPassword.Location = New System.Drawing.Point(851, 361)
         Me.ButtonResetPassword.Name = "ButtonResetPassword"
         Me.ButtonResetPassword.Size = New System.Drawing.Size(102, 23)
         Me.ButtonResetPassword.TabIndex = 5
@@ -227,6 +157,7 @@ Partial Class UserManagementView
         'ComboBoxUserRole
         '
         Me.ComboBoxUserRole.FormattingEnabled = True
+        Me.ComboBoxUserRole.Items.AddRange(New Object() {"Admin", "Customer", "Normal"})
         Me.ComboBoxUserRole.Location = New System.Drawing.Point(957, 155)
         Me.ComboBoxUserRole.Name = "ComboBoxUserRole"
         Me.ComboBoxUserRole.Size = New System.Drawing.Size(144, 21)
@@ -245,6 +176,7 @@ Partial Class UserManagementView
         'ComboBoxGender
         '
         Me.ComboBoxGender.FormattingEnabled = True
+        Me.ComboBoxGender.Items.AddRange(New Object() {"Male", "Female"})
         Me.ComboBoxGender.Location = New System.Drawing.Point(957, 211)
         Me.ComboBoxGender.Name = "ComboBoxGender"
         Me.ComboBoxGender.Size = New System.Drawing.Size(144, 21)
@@ -273,7 +205,7 @@ Partial Class UserManagementView
         '
         'ButtonEdit
         '
-        Me.ButtonEdit.Location = New System.Drawing.Point(851, 416)
+        Me.ButtonEdit.Location = New System.Drawing.Point(849, 390)
         Me.ButtonEdit.Name = "ButtonEdit"
         Me.ButtonEdit.Size = New System.Drawing.Size(102, 23)
         Me.ButtonEdit.TabIndex = 24
@@ -282,17 +214,17 @@ Partial Class UserManagementView
         '
         'ButtonAdd
         '
-        Me.ButtonAdd.Location = New System.Drawing.Point(957, 387)
+        Me.ButtonAdd.Location = New System.Drawing.Point(957, 361)
         Me.ButtonAdd.Name = "ButtonAdd"
         Me.ButtonAdd.Size = New System.Drawing.Size(102, 23)
         Me.ButtonAdd.TabIndex = 25
         Me.ButtonAdd.Text = "Add"
         Me.ButtonAdd.UseVisualStyleBackColor = True
         '
-        'ButtonCancelEdit
+        'ButtonCancelAddEdit
         '
-        Me.ButtonCancelAddEdit.Location = New System.Drawing.Point(849, 416)
-        Me.ButtonCancelAddEdit.Name = "ButtonCancelEdit"
+        Me.ButtonCancelAddEdit.Location = New System.Drawing.Point(849, 390)
+        Me.ButtonCancelAddEdit.Name = "ButtonCancelAddEdit"
         Me.ButtonCancelAddEdit.Size = New System.Drawing.Size(102, 23)
         Me.ButtonCancelAddEdit.TabIndex = 26
         Me.ButtonCancelAddEdit.Text = "Cancel"
@@ -382,11 +314,91 @@ Partial Class UserManagementView
         Me.ExtendedGroupBoxAllUsers.Size = New System.Drawing.Size(778, 463)
         Me.ExtendedGroupBoxAllUsers.TabIndex = 0
         '
+        'ButtonUnlockUser
+        '
+        Me.ButtonUnlockUser.Location = New System.Drawing.Point(906, 419)
+        Me.ButtonUnlockUser.Name = "ButtonUnlockUser"
+        Me.ButtonUnlockUser.Size = New System.Drawing.Size(102, 23)
+        Me.ButtonUnlockUser.TabIndex = 27
+        Me.ButtonUnlockUser.Text = "Unlock User"
+        Me.ButtonUnlockUser.UseVisualStyleBackColor = True
+        '
+        'Id
+        '
+        Me.Id.DataPropertyName = "Id"
+        Me.Id.HeaderText = "Id"
+        Me.Id.Name = "Id"
+        Me.Id.ReadOnly = True
+        '
+        'Fullname
+        '
+        Me.Fullname.DataPropertyName = "Fullname"
+        Me.Fullname.HeaderText = "Fullname"
+        Me.Fullname.Name = "Fullname"
+        Me.Fullname.ReadOnly = True
+        '
+        'Username
+        '
+        Me.Username.DataPropertyName = "Username"
+        Me.Username.HeaderText = "Username"
+        Me.Username.Name = "Username"
+        Me.Username.ReadOnly = True
+        '
+        'Role
+        '
+        Me.Role.DataPropertyName = "Role"
+        Me.Role.HeaderText = "User Role"
+        Me.Role.Name = "Role"
+        Me.Role.ReadOnly = True
+        '
+        'NidPp
+        '
+        Me.NidPp.DataPropertyName = "NidPp"
+        Me.NidPp.HeaderText = "National Id / Passport"
+        Me.NidPp.Name = "NidPp"
+        Me.NidPp.ReadOnly = True
+        '
+        'Birthdate
+        '
+        Me.Birthdate.DataPropertyName = "Birthdate"
+        Me.Birthdate.HeaderText = "Birthdate"
+        Me.Birthdate.Name = "Birthdate"
+        Me.Birthdate.ReadOnly = True
+        '
+        'Gender
+        '
+        Me.Gender.DataPropertyName = "Gender"
+        Me.Gender.HeaderText = "Gender"
+        Me.Gender.Name = "Gender"
+        Me.Gender.ReadOnly = True
+        '
+        'PhoneNumber
+        '
+        Me.PhoneNumber.DataPropertyName = "PhoneNumber"
+        Me.PhoneNumber.HeaderText = "Phone Number"
+        Me.PhoneNumber.Name = "PhoneNumber"
+        Me.PhoneNumber.ReadOnly = True
+        '
+        'IsActive
+        '
+        Me.IsActive.DataPropertyName = "IsActive"
+        Me.IsActive.HeaderText = "Is Active"
+        Me.IsActive.Name = "IsActive"
+        Me.IsActive.ReadOnly = True
+        '
+        'IsUnLocked
+        '
+        Me.IsUnLocked.DataPropertyName = "IsUnLocked"
+        Me.IsUnLocked.HeaderText = "Is Unlocked"
+        Me.IsUnLocked.Name = "IsUnLocked"
+        Me.IsUnLocked.ReadOnly = True
+        '
         'UserManagementView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1113, 469)
+        Me.Controls.Add(Me.ButtonUnlockUser)
         Me.Controls.Add(Me.ButtonCancelAddEdit)
         Me.Controls.Add(Me.ButtonAdd)
         Me.Controls.Add(Me.ButtonEdit)
@@ -445,6 +457,10 @@ Partial Class UserManagementView
     Friend WithEvents CheckBoxIsActive As CheckBox
     Friend WithEvents CheckBoxIsUnocked As CheckBox
     Friend WithEvents ExtendedTextBoxUsername As ExtendedTextBox
+    Friend WithEvents ButtonEdit As Button
+    Friend WithEvents ButtonAdd As Button
+    Friend WithEvents ButtonCancelAddEdit As Button
+    Friend WithEvents ButtonUnlockUser As Button
     Friend WithEvents Id As DataGridViewTextBoxColumn
     Friend WithEvents Fullname As DataGridViewTextBoxColumn
     Friend WithEvents Username As DataGridViewTextBoxColumn
@@ -455,7 +471,4 @@ Partial Class UserManagementView
     Friend WithEvents PhoneNumber As DataGridViewTextBoxColumn
     Friend WithEvents IsActive As DataGridViewCheckBoxColumn
     Friend WithEvents IsUnLocked As DataGridViewCheckBoxColumn
-    Friend WithEvents ButtonEdit As Button
-    Friend WithEvents ButtonAdd As Button
-    Friend WithEvents ButtonCancelAddEdit As Button
 End Class

@@ -17,51 +17,9 @@ Public Class UserManagementViewModel
     Private _isEditMode As Boolean
     Private _falseOnEditMode As Boolean
     Private _isCancelEditEnabledVisible As Boolean
+    Private _isUnlockUserAvailable As Boolean
     Private _LastSelectedUser As UserManagementModel
-
-    Friend Sub Save()
-        Select Case True
-            Case Me.IsEditMode And Me.IsAddMode
-                'add new user
-                AddNewUser()
-            Case Me.IsEditMode
-                'update user
-                UpdateUser()
-            Case Else
-
-        End Select
-
-    End Sub
-
-    Private Sub AddNewUser()
-        'save new user
-        'disable add mode
-        _isAddMode = False
-        EnableEditMode(False)
-        Throw New NotImplementedException()
-    End Sub
-
-    Private Sub UpdateUser()
-        'Construct updated user
-        Dim updatedUser = New UserManagementModel() With {
-            .Id = _LastSelectedUser.Id,
-            .NidPp = SelectedNidPp,
-            .Username = SelectedUsername,
-            .Fullname = SelectedFullname,
-            .PhoneNumber = SelectedPhoneNumber,
-            .Role = SelectedRole,
-            .Birthdate = SelectedBirthdate,
-            .Gender = SelectedGender,
-            .IsActive = SelectedIsActive,
-            .IsUnlocked = SelectedIsUnlocked}
-        'check for changes
-        Dim IsUpdateRequired = Not updatedUser.Equals(_LastSelectedUser)
-        'update details
-        'cancel edit mode
-        EnableEditMode(False)
-        'load data from datebase
-    End Sub
-
+    Private _userDataAccess As UserDataAccess = New UserDataAccess
 
 #End Region
 
@@ -69,42 +27,22 @@ Public Class UserManagementViewModel
     Public Sub New()
         AllUsers = New BindingList(Of UserManagementModel)
         AllRoles = New List(Of String)
+        AllGenders = New List(Of String)
         'initialize with edit mode disabled
         IsEditMode = False
-        InitializeDemoData()
+        'InitializeDemoData()
+        AddGendersAndRolesDatasource()
+        LoadAllUsers()
     End Sub
 
-    Private Sub InitializeDemoData()
-        'demo user 1
-        Dim user1 = New UserManagementModel() With {
-            .Id = 1,
-            .NidPp = "A2626525",
-            .Username = "minahucyn",
-            .Fullname = "moomina hussain",
-            .Birthdate = New DateTime(1998, 2, 2),
-            .PhoneNumber = "765-7111",
-            .Role = "Admin",
-            .Gender = "Female",
-            .IsActive = False,
-            .IsUnlocked = True}
-        'demo user 2
-        Dim user2 = New UserManagementModel() With {
-            .Id = 2,
-            .NidPp = "A856585",
-            .Username = "someoneelsea",
-            .Fullname = "Someone Elsea",
-            .Birthdate = New DateTime(1989, 9, 10),
-            .PhoneNumber = "986-5811",
-            .Role = "Normal",
-            .Gender = "Male",
-            .IsActive = True,
-            .IsUnlocked = True}
-
-        'add demo user1 and demo user2 to datasource
-        AllUsers.Add(user1)
-        AllUsers.Add(user2)
-
+    Private Sub AddGendersAndRolesDatasource()
+        AllRoles.Add("Admin")
+        AllRoles.Add("Customer")
+        AllRoles.Add("Normal")
+        AllGenders.Add("Male")
+        AllGenders.Add("Female")
     End Sub
+
 #End Region
 
 #Region "Public Properties"
@@ -200,6 +138,7 @@ Public Class UserManagementViewModel
         Set(ByVal value As Boolean)
             If value = _selectedIsUnlocked Then Return
             _selectedIsUnlocked = value
+            IsUnlockUserAvailable = Not _selectedIsUnlocked
             OnPropertyChanged()
         End Set
     End Property
@@ -236,6 +175,7 @@ Public Class UserManagementViewModel
         End Set
     End Property
     Private _isAddMode As Boolean
+
     Public Property IsAddMode() As Boolean
         Get
             Return _isAddMode
@@ -253,11 +193,45 @@ Public Class UserManagementViewModel
             End If
         End Set
     End Property
+    Public Property IsUnlockUserAvailable As Boolean
+        Get
+            Return _isUnlockUserAvailable
+        End Get
+        Set
+            _isUnlockUserAvailable = Value
+            OnPropertyChanged()
+        End Set
+    End Property
 #End Region
 
 #End Region
 
 #Region "Public Methods"
+    ''' <summary>
+    ''' reset passed-in username's users password to default
+    ''' </summary>
+    Friend Sub ResetSelectedUserPassword(username As String)
+        Try
+            Dim noRowsEffected = _userDataAccess.ResetPassword(username)
+            If noRowsEffected > 0 Then MsgBox("Password reset to default, successful.")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Friend Sub Save()
+        Select Case True
+            Case Me.IsEditMode And Me.IsAddMode
+                'add new user
+                AddNewUser()
+            Case Me.IsEditMode
+                'update user
+                UpdateUser()
+            Case Else
+
+        End Select
+
+    End Sub
+
     Friend Sub EnableAddMode()
         'set add mode enabled flag
         IsAddMode = True
@@ -289,6 +263,62 @@ Public Class UserManagementViewModel
         'assign selected user details to selected user properties
         ReAssignSelectedUserDetails(selectedUser)
     End Sub
+
+#End Region
+
+#Region "Private Methods"
+    ''' <summary>
+    ''' Load all users from database
+    ''' </summary>
+    Private Sub LoadAllUsers()
+        Try
+            Dim allUsers = _userDataAccess.ReadAllUsers()
+            AddQueriedListToDatasource(allUsers)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub AddQueriedListToDatasource(allUsers As List(Of UserManagementDatabaseModel))
+        'clear datasource
+        Me.AllUsers.Clear()
+        'all newly fetched users to datasource
+        For Each user In allUsers
+            Me.AllUsers.Add(UserManagementModel.GetUserManagementModel(user))
+        Next
+    End Sub
+
+    Private Sub InitializeDemoData()
+        'demo user 1
+        Dim user1 = New UserManagementModel() With {
+            .Id = 1,
+            .NidPp = "A2626525",
+            .Username = "minahucyn",
+            .Fullname = "moomina hussain",
+            .Birthdate = New DateTime(1998, 2, 2),
+            .PhoneNumber = "765-7111",
+            .Role = "Admin",
+            .Gender = "Female",
+            .IsActive = False,
+            .IsUnlocked = True}
+        'demo user 2
+        Dim user2 = New UserManagementModel() With {
+            .Id = 2,
+            .NidPp = "A856585",
+            .Username = "someoneelsea",
+            .Fullname = "Someone Elsea",
+            .Birthdate = New DateTime(1989, 9, 10),
+            .PhoneNumber = "986-5811",
+            .Role = "Normal",
+            .Gender = "Male",
+            .IsActive = True,
+            .IsUnlocked = True}
+
+        'add demo user1 and demo user2 to datasource
+        AllUsers.Add(user1)
+        AllUsers.Add(user2)
+
+    End Sub
     ''' <summary>
     ''' assigns the passed in user details to selected user properties
     ''' </summary>
@@ -318,6 +348,53 @@ Public Class UserManagementViewModel
         SelectedGender = String.Empty
         SelectedIsActive = False
         SelectedIsUnlocked = False
+    End Sub
+    Private Sub AddNewUser()
+        'step: save new user
+        'instantiate insert model
+        Dim userInsert As New UserInsertDatabaseModel() With {
+            .Fullname = SelectedFullname,
+            .NidPp = SelectedNidPp,
+            .Birthdate = SelectedBirthdate,
+            .Gender = SelectedGender,
+            .PhoneNumber = SelectedPhoneNumber,
+            .RoleId = SelectedRole,
+            .Username = SelectedUsername}
+
+        Try
+            'call create user function
+            Me._userDataAccess.CreateUser(userInsert)
+            'load all users
+            LoadAllUsers()
+        Catch ex As Exception
+            'if any exceptions, show the error message
+            MsgBox(ex.Message)
+        End Try
+
+        'disable add mode
+        _isAddMode = False
+        EnableEditMode(False)
+    End Sub
+
+    Private Sub UpdateUser()
+        'Construct updated user
+        Dim updatedUser = New UserManagementModel() With {
+            .Id = _LastSelectedUser.Id,
+            .NidPp = SelectedNidPp,
+            .Username = SelectedUsername,
+            .Fullname = SelectedFullname,
+            .PhoneNumber = SelectedPhoneNumber,
+            .Role = SelectedRole,
+            .Birthdate = SelectedBirthdate,
+            .Gender = SelectedGender,
+            .IsActive = SelectedIsActive,
+            .IsUnlocked = SelectedIsUnlocked}
+        'check for changes
+        Dim IsUpdateRequired = Not updatedUser.Equals(_LastSelectedUser)
+        'update details
+        'cancel edit mode
+        EnableEditMode(False)
+        'load data from datebase
     End Sub
 #End Region
 

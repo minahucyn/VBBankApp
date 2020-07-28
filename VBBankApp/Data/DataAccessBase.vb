@@ -78,7 +78,7 @@ Public Class DataAccessBase
             Dim reader As SqlDataReader = _dataAdapter.SelectCommand.ExecuteReader()
             While reader.Read()
                 'read the results into a generic instance
-                For index = 1 To propertyInfo.Length - 1
+                For index = 0 To propertyInfo.Length - 1
                     propertyInfo(index).SetValue(output, reader(index))
                 Next
                 'add the instance to generic list

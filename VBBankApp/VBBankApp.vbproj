@@ -86,6 +86,7 @@
     <Compile Include="Data\AuthDataAccess.vb" />
     <Compile Include="Data\ChangePasswordDataAccess.vb" />
     <Compile Include="Data\DataAccessBase.vb" />
+    <Compile Include="Data\UserDataAccess.vb" />
     <Compile Include="Extensions\BindableToolStripStatusLabel.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -109,6 +110,8 @@
     <Compile Include="Models\CreditModel.vb" />
     <Compile Include="Models\DatabaseModels\AuthDetailsDatabaseModel.vb" />
     <Compile Include="Models\DatabaseModels\GoodHashDatabaseModel.vb" />
+    <Compile Include="Models\DatabaseModels\UserInsertDatabaseModel.vb" />
+    <Compile Include="Models\DatabaseModels\UserManagementDatabaseModel.vb" />
     <Compile Include="Models\MainViewModel.vb" />
     <Compile Include="Models\MenuModel.vb" />
     <Compile Include="Models\RepaymentModel.vb" />

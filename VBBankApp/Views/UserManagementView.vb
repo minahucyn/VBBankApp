@@ -15,7 +15,22 @@ Public Class UserManagementView
         AddHandler ButtonCancelAddEdit.Click, AddressOf OnCancelAddEditButtonClick
         AddHandler ButtonSave.Click, AddressOf OnSaveClicked
         AddHandler ButtonAdd.Click, AddressOf EnabledAddMode
+        AddHandler ButtonResetPassword.Click, AddressOf OnResetPasswordClick
 
+    End Sub
+
+    Private Sub OnResetPasswordClick(sender As Object, e As EventArgs)
+        'check the username for null
+        If String.IsNullOrEmpty(_viewModel.SelectedUsername) Then
+            MsgBox("A user needs to be selected to change the password. Please select the user and try again.")
+            Return
+        End If
+        'confirm that the logged in user wants to reset the password
+        If MessageBox.Show($"Are you sure that you want to reset the password for user: {_viewModel.SelectedUsername}?",
+                           "Reset Password Confirmation", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            'call view model to reset the password
+            _viewModel.ResetSelectedUserPassword(_viewModel.SelectedUsername)
+        End If
     End Sub
 
     Private Sub EnabledAddMode(sender As Object, e As EventArgs)
@@ -77,7 +92,7 @@ Public Class UserManagementView
         'bind All gender and selected gender
         Me.ComboBoxGender.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.SelectedGender)))
         Me.ComboBoxGender.DataBindings.Add(New Binding("Enabled", _viewModel, NameOf(_viewModel.IsEditMode)))
-        Me.ComboBoxGender.DataSource = _viewModel.AllRoles
+        Me.ComboBoxGender.DataSource = _viewModel.AllGenders
         'bind Is Active
         Me.CheckBoxIsActive.DataBindings.Add(New Binding("Checked", _viewModel, NameOf(_viewModel.SelectedIsActive)))
         Me.CheckBoxIsActive.DataBindings.Add(New Binding("Enabled", _viewModel, NameOf(_viewModel.IsEditMode)))
@@ -97,6 +112,8 @@ Public Class UserManagementView
         ButtonAdd.DataBindings.Add(New Binding("Visible", _viewModel, NameOf(_viewModel.FalseOnEditMode)))
         'reset Password
         ButtonResetPassword.DataBindings.Add(New Binding("Visible", _viewModel, NameOf(_viewModel.FalseOnEditMode)))
+        'button unlock user
+        Me.ButtonUnlockUser.DataBindings.Add(New Binding("Visible", _viewModel, NameOf(_viewModel.IsUnlockUserAvailable)))
 
 
     End Sub
