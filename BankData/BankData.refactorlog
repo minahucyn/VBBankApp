@@ -7,4 +7,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Fullname" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="65bd0fe4-9805-4f29-8d45-04dba2c749aa" ChangeDateTime="07/28/2020 16:01:27">
+    <Property Name="ElementName" Value="[dbo].[Credit Configuration].[Decimal]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Credit Configuration]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Amount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6a362d01-6ab4-4e50-9b25-e81d23c7a7f4" ChangeDateTime="07/28/2020 16:02:52">
+    <Property Name="ElementName" Value="[dbo].[Credits].[CreditConfigid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Credits]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreditConfigId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="971bc01a-cee6-4a7f-b71c-8fa27bdab736" ChangeDateTime="07/28/2020 16:24:38">
+    <Property Name="ElementName" Value="[dbo].[Securities].[CustomerCreditsId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Securities]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreditsId" />
+  </Operation>
 </Operations>
