@@ -2,19 +2,22 @@
 Imports System.Reflection
 Imports System.Runtime.CompilerServices
 Imports System.Text
+Imports VBBankApp
 
 Public Class CreditManagementViewModel
     Inherits ViewModelBase
 
 #Region "Private Properties"
+    Private _userDataAccess As UserDataAccess = New UserDataAccess
     Private _selectedTitle As String
     Private _nidPp As String
     Private _fullname As String
-    Private _birthdate As Date
-    Private _age As Integer
+    Private _birthdate As Date?
+    Private _Username As String
     Private _gender As String
     Private _phoneNumber As String
     Private _selectedCreditId As Integer
+    Private _searchTerm As String
     Private _selectedCreditIdForSecuritiesSearch As Integer
 
 #End Region
@@ -39,6 +42,8 @@ Public Class CreditManagementViewModel
 
     End Sub
 
+
+
 #End Region
 
 #Region "Public Properties"
@@ -48,6 +53,15 @@ Public Class CreditManagementViewModel
     Public Property AllRepaymentsForCustomer As BindingList(Of RepaymentModel)
     Public Property RepaymentsForSelectedCredit As BindingList(Of RepaymentModel)
 
+    Public Property SearchTerm() As String
+        Get
+            Return _searchTerm
+        End Get
+        Set(ByVal value As String)
+            _searchTerm = value
+            OnPropertyChanged()
+        End Set
+    End Property
     Public Property NidPp() As String
         Get
             Return _nidPp
@@ -76,11 +90,11 @@ Public Class CreditManagementViewModel
             OnPropertyChanged()
         End Set
     End Property
-    Public Property Birthdate() As Date
+    Public Property Birthdate() As Date?
         Get
             Return _birthdate
         End Get
-        Set(ByVal value As Date)
+        Set(ByVal value As Date?)
             'if new value is equal to stored value...
             If value = _birthdate Then
                 'ingore
@@ -90,21 +104,20 @@ Public Class CreditManagementViewModel
             OnPropertyChanged()
         End Set
     End Property
-    Public Property Age() As Integer
+    Public Property Username() As String
         Get
-            Return _age
+            Return _Username
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             'if new value is equal to stored value...
-            If value = _age Then
+            If value = _Username Then
                 'ingore
                 Return
             End If
-            _age = value
+            _Username = value
             OnPropertyChanged()
         End Set
     End Property
-
     Public Property Gender() As String
         Get
             Return _gender
@@ -142,24 +155,18 @@ Public Class CreditManagementViewModel
         Dim credit1 = New CreditModel() With {
             .Id = 1,
             .Description = "Lui Loan",
-            .CreditAmount = 100000.0,
-            .Outstanding = 100000.0,
-            .InterestOutstanding = 187878.0,
-            .PrincipleOutstanding = 100000.0,
-            .PrincipleDue = 1000.0,
-            .InterestDue = 500.0,
-            .TotalDue = 1500.0
+            .PrincipleAmount = 100000.0,
+            .InterestAmount = 500.0,
+            .LastUpdated = New DateTime(2020, 5, 25),
+            .TimeStamp = New DateTime(2020, 5, 24)
         }
         Dim credit2 = New CreditModel() With {
             .Id = 2,
             .Description = "Not So Lui Loan",
-            .CreditAmount = 100000000.0,
-            .Outstanding = 100000000.0,
-            .InterestOutstanding = 18787834656.0,
-            .PrincipleOutstanding = 100000000.0,
-            .PrincipleDue = 1000.0,
-            .InterestDue = 500.0,
-            .TotalDue = 1500.0
+            .PrincipleAmount = 100000000.0,
+            .InterestAmount = 50000.0,
+            .LastUpdated = New DateTime(2019, 12, 25),
+            .TimeStamp = New DateTime(2019, 12, 24)
         }
         'add the demo credits to the datasource for UI, Binding List
         CustomerCredits.Add(credit1)
@@ -295,6 +302,45 @@ Public Class CreditManagementViewModel
 #End Region
 
 #Region "Public Methods"
+
+    ''' <summary>
+    ''' Calls the datalayer with national Id or passport for searching
+    ''' </summary>
+    Friend Sub SearchByNidPp()
+        Try
+            'if there is nothing to search with...
+            If String.IsNullOrEmpty(SearchTerm) Then
+                'ignore
+                Return
+            End If
+            'search with search term
+            Dim results = _userDataAccess.SearchUserByNidPp(SearchTerm)
+            'if no results
+            If results Is Nothing Then
+                MsgBox($"No search result found for: {SearchTerm}")
+                Return
+            End If
+            'otherwise, display on UI
+            DisplaSearchResultOnUI(results)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        SearchTerm = ""
+    End Sub
+
+    ''' <summary>
+    ''' Displays the search results on the UI by assiging them to the databound properties
+    ''' </summary>
+    ''' <param name="results">The search result model</param>
+    Private Sub DisplaSearchResultOnUI(results As CustomerSearchDatabaseModel)
+        Me.NidPp = results.NidPp
+        Me.Fullname = results.Fullname
+        Me.Gender = results.Gender
+        Me.Birthdate = results.Birthdate
+        Me.Username = results.Username
+        Me.PhoneNumber = results.PhoneNumber
+    End Sub
+
     Public Sub OnCreditRowSelected(sender As Object, e As Integer)
         'If the selected credit id is already selected...
         If _selectedCreditId = e Then

@@ -91,4 +91,25 @@ Public Class UserDataAccess
             Throw
         End Try
     End Function
+
+    ''' <summary>
+    ''' Searches user
+    ''' </summary>
+    ''' <param name="nidPp"></param>
+    ''' <returns></returns>
+    Public Function SearchUserByNidPp(nidPp As String) As CustomerSearchDatabaseModel
+        'configure stored procedure and parameters
+        Dim storedProcedure = "[dbo].[usp_ReadCustomerByNidPp]"
+        Dim parameters = New List(Of SqlParameter) From {
+            New SqlParameter("NidPp", nidPp)
+        }
+
+        Try
+            'call method to execute insert
+            Return Read(Of CustomerSearchDatabaseModel)(storedProcedure, parameters).FirstOrDefault
+        Catch ex As Exception
+            'throw any exceptions. Will be handled down the line.
+            Throw
+        End Try
+    End Function
 End Class
