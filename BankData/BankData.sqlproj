@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{87eb059c-0fc1-4b01-af1b-9abc4c4adee2}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -71,6 +71,7 @@
     <Build Include="dbo\Tables\RoleSpecificMenus.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateUserHash.sql" />
     <Build Include="dbo\StoredProcedures\usp_ReadGoodHash.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ReadAuthDetails.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BankData.refactorlog" />
