@@ -10,20 +10,28 @@
 	@IsActive BIT
 AS
 BEGIN
-	--update dbo.Users
-	UPDATE [dbo].[Users]
-	SET [Fullname] = @Fullname,
-		[NidPp] = @NidPp,
-		[PhoneNumber] = @PhoneNumber,
-		[Birthdate] = @Birthdate,
-		[Gender] = @Gender
-	WHERE [Id]  = @UserId;
+SET XACT_ABORT ON;
+	BEGIN TRY
+		BEGIN TRANSACTION;
+			--update dbo.Users
+			UPDATE [dbo].[Users]
+			SET [Fullname] = @Fullname,
+				[NidPp] = @NidPp,
+				[PhoneNumber] = @PhoneNumber,
+				[Birthdate] = @Birthdate,
+				[Gender] = @Gender
+			WHERE [Id]  = @UserId;
 
-	--update dbo.UserDetails
-	UPDATE [dbo].[UserDetails]
-	SET [RolesId] = @RoleId,
-		[IsActive] = @IsActive,
-		[Username] = @Username
-	WHERE [UsersId] = @UserId;
-		
+			--update dbo.UserDetails
+			UPDATE [dbo].[UserDetails]
+			SET [RolesId] = @RoleId,
+				[IsActive] = @IsActive,
+				[Username] = @Username
+			WHERE [UsersId] = @UserId;
+		COMMIT TRANSACTION;
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION;
+		THROW;
+	END CATCH
 END
