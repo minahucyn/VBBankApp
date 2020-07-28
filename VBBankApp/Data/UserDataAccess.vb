@@ -6,7 +6,6 @@ Public Class UserDataAccess
     Public Function ReadAllUsers() As List(Of UserManagementDatabaseModel)
         'configure stored procedure
         Dim storedProcedure = "[dbo].[usp_ReadAllUsers]"
-
         Try
             'read and return
             Return Read(Of UserManagementDatabaseModel)(storedProcedure)
@@ -40,6 +39,22 @@ Public Class UserDataAccess
     Public Function ResetPassword(username As String) As Integer
         'configure stored procedure and parameters
         Dim storedProcedure = "[dbo].[usp_ResetUserPassword]"
+        Dim parameters = New List(Of SqlParameter) From {
+            New SqlParameter("Username", username)
+        }
+
+        Try
+            'call method to execute insert
+            Return Update(storedProcedure, parameters)
+        Catch ex As Exception
+            'throw any exceptions. Will be handled down the line.
+            Throw
+        End Try
+    End Function
+
+    Public Function UnlockUser(username As String) As Integer
+        'configure stored procedure and parameters
+        Dim storedProcedure = "[dbo].[usp_UpdateUnlockUser]"
         Dim parameters = New List(Of SqlParameter) From {
             New SqlParameter("Username", username)
         }

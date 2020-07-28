@@ -28,19 +28,14 @@ Public Class UserManagementViewModel
         AllUsers = New BindingList(Of UserManagementModel)
         AllRoles = New List(Of String)
         AllGenders = New List(Of String)
+        'handle events 
+        AddHandler Me.PropertyChanged, AddressOf LogicOnMyPropertiesChanges
         'initialize with edit mode disabled
         IsEditMode = False
+        CheckBoxIsActiveIsVisible = True
         'InitializeDemoData()
         AddGendersAndRolesDatasource()
         LoadAllUsers()
-    End Sub
-
-    Private Sub AddGendersAndRolesDatasource()
-        AllRoles.Add("Admin")
-        AllRoles.Add("Customer")
-        AllRoles.Add("Normal")
-        AllGenders.Add("Male")
-        AllGenders.Add("Female")
     End Sub
 
 #End Region
@@ -138,7 +133,6 @@ Public Class UserManagementViewModel
         Set(ByVal value As Boolean)
             If value = _selectedIsUnlocked Then Return
             _selectedIsUnlocked = value
-            IsUnlockUserAvailable = Not _selectedIsUnlocked
             OnPropertyChanged()
         End Set
     End Property
@@ -193,12 +187,33 @@ Public Class UserManagementViewModel
             End If
         End Set
     End Property
-    Public Property IsUnlockUserAvailable As Boolean
+    Public Property IsButtonUnlockUserVisible As Boolean
         Get
             Return _isUnlockUserAvailable
         End Get
         Set
             _isUnlockUserAvailable = Value
+            OnPropertyChanged()
+        End Set
+    End Property
+
+    Private _checkBoxIsActiveIsVisible As Boolean
+    Public Property CheckBoxIsActiveIsVisible() As Boolean
+        Get
+            Return _checkBoxIsActiveIsVisible
+        End Get
+        Set(ByVal value As Boolean)
+            _checkBoxIsActiveIsVisible = value
+            OnPropertyChanged()
+        End Set
+    End Property
+    Private _checkBoxIsUnlockedIsVisible As Boolean
+    Public Property CheckBoxIsUnlockedIsVisible() As Boolean
+        Get
+            Return _checkBoxIsUnlockedIsVisible
+        End Get
+        Set(ByVal value As Boolean)
+            _checkBoxIsUnlockedIsVisible = value
             OnPropertyChanged()
         End Set
     End Property
@@ -267,6 +282,77 @@ Public Class UserManagementViewModel
 #End Region
 
 #Region "Private Methods"
+    ''' <summary>
+    ''' Adds Roles and genders
+    ''' </summary>
+    Private Sub AddGendersAndRolesDatasource()
+        AllRoles.Add("Admin")
+        AllRoles.Add("Customer")
+        AllRoles.Add("Normal")
+        AllGenders.Add("Male")
+        AllGenders.Add("Female")
+    End Sub
+    ''' <summary>
+    ''' Unlocks a locked user
+    ''' </summary>
+    Friend Sub UnlockUser(username As String)
+        Try
+            Dim NoRowsEffected = _userDataAccess.UnlockUser(username)
+            If NoRowsEffected > 0 Then
+                LoadAllUsers()
+                MsgBox("Successfully unlocked the user!")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Handles some of the logic on changes of my properties
+    ''' </summary>
+    Private Sub LogicOnMyPropertiesChanges(sender As Object, e As PropertyChangedEventArgs)
+
+        If e.PropertyName = NameOf(IsEditMode) Then
+            'LOGIC: CheckBoxIsActive for Visiblity
+            'if Add mode is active, checkbox should not be visible
+            If IsAddMode Then
+                CheckBoxIsActiveIsVisible = False
+            Else
+                CheckBoxIsActiveIsVisible = True
+            End If
+
+            'LOGIC: CheckBoxIsUnlockedIsVisible for Visiblity
+            'if a user us not locked, Do not allow user to lock another user while in edit mode. 
+            'Hide CheckBoxIsUnlocked, user gets locked only when password is mismatched 3 times
+            Select Case True
+                Case IsAddMode And IsEditMode
+                    CheckBoxIsUnlockedIsVisible = False
+                Case Not IsAddMode And IsEditMode
+                    CheckBoxIsUnlockedIsVisible = False
+                Case IsAddMode And Not IsEditMode
+                    CheckBoxIsUnlockedIsVisible = False
+                Case Not IsAddMode And Not IsEditMode
+                    CheckBoxIsUnlockedIsVisible = True
+            End Select
+
+        End If
+
+        If e.PropertyName = NameOf(SelectedIsUnlocked) Or e.PropertyName = NameOf(IsEditMode) Then
+
+            'LOGIC: Visibility of Button UnlockUser
+            Select Case True
+                Case Not IsAddMode And Not IsEditMode And Not SelectedIsUnlocked
+                    IsButtonUnlockUserVisible = True
+                Case Not IsAddMode And Not IsEditMode And SelectedIsUnlocked
+                    IsButtonUnlockUserVisible = False
+                Case Else
+                    IsButtonUnlockUserVisible = False
+            End Select
+
+        End If
+
+
+    End Sub
     ''' <summary>
     ''' Load all users from database
     ''' </summary>
