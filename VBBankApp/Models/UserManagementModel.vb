@@ -34,6 +34,7 @@ Public Class UserManagementModel
             Case False
                 Return "Male"
         End Select
+        Throw New Exception("ConvertBoolToGender")
     End Function
 
     Public Overrides Function Equals(obj As Object) As Boolean

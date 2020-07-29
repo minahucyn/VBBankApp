@@ -53,7 +53,7 @@
             Case value.Trim().ToLower() = EGender.female.ToString
                 Return EGender.female
             Case Else
-
+                Return 0
         End Select
     End Function
     Private Function GetRolesId(value As String) As String
@@ -65,7 +65,7 @@
             Case value.Trim().ToLower() = ERoles.normal.ToString
                 Return ERoles.normal
             Case Else
-
+                Throw New Exception("GetRolesId")
         End Select
     End Function
     Private Enum EGender

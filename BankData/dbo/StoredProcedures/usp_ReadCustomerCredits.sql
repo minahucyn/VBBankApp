@@ -11,4 +11,5 @@ BEGIN
 	FROM [dbo].[Credits] [c]
 	INNER JOIN [dbo].[CreditConfiguration] [cc] 
 						ON [c].[CreditConfigId] = [cc].[Id]
+	WHERE [UserDetailsId] = @UserId
 END

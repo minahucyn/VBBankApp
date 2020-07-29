@@ -112,4 +112,23 @@ Public Class UserDataAccess
             Throw
         End Try
     End Function
+
+    ''' <summary>
+    ''' This function fetches all details for customer search combobox datasource
+    ''' </summary>
+    ''' <returns>List(Of CustomerSearchDetail)</returns>
+    Public Function ReadAllCustomerSearchDatasourceData() As List(Of CustomerSearchDetail)
+        'configure stored procedure and parameters
+        Dim storedProcedure = "[dbo].[usp_ReadAllCustomerSearchDatasourceFields]"
+
+        Try
+            'call method to execute insert
+            Return Read(Of CustomerSearchDetail)(storedProcedure)
+        Catch ex As Exception
+            'throw any exceptions. Will be handled down the line.
+            Throw
+        End Try
+    End Function
+
+
 End Class

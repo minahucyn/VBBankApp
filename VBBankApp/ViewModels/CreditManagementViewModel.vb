@@ -8,7 +8,10 @@ Public Class CreditManagementViewModel
     Inherits ViewModelBase
 
 #Region "Private Properties"
-    Private _userDataAccess As UserDataAccess = New UserDataAccess
+    Private ReadOnly _userDataAccess As UserDataAccess = New UserDataAccess
+    Private ReadOnly _securitiesDataAccess As SecuritiesDataAccess = New SecuritiesDataAccess
+    Private ReadOnly _repaymentsDataAccess As RepaymentsDataAccess = New RepaymentsDataAccess
+
     Private _creditDetailsDataAccess As CreditDataAccess = New CreditDataAccess
     Private _selectedTitle As String
     Private _nidPp As String
@@ -20,6 +23,10 @@ Public Class CreditManagementViewModel
     Private _selectedCreditId As Integer
     Private _searchTerm As String
     Private _selectedCreditIdForSecuritiesSearch As Integer
+    Private _newCreditPrincipleAmount As Decimal
+    Private _newCreditInterestAmount As Decimal
+    Private _selectedNewCredit As String
+
 
 #End Region
 
@@ -29,21 +36,67 @@ Public Class CreditManagementViewModel
 
 #Region "Default Constructor"
     Public Sub New()
+        SearchTerm = "Search Customer (Nid / Pp)"
+
         'Initialize lists
         CustomerCredits = New BindingList(Of CreditModel)
         AllRepaymentsForCustomer = New BindingList(Of RepaymentModel)
         AllCreditSecuritiesForCustomer = New List(Of SecurityModel)
         SecuritiesForSelectedCredit = New BindingList(Of SecurityModel)
         RepaymentsForSelectedCredit = New BindingList(Of RepaymentModel)
+        AllCreditConfig = New BindingList(Of CreditConfigModel)
+        CustomerSearchComboDatasource = New BindingList(Of CustomerSearchDetail)
         'InitializeDemoData()
 
         'Initialize internal variables
         _selectedCreditId = -1
         _selectedCreditIdForSecuritiesSearch = -1
 
+        LoadStartupData()
     End Sub
 
+    Private Sub LoadStartupData()
+        'load data for customer search combobox datasource
+        LoadCustomerSearchComboBoxDatasourceData()
+        'load all credit configuration
+        LoadAllCreditConfig()
+    End Sub
 
+    Private Sub LoadCustomerSearchComboBoxDatasourceData()
+        'clear the datasource data
+        CustomerSearchComboDatasource.Clear()
+        Try
+            'call the datalayer to get the data
+            Dim output = _userDataAccess.ReadAllCustomerSearchDatasourceData()
+            'null check
+            If output Is Nothing Then Return
+            'Add to the datasource
+            For Each item In output
+                CustomerSearchComboDatasource.Add(item)
+            Next
+            MyBase.OnPropertyChanged("CustomerSearchComboDatasource")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub LoadAllCreditConfig()
+        'clear the all credit config list
+        AllCreditConfig.Clear()
+
+        Try
+            'load data by calling to data layer
+            Dim creditConfig = _creditDetailsDataAccess.ReadAllCreditsConfiguration()
+            'null check
+            If creditConfig Is Nothing Then Return
+            'Add the data to the datasource
+            For Each config In creditConfig
+                AllCreditConfig.Add(config)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 
 #End Region
 
@@ -53,6 +106,8 @@ Public Class CreditManagementViewModel
     Public Property SecuritiesForSelectedCredit As BindingList(Of SecurityModel)
     Public Property AllRepaymentsForCustomer As BindingList(Of RepaymentModel)
     Public Property RepaymentsForSelectedCredit As BindingList(Of RepaymentModel)
+    Public Property AllCreditConfig As BindingList(Of CreditConfigModel)
+    Public Property CustomerSearchComboDatasource As BindingList(Of CustomerSearchDetail)
 
     Public Property SearchTerm() As String
         Get
@@ -148,6 +203,30 @@ Public Class CreditManagementViewModel
         End Set
     End Property
 
+    Public Property NewCreditPrincipleAmount() As Decimal
+        Get
+            Return _newCreditPrincipleAmount
+        End Get
+        Set(ByVal value As Decimal)
+            _newCreditPrincipleAmount = value
+        End Set
+    End Property
+    Public Property NewCreditInterestAmount() As Decimal
+        Get
+            Return _newCreditInterestAmount
+        End Get
+        Set(ByVal value As Decimal)
+            _newCreditInterestAmount = value
+        End Set
+    End Property
+    Public Property SelectedNewCredit() As String
+        Get
+            Return _selectedNewCredit
+        End Get
+        Set(ByVal value As String)
+            _selectedNewCredit = value
+        End Set
+    End Property
 #End Region
 
 #Region "Private Methods"
@@ -270,36 +349,6 @@ Public Class CreditManagementViewModel
             RepaymentsForSelectedCredit.Add(repayment)
         Next
     End Sub
-
-    '''' <summary>
-    '''' Adds spaces to pascal case.
-    '''' Source: 
-    '''' </summary>
-    '''' <param name="text">The text to insert spaces</param>
-    '''' <param name="preserveAcronyms">true if no spaces are to be inserted into Acronyms</param>
-    '''' <returns>The text passed in with spaces inserted</returns>
-    'Private Function AddSpacesToSentence(ByVal text As String, ByVal preserveAcronyms As Boolean) As String
-    '    'null check, if so... return null string 
-    '    If String.IsNullOrWhiteSpace(text) Then Return String.Empty
-    '    'instantiate string builder
-    '    Dim newText As StringBuilder = New StringBuilder(text.Length * 2)
-    '    newText.Append(text(0))
-
-    '    For i As Integer = 1 To text.Length - 1
-
-    '        If Char.IsUpper(text(i)) Then
-    '            If (text(i - 1) <> " "c AndAlso Not Char.IsUpper(text(i - 1))) OrElse
-    '                (preserveAcronyms AndAlso Char.IsUpper(text(i - 1)) AndAlso
-    '                i < text.Length - 1 AndAlso Not Char.IsUpper(text(i + 1))) Then
-    '                newText.Append(" "c)
-    '            End If
-    '        End If
-
-    '        newText.Append(text(i))
-    '    Next
-
-    '    Return newText.ToString()
-    'End Function
 #End Region
 
 #Region "Public Methods"
@@ -308,6 +357,14 @@ Public Class CreditManagementViewModel
     ''' Calls the datalayer with national Id or passport for searching
     ''' </summary>
     Friend Sub SearchByNidPp()
+        'Clear all related, Ui bound datasources
+        CustomerCredits.Clear()
+        AllCreditSecuritiesForCustomer.Clear()
+        AllRepaymentsForCustomer.Clear()
+        RepaymentsForSelectedCredit.Clear()
+        SecuritiesForSelectedCredit.Clear()
+        ClearSelectedCustomerDetails()
+
         Try
             'if there is nothing to search with...
             If String.IsNullOrEmpty(SearchTerm) Then
@@ -323,17 +380,54 @@ Public Class CreditManagementViewModel
             End If
             'otherwise, display on UI
             DisplaSearchResultOnUI(results)
-            'Initialize search for credits for loaded customer
+            'Initialize search for credits, securities and repayments for loaded customer
             Dim creditDetails = _creditDetailsDataAccess.ReadAllCustomerCredits(results.UsersId)
-            'Add credit details to datasource
-            AddCustomerCreditDetailsUiDatasource(creditDetails)
-            'Initialize search for credit securities for loaded credits
-            'Initialize search for credit payments for loaded credits
+            Dim securities = _securitiesDataAccess.ReadAllCustomerSecurities(results.UsersId)
+            Dim repayments = _repaymentsDataAccess.ReadAllCustomerRepayments(results.UsersId)
 
+            'Add credit details, securities and repayments to datasource
+            AddSecuritiesToUiDataSource(securities)
+            AddRepaymentDetailsToUiDatasource(repayments)
+            AddCustomerCreditDetailsUiDatasource(creditDetails)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
         SearchTerm = ""
+    End Sub
+
+    Private Sub ClearSelectedCustomerDetails()
+        NidPp = ""
+        Fullname = ""
+        Gender = ""
+        Birthdate = Nothing
+        Username = ""
+        PhoneNumber = ""
+    End Sub
+
+    Private Sub AddRepaymentDetailsToUiDatasource(repayments As List(Of RepaymentModel))
+        'handles no repayments
+        If repayments Is Nothing Then
+            Return
+        End If
+        'clear datasource
+        AllRepaymentsForCustomer.Clear()
+        'add to Ui bound datasource
+        For Each payment In repayments
+            AllRepaymentsForCustomer.Add(payment)
+        Next
+    End Sub
+
+    Private Sub AddSecuritiesToUiDataSource(securities As List(Of SecurityModel))
+        'handle no securities
+        If securities Is Nothing Then
+            Return
+        End If
+        'clear UI bound datasource
+        AllCreditSecuritiesForCustomer.Clear()
+        'add data to datasource
+        For Each sec In securities
+            AllCreditSecuritiesForCustomer.Add(sec)
+        Next
     End Sub
 
     ''' <summary>

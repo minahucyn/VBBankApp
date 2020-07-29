@@ -87,6 +87,10 @@
     <Build Include="dbo\Tables\Repayments.sql" />
     <Build Include="dbo\StoredProcedures\usp_ReadCustomerByNidPp.sql" />
     <Build Include="dbo\StoredProcedures\usp_ReadCustomerCredits.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ReadCustomerRepayments.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ReadCustomerSecurities.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ReadAllCreditConfig.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ReadAllCustomerSearchDatasourceFields.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BankData.refactorlog" />

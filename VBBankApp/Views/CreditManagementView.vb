@@ -1,4 +1,6 @@
-﻿Public Class CreditManagementView
+﻿Imports System.ComponentModel
+
+Public Class CreditManagementView
     Private WithEvents _viewModel As CreditManagementViewModel
     Private _selectedIndex As Integer = -1
 
@@ -18,12 +20,47 @@
         'Subscribe for events
 
         AddHandler DataGridViewCustomerCredits.RowEnter, AddressOf OnRowFocused
+        AddHandler DataGridViewCustomerCredits.RowsAdded, AddressOf OnRowsAdded
         AddHandler CreditRowSelected, AddressOf _viewModel.OnCreditRowSelected
         AddHandler CreditSecurityRowSelected, AddressOf _viewModel.OnCreditSecurityRowSelected
-        AddHandler TextBoxSearch.KeyUp, AddressOf OnKeyUpForSearch
+        AddHandler AddCreditsToolStripMenuItem.Click, AddressOf EnableCreditAddMode
+        AddHandler ButtonCancelCredit.Click, AddressOf CancelAddingNewCredit
+        AddHandler ComboBoxCustomerSearch.KeyUp, AddressOf OnKeyUpForSearch
+    End Sub
+
+    Private Sub CancelAddingNewCredit(sender As Object, e As EventArgs)
+        'clear all 3 items in the credits entry
+        _viewModel.SelectedNewCredit = ""
+        _viewModel.NewCreditPrincipleAmount = 0
+        _viewModel.NewCreditInterestAmount = 0
+
+        'hide the form and show the grid
+        Dim addLocation = GroupBoxCreditDetailsAdd.Location
+        Dim displayCreditLocation = GroupBoxCreditDisplay.Location
+
+        GroupBoxCreditDisplay.Location = addLocation
+        GroupBoxCreditDetailsAdd.Location = displayCreditLocation
+    End Sub
+
+    Private Sub EnableCreditAddMode(sender As Object, e As EventArgs)
+        Dim addLocation = GroupBoxCreditDetailsAdd.Location
+        Dim displayCreditLocation = GroupBoxCreditDisplay.Location
+
+        GroupBoxCreditDisplay.Location = addLocation
+        GroupBoxCreditDetailsAdd.Location = displayCreditLocation
+    End Sub
+
+    Private Sub OnRowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs)
+        Dim grid As DataGridView = sender
+        grid.ClearSelection()
     End Sub
 
     Private Sub OnKeyUpForSearch(sender As Object, e As KeyEventArgs)
+        If ComboBoxCustomerSearch.Text.Contains("|") Then
+            _viewModel.SearchTerm = ComboBoxCustomerSearch.Text.Split(ChrW(124))(0)
+        Else
+            _viewModel.SearchTerm = ComboBoxCustomerSearch.Text.Trim()
+        End If
         If e.KeyCode = Keys.Enter Then
             _viewModel.SearchByNidPp()
         End If
@@ -50,9 +87,9 @@
 
 
     Private Sub IntializeBinding()
-        'Bind the search text box
-        TextBoxSearch.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.SearchTerm),
-                                                        False, DataSourceUpdateMode.OnPropertyChanged))
+        'Bind combobox datasource
+        ComboBoxCustomerSearch.DataSource = _viewModel.CustomerSearchComboDatasource
+
 #Region "Grids"
 
         'Bind customer credits
@@ -81,7 +118,16 @@
 
 #End Region
 
-    End Sub
+#Region "Add new credit Bindings"
+        'comboxBOx
+        ComboBoxCredits.DataSource = _viewModel.AllCreditConfig
+        ComboBoxCredits.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.SelectedNewCredit)))
+        'principle amount
+        TextBoxPrincipleAmount.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.NewCreditPrincipleAmount)))
+        'interestAmount
+        TextBoxInterestAmount.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.NewCreditInterestAmount)))
 
+#End Region
+    End Sub
 
 End Class
