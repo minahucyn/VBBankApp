@@ -9,6 +9,7 @@ Public Class CreditManagementViewModel
 
 #Region "Private Properties"
     Private _userDataAccess As UserDataAccess = New UserDataAccess
+    Private _creditDetailsDataAccess As CreditDataAccess = New CreditDataAccess
     Private _selectedTitle As String
     Private _nidPp As String
     Private _fullname As String
@@ -34,7 +35,7 @@ Public Class CreditManagementViewModel
         AllCreditSecuritiesForCustomer = New List(Of SecurityModel)
         SecuritiesForSelectedCredit = New BindingList(Of SecurityModel)
         RepaymentsForSelectedCredit = New BindingList(Of RepaymentModel)
-        InitializeDemoData()
+        'InitializeDemoData()
 
         'Initialize internal variables
         _selectedCreditId = -1
@@ -322,10 +323,35 @@ Public Class CreditManagementViewModel
             End If
             'otherwise, display on UI
             DisplaSearchResultOnUI(results)
+            'Initialize search for credits for loaded customer
+            Dim creditDetails = _creditDetailsDataAccess.ReadAllCustomerCredits(results.UsersId)
+            'Add credit details to datasource
+            AddCustomerCreditDetailsUiDatasource(creditDetails)
+            'Initialize search for credit securities for loaded credits
+            'Initialize search for credit payments for loaded credits
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
         SearchTerm = ""
+    End Sub
+
+    ''' <summary>
+    ''' Add credit details from database to CustomerCredits() binding list
+    ''' </summary>
+    ''' <param name="creditDetails">customer credits list from database</param>
+    Private Sub AddCustomerCreditDetailsUiDatasource(creditDetails As List(Of CreditModel))
+        'clear the binding list
+        CustomerCredits.Clear()
+        'check for parameter nulls
+        If creditDetails Is Nothing Then
+            MsgBox("Cannot find any credit details for selected customer.")
+            Return
+        End If
+        'add the credit details to binding list
+        For Each credit In creditDetails
+            CustomerCredits.Add(credit)
+        Next
     End Sub
 
     ''' <summary>

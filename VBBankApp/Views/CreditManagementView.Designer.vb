@@ -22,6 +22,8 @@ Partial Class CreditManagementView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -57,13 +59,19 @@ Partial Class CreditManagementView
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.TextBoxSearch = New System.Windows.Forms.TextBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.ExtendedTextBoxUsername = New VBBankApp.ExtendedTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBoxNidPp = New VBBankApp.ExtendedTextBox()
         Me.TextBoxGender = New VBBankApp.ExtendedTextBox()
         Me.TextBoxPhoneNumber = New VBBankApp.ExtendedTextBox()
         Me.TextBoxCustomerName = New VBBankApp.ExtendedTextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PrincipleAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InterestAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastUpdated = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnTimeStamp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridViewCustomerCredits, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridViewSecurity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridViewRepayments, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -173,6 +181,7 @@ Partial Class CreditManagementView
         Me.DataGridViewCustomerCredits.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.DataGridViewCustomerCredits.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DataGridViewCustomerCredits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewCustomerCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id, Me.Description, Me.PrincipleAmount, Me.InterestAmount, Me.LastUpdated, Me.ColumnTimeStamp})
         Me.DataGridViewCustomerCredits.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewCustomerCredits.Location = New System.Drawing.Point(3, 18)
         Me.DataGridViewCustomerCredits.Name = "DataGridViewCustomerCredits"
@@ -450,6 +459,18 @@ Partial Class CreditManagementView
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Customer Details"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label4.Location = New System.Drawing.Point(7, 174)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(60, 15)
+        Me.Label4.TabIndex = 29
+        Me.Label4.Text = "Username"
+        '
         'ExtendedTextBoxUsername
         '
         Me.ExtendedTextBoxUsername.AutoValidate = False
@@ -552,17 +573,59 @@ Partial Class CreditManagementView
         Me.TextBoxCustomerName.TextInvalidColor = System.Drawing.Color.LavenderBlush
         Me.TextBoxCustomerName.TextValidColor = System.Drawing.Color.Honeydew
         '
-        'Label4
+        'Id
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label4.Location = New System.Drawing.Point(7, 174)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(60, 15)
-        Me.Label4.TabIndex = 29
-        Me.Label4.Text = "Username"
+        Me.Id.DataPropertyName = "Id"
+        Me.Id.HeaderText = "Id"
+        Me.Id.Name = "Id"
+        Me.Id.ReadOnly = True
+        Me.Id.Width = 42
+        '
+        'Description
+        '
+        Me.Description.DataPropertyName = "Description"
+        Me.Description.HeaderText = "Description"
+        Me.Description.Name = "Description"
+        Me.Description.ReadOnly = True
+        Me.Description.Width = 91
+        '
+        'PrincipleAmount
+        '
+        Me.PrincipleAmount.DataPropertyName = "PrincipleAmount"
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.PrincipleAmount.DefaultCellStyle = DataGridViewCellStyle1
+        Me.PrincipleAmount.HeaderText = "Principle Amount"
+        Me.PrincipleAmount.Name = "PrincipleAmount"
+        Me.PrincipleAmount.ReadOnly = True
+        Me.PrincipleAmount.Width = 110
+        '
+        'InterestAmount
+        '
+        Me.InterestAmount.DataPropertyName = "InterestAmount"
+        DataGridViewCellStyle2.Format = "N2"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.InterestAmount.DefaultCellStyle = DataGridViewCellStyle2
+        Me.InterestAmount.HeaderText = "Interest Amount"
+        Me.InterestAmount.Name = "InterestAmount"
+        Me.InterestAmount.ReadOnly = True
+        Me.InterestAmount.Width = 105
+        '
+        'LastUpdated
+        '
+        Me.LastUpdated.DataPropertyName = "LastUpdated"
+        Me.LastUpdated.HeaderText = "Last Updated"
+        Me.LastUpdated.Name = "LastUpdated"
+        Me.LastUpdated.ReadOnly = True
+        Me.LastUpdated.Width = 92
+        '
+        'ColumnTimeStamp
+        '
+        Me.ColumnTimeStamp.DataPropertyName = "TimeStamp"
+        Me.ColumnTimeStamp.HeaderText = "Time Stamp"
+        Me.ColumnTimeStamp.Name = "ColumnTimeStamp"
+        Me.ColumnTimeStamp.ReadOnly = True
+        Me.ColumnTimeStamp.Width = 84
         '
         'CreditManagementView
         '
@@ -642,4 +705,10 @@ Partial Class CreditManagementView
     Friend WithEvents TextBoxSearch As TextBox
     Friend WithEvents ExtendedTextBoxUsername As ExtendedTextBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents Id As DataGridViewTextBoxColumn
+    Friend WithEvents Description As DataGridViewTextBoxColumn
+    Friend WithEvents PrincipleAmount As DataGridViewTextBoxColumn
+    Friend WithEvents InterestAmount As DataGridViewTextBoxColumn
+    Friend WithEvents LastUpdated As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnTimeStamp As DataGridViewTextBoxColumn
 End Class

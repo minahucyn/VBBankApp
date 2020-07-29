@@ -56,10 +56,19 @@ INSERT INTO BankData.dbo.Users (Id,Fullname,NidPp,Birthdate,Gender,PhoneNumber) 
 SET IDENTITY_INSERT BankData.dbo.Users OFF; 
 
 --insert details for user
-SET IDENTITY_INSERT BankData.dbo.UserDetails ON; 
+SET IDENTITY_INSERT BankData.dbo.UserDetails ON;
 INSERT INTO BankData.dbo.UserDetails (Id,UsersId,RolesId,Username,RetryCount,RetryCountThreshold,IsLockedOut,IsActive,PasswordHash) VALUES 
 (1,1,1,'minahucyn',0,3,0,1,'SHA512:88:g8WGo205+eNi4KdLk+Dawq1rmm6D5dmPWQ==:Ra+a+v9EjIGJXrgZ1wPwdqkWXEBpy0vvCtvgDwZOHxAYU/X0VYORXj7GIm4h5Sw3d+HLuUR1BEQTK/ifMafOFg=='),
 (2,2,3,'muny',0,3,0,1,'SHA512:88:g8WGo205+eNi4KdLk+Dawq1rmm6D5dmPWQ==:Ra+a+v9EjIGJXrgZ1wPwdqkWXEBpy0vvCtvgDwZOHxAYU/X0VYORXj7GIm4h5Sw3d+HLuUR1BEQTK/ifMafOFg=='),
 (3,3,2,'aishaibrahim',0,3,0,1,'SHA512:88:g8WGo205+eNi4KdLk+Dawq1rmm6D5dmPWQ==:Ra+a+v9EjIGJXrgZ1wPwdqkWXEBpy0vvCtvgDwZOHxAYU/X0VYORXj7GIm4h5Sw3d+HLuUR1BEQTK/ifMafOFg==')
 ;
 SET IDENTITY_INSERT BankData.dbo.UserDetails OFF; 
+
+--credit confirguration
+SET IDENTITY_INSERT BankData.dbo.CreditConfiguration ON;
+INSERT INTO BankData.dbo.CreditConfiguration (Id,Description,Amount,InterestPercentage) VALUES 
+(1,'Lui Loan',30000.0000,20)
+,(2,'Express Loan',60000.0000,20)
+,(3,'Crazy Express Loan',1000000.0000,10)
+;
+SET IDENTITY_INSERT BankData.dbo.CreditConfiguration OFF;

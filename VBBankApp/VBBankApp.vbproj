@@ -85,6 +85,7 @@
     <Compile Include="Crypto\Hashing.vb" />
     <Compile Include="Data\AuthDataAccess.vb" />
     <Compile Include="Data\ChangePasswordDataAccess.vb" />
+    <Compile Include="Data\CreditDataAccess.vb" />
     <Compile Include="Data\DataAccessBase.vb" />
     <Compile Include="Data\UserDataAccess.vb" />
     <Compile Include="Extensions\BindableToolStripStatusLabel.vb">
