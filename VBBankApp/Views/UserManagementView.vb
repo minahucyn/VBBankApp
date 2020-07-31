@@ -151,6 +151,7 @@ Public Class UserManagementView
         'button unlock user
         Me.ButtonUnlockUser.DataBindings.Add(New Binding("Visible", _viewModel, NameOf(_viewModel.IsButtonUnlockUserVisible)))
 
+        'bind selected new credit
 
     End Sub
 End Class

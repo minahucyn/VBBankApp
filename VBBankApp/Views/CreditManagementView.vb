@@ -25,12 +25,32 @@ Public Class CreditManagementView
         AddHandler CreditSecurityRowSelected, AddressOf _viewModel.OnCreditSecurityRowSelected
         AddHandler AddCreditsToolStripMenuItem.Click, AddressOf EnableCreditAddMode
         AddHandler ButtonCancelCredit.Click, AddressOf CancelAddingNewCredit
+        AddHandler ButtonSaveNewCredit.Click, AddressOf OnSaveNewCreditClicked
         AddHandler ComboBoxCustomerSearch.KeyUp, AddressOf OnKeyUpForSearch
+        AddHandler ComboBoxCredits.SelectedIndexChanged, AddressOf OnSelectedNewCreditChanged
+    End Sub
+
+    Private Sub OnSaveNewCreditClicked(sender As Object, e As EventArgs)
+        'call view model to save changes
+        _viewModel.SaveNewCreditForSelectedCustomer()
+        'change to normal view and update changes to view
+        ChangeMode_CreditEntryToCredit_View(True)
+    End Sub
+
+    Private Sub OnSelectedNewCreditChanged(sender As Object, e As EventArgs)
+        'get the selected credit config model from combobox
+        Dim selectedNewCreditCombo As ComboBox = sender
+        Dim selectedCreditConfig As CreditConfigModel = selectedNewCreditCombo.SelectedItem
+        'call viewmodel to update its' variables to latest
+        _viewModel.DisplayDetailsForSelectedCredit(selectedCreditConfig)
     End Sub
 
     Private Sub CancelAddingNewCredit(sender As Object, e As EventArgs)
-        'clear all 3 items in the credits entry
-        _viewModel.SelectedNewCredit = ""
+        ChangeMode_CreditEntryToCredit_View()
+    End Sub
+
+    Private Sub ChangeMode_CreditEntryToCredit_View(Optional displayedDataRefreshRequired As Boolean = False)
+        'clear all 2 items in the credits entry
         _viewModel.NewCreditPrincipleAmount = 0
         _viewModel.NewCreditInterestAmount = 0
 
@@ -40,9 +60,18 @@ Public Class CreditManagementView
 
         GroupBoxCreditDisplay.Location = addLocation
         GroupBoxCreditDetailsAdd.Location = displayCreditLocation
+
+        'if changes were saved...
+        'load the saved changes from the database by invoking viewmodel to call datalayer
+        If displayedDataRefreshRequired Then
+            'do a customer search for the same customer
+            _viewModel.SearchTerm = Me.TextBoxNidPp.Text
+            _viewModel.SearchByNidPp()
+        End If
     End Sub
 
     Private Sub EnableCreditAddMode(sender As Object, e As EventArgs)
+        ComboBoxCredits.SelectedItem = Nothing
         Dim addLocation = GroupBoxCreditDetailsAdd.Location
         Dim displayCreditLocation = GroupBoxCreditDisplay.Location
 
@@ -121,7 +150,6 @@ Public Class CreditManagementView
 #Region "Add new credit Bindings"
         'comboxBOx
         ComboBoxCredits.DataSource = _viewModel.AllCreditConfig
-        ComboBoxCredits.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.SelectedNewCredit)))
         'principle amount
         TextBoxPrincipleAmount.DataBindings.Add(New Binding("Text", _viewModel, NameOf(_viewModel.NewCreditPrincipleAmount)))
         'interestAmount

@@ -114,6 +114,7 @@
     <Compile Include="Models\CreditModel.vb" />
     <Compile Include="Models\CustomerSearchDetail.vb" />
     <Compile Include="Models\DatabaseModels\AuthDetailsDatabaseModel.vb" />
+    <Compile Include="Models\DatabaseModels\CreateCustomerCreditDatabaseModel.vb" />
     <Compile Include="Models\DatabaseModels\CustomerSearchDatabaseModel.vb" />
     <Compile Include="Models\DatabaseModels\GoodHashDatabaseModel.vb" />
     <Compile Include="Models\DatabaseModels\UserInsertDatabaseModel.vb" />

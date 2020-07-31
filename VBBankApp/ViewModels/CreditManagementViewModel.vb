@@ -25,7 +25,7 @@ Public Class CreditManagementViewModel
     Private _selectedCreditIdForSecuritiesSearch As Integer
     Private _newCreditPrincipleAmount As Decimal
     Private _newCreditInterestAmount As Decimal
-    Private _selectedNewCredit As String
+    Private _selectedNewCredit As CreditConfigModel
 
 
 #End Region
@@ -53,6 +53,36 @@ Public Class CreditManagementViewModel
         _selectedCreditIdForSecuritiesSearch = -1
 
         LoadStartupData()
+    End Sub
+
+    ''' <summary>
+    ''' calls datalayer to save the new credits for the customer
+    ''' </summary>
+    Friend Sub SaveNewCreditForSelectedCustomer()
+        'check if a user is selected
+        If String.IsNullOrEmpty(Username) Then
+            MsgBox("Required selection of a customer before saving a credit details for a customer.")
+            Return
+        End If
+        Try
+            Dim creditInsertModel = New CreateCustomerCreditDatabaseModel() With {
+                .CreditConfigId = Me._selectedNewCredit.Id,
+                .Username = Me.Username}
+            Dim NoRowsInserted = _creditDetailsDataAccess.CreateNewCreditForCustomer(creditInsertModel)
+            If NoRowsInserted > 0 Then MsgBox("Successfully inserted credit for customer.")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Friend Sub DisplayDetailsForSelectedCredit(selectedCreditConfig As CreditConfigModel)
+        'check for nulls
+        If selectedCreditConfig Is Nothing Then
+            Return
+        End If
+        Me._selectedNewCredit = selectedCreditConfig
+        Me.NewCreditPrincipleAmount = selectedCreditConfig.PrincipleAmount
+        Me.NewCreditInterestAmount = selectedCreditConfig.InterestAmount
     End Sub
 
     Private Sub LoadStartupData()
@@ -209,6 +239,7 @@ Public Class CreditManagementViewModel
         End Get
         Set(ByVal value As Decimal)
             _newCreditPrincipleAmount = value
+            OnPropertyChanged()
         End Set
     End Property
     Public Property NewCreditInterestAmount() As Decimal
@@ -217,14 +248,7 @@ Public Class CreditManagementViewModel
         End Get
         Set(ByVal value As Decimal)
             _newCreditInterestAmount = value
-        End Set
-    End Property
-    Public Property SelectedNewCredit() As String
-        Get
-            Return _selectedNewCredit
-        End Get
-        Set(ByVal value As String)
-            _selectedNewCredit = value
+            OnPropertyChanged()
         End Set
     End Property
 #End Region
