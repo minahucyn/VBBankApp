@@ -454,6 +454,10 @@ Public Class UserManagementViewModel
             LoadAllUsers()
         Catch ex As Exception
             'if any exceptions, show the error message
+            If ex.Message.Contains("UNIQUE KEY") Then
+                MsgBox("The user already exists in the database. Please check the username and/or national ID/Passport and, try again.")
+                Return
+            End If
             MsgBox(ex.Message)
         End Try
 

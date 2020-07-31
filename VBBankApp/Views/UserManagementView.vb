@@ -57,6 +57,19 @@ Public Class UserManagementView
     End Sub
 
     Private Sub OnSaveClicked(sender As Object, e As EventArgs)
+        'the date picker is not binding properly and giving me trouble
+        Select Case True
+            Case _viewModel.SelectedBirthdate Is Nothing And DateTimePickerBirthdate.Value.ToString Is Nothing
+                MsgBox("Please select a birthdate for the new user and then save.")
+                Return
+            Case _viewModel.SelectedBirthdate Is Nothing And DateTimePickerBirthdate.Value.ToString IsNot Nothing
+                'manually assign the value
+                _viewModel.SelectedBirthdate = DateTimePickerBirthdate.Value
+            Case Else
+                Debug.WriteLine("This should not have been hit!")
+        End Select
+
+        'call view model to save the user                 c
         _viewModel.Save()
     End Sub
 
